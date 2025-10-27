@@ -1,6 +1,6 @@
 FROM php:8.2-apache
 
-# Extensiones: PDO MySQL + GD (imágenes)
+# Extensiones necesarias (PDO MySQL + GD para imágenes) y mod_rewrite
 RUN apt-get update \
  && apt-get install -y libjpeg-dev libpng-dev libfreetype6-dev \
  && docker-php-ext-configure gd --with-jpeg --with-freetype \
@@ -8,14 +8,25 @@ RUN apt-get update \
  && a2enmod rewrite \
  && rm -rf /var/lib/apt/lists/*
 
+# DocumentRoot = /public
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf \
  && sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
 
+# **Permitir .htaccess en /public (AllowOverride All)**
+RUN bash -lc 'cat > /etc/apache2/conf-available/public-dir.conf <<EOF
+<Directory ${APACHE_DOCUMENT_ROOT}>
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+</Directory>
+EOF' \
+ && a2enconf public-dir
+
 WORKDIR /var/www/html
 COPY . /var/www/html
 
-
-RUN mkdir -p uploads/usuarios && chown -R www-data:www-data uploads
+# Carpeta de subidas dentro de public (para demo sin disco)
+RUN mkdir -p public/uploads/usuarios && chown -R www-data:www-data public/uploads
 
 EXPOSE 10000
