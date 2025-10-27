@@ -1,0 +1,19 @@
+# Dependencias de PHP
+/vendor/
+
+# Config local/sensible
+config.php
+*.env
+
+# Subidas de usuarios 
+uploads/*
+!uploads/.gitkeep
+
+# Sistemas
+.DS_Store
+Thumbs.db
+
+# Logs y cachés comunes
+/storage/*.log
+*.log
+.cache/

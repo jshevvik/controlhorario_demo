@@ -1,0 +1,951 @@
+/* ---------- Selector de Rango de Fechas ---------- */
+.daterangepicker .ranges li {
+  border-radius: .5rem;
+  padding: .25rem .75rem;
+}
+.daterangepicker .ranges li.active,
+.daterangepicker .ranges li:hover {
+  background-color: var(--bs-primary);
+  color:#fff;
+}
+.daterangepicker td.active,
+.daterangepicker td.active:hover {
+  background-color: var(--bs-primary);
+}
+
+/* ---------- Calendario Completo ---------- */
+.fc .fc-toolbar-title {
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+.fc .fc-button-primary {
+  background: var(--bs-light);
+  border: 1px solid var(--bs-border-color);
+  color: var(--bs-body-color);
+  text-transform: capitalize;
+}
+.fc .fc-button-primary:not(:disabled).fc-button-active,
+.fc .fc-button-primary:not(:disabled):hover {
+  background: var(--bs-primary);
+  border-color: var(--bs-primary);
+  color:#fff;
+}
+
+/* Eventos según estado (las clases se añaden vía JS) */
+.bg-success{background-color:#28a745!important;color:#fff!important}
+.bg-warning{background-color:#ffc107!important}
+.bg-danger{background-color:#dc3545!important;color:#fff!important}
+
+/* ---------- Línea de tiempo barra lateral ---------- */
+.timeline {
+  position: relative;
+  margin-left: .75rem;
+}
+.timeline-item {
+  position: relative;
+}
+.timeline-indicator {
+  width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:.5rem;margin-top:.25rem;
+}
+
+/* ---------- Ajustes responsivos ---------- */
+@media (max-width:991.98px){
+  /* Sólo media día y extras deben caer tras el comentario */
+  #halfDayGroup,
+  #extraHoursGroup {
+    order: 2;
+  }
+  /* Volvemos el Periodo al flujo normal */
+  #periodoGroup {
+    order: 0;
+  }
+}
+
+
+
+@media (max-width: 767.98px){
+  #leave-calendar {
+    max-width: 100%;
+    height: 320px;    
+  }
+  .fc .fc-toolbar-title{
+    display: block !important;
+    font-size: 1rem !important;
+  }
+}
+
+
+@media (max-width: 991.98px){
+  .card { margin-bottom: 1.25rem; }
+  .fc-daygrid-day-number{font-size:.75rem}
+}
+
+
+@media (max-width: 575.98px){
+  #leave-calendar + small { display:none; }
+}
+
+
+/* ───────── Calendario responsive ───────── */
+.calendario-wrap #leave-calendar{max-width:100%;min-width:320px}
+
+@media (min-width:992px) and (max-width:1399.98px){
+  .calendario-wrap #leave-calendar{height:420px}
+  .fc-toolbar-title{font-size:1rem}
+  .fc-daygrid-day-number{font-size:.8rem}
+}
+
+
+@media (max-width:991.98px){
+  .calendario-wrap #leave-calendar{height:380px}
+  
+}
+
+/* < 768 px – ajustes móvil */
+@media (max-width:767.98px){
+  #leave-calendar{height:320px}
+  #cal-help{display:none!important}
+}
+
+.calendario-card #leave-calendar{height:480px}
+
+
+@media(max-width:991.98px){
+   .calendario-card #leave-calendar{
+    height:420px
+  } 
+}
+@media(max-width:767.98px){
+   .calendario-card #leave-calendar{
+    height:340px
+  } 
+}
+
+/* ========================================================================
+   RESPONSIVE ESPECÍFICO PARA VER-SOLICITUDES.PHP
+   ======================================================================== */
+
+/* Optimización de tabla para pantallas medianas */
+@media (max-width: 1199.98px) {
+  #tabla-solicitudes {
+    font-size: 0.875rem;
+  }
+  
+  #tabla-solicitudes th,
+  #tabla-solicitudes td {
+    padding: 0.5rem 0.3rem;
+    font-size: 0.875rem;
+  }
+  
+  #tabla-solicitudes .avatar-sm {
+    width: 30px;
+    height: 30px;
+  }
+  
+  #tabla-solicitudes .avatar-sm img {
+    width: 30px !important;
+    height: 30px !important;
+  }
+  
+  #tabla-solicitudes .btn-sm {
+    padding: 0.25rem 0.3rem;
+    font-size: 0.75rem;
+  }
+  
+  #tabla-solicitudes .badge {
+    font-size: 0.7rem;
+    padding: 0.25em 0.5em;
+  }
+}
+
+/* Ajustes específicos para iPad Pro y tablets grandes (1024px) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .admin-solicitudes #tabla-solicitudes {
+    font-size: 0.75rem;
+  }
+  
+  .admin-solicitudes #tabla-solicitudes th,
+  .admin-solicitudes #tabla-solicitudes td {
+    padding: 0.3rem 0.2rem;
+    font-size: 0.75rem;
+  }
+  
+  /* Ajustar columna de empleado */
+  .admin-solicitudes #tabla-solicitudes td:first-child .fw-semibold {
+    font-size: 0.8rem;
+    max-width: 100px;
+  }
+  
+  /* Ocultar columnas problemáticas en esta resolución */
+  .admin-solicitudes #tabla-solicitudes .d-none.d-xl-table-cell {
+    display: none !important;
+  }
+  
+  /* Badges de estado más compactos en la primera columna */
+  .admin-solicitudes #tabla-solicitudes .d-xl-none .badge {
+    font-size: 0.6rem;
+    padding: 0.15em 0.3em;
+    margin-top: 0.2rem;
+  }
+  
+  /* Ajustar badges de tipo */
+  .admin-solicitudes #tabla-solicitudes .badge.bg-info {
+    font-size: 0.65rem;
+    padding: 0.2em 0.35em;
+  }
+  
+  /* Período más compacto */
+  .admin-solicitudes #tabla-solicitudes td:nth-child(3) {
+    font-size: 0.7rem;
+  }
+  
+  .admin-solicitudes #tabla-solicitudes td:nth-child(3) .text-nowrap {
+    font-size: 0.7rem;
+  }
+  
+  .admin-solicitudes #tabla-solicitudes td:nth-child(3) small {
+    font-size: 0.65rem;
+  }
+  
+  /* Estado principal (ahora en columna 4 sin las ocultas) */
+  .admin-solicitudes #tabla-solicitudes td:nth-child(4) .badge {
+    font-size: 0.65rem;
+    padding: 0.2em 0.4em;
+  }
+  
+  /* Botones más pequeños */
+  .admin-solicitudes #tabla-solicitudes .btn-sm {
+    padding: 0.15rem 0.2rem;
+    font-size: 0.65rem;
+  }
+  
+  /* Header responsive para solicitudes */
+  .admin-solicitudes h2 {
+    font-size: 1.3rem;
+  }
+  
+  .admin-solicitudes .badge-group .badge {
+    font-size: 0.65rem;
+    padding: 0.15em 0.35em;
+  }
+  
+  /* Ajustar el ancho de la tabla */
+  .admin-solicitudes .table-responsive {
+    font-size: 0.75rem;
+  }
+}
+
+/* Asegurar transición suave entre tabla y cards */
+@media (min-width: 992px) {
+  /* Mostrar tabla en desktop */
+  .table-responsive.d-none.d-lg-block {
+    display: block !important;
+  }
+  
+  /* Ocultar cards en desktop */
+  .d-lg-none {
+    display: none !important;
+  }
+}
+
+@media (max-width: 991.98px) {
+  /* Asegurar que la tabla se oculte */
+  .table-responsive.d-none.d-lg-block {
+    display: none !important;
+  }
+  
+  /* Mostrar las cards móviles */
+  .d-lg-none {
+    display: block !important;
+  }
+  
+  /* Mejorar espaciado de las cards */
+  .d-lg-none .card {
+    margin-bottom: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  
+  .d-lg-none .card-body {
+    padding: 1rem;
+  }
+  
+  /* Avatares en cards móviles */
+  .d-lg-none .avatar-sm {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .d-lg-none .avatar-sm img {
+    width: 36px !important;
+    height: 36px !important;
+  }
+}
+
+/* Optimización para móviles pequeños */
+@media (max-width: 575.98px) {
+  /* Header responsive */
+  .d-flex.flex-column.flex-md-row h2 {
+    font-size: 1.5rem;
+  }
+  
+  .badge-group .badge {
+    font-size: 0.75rem;
+    padding: 0.25em 0.5em;
+  }
+  
+  /* Filtros más compactos */
+  .form-label {
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .form-control,
+  .form-select {
+    font-size: 0.875rem;
+    padding: 0.375rem 0.5rem;
+  }
+  
+  /* Cards móviles más compactas */
+  .d-lg-none .card-body {
+    padding: 0.75rem;
+  }
+  
+  .d-lg-none .avatar-sm {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .d-lg-none .avatar-sm img {
+    width: 32px !important;
+    height: 32px !important;
+  }
+  
+  /* Botones en cards móviles */
+  .d-lg-none .btn-sm {
+    padding: 0.375rem 0.5rem;
+    font-size: 0.8rem;
+  }
+  
+  /* Badges en cards móviles */
+  .d-lg-none .badge {
+    font-size: 0.7rem;
+    padding: 0.25em 0.4em;
+  }
+  
+  /* Texto más legible */
+  .d-lg-none small {
+    font-size: 0.8rem;
+  }
+  
+  /* Contenedor principal */
+  .container-fluid {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+}
+
+/* Optimización específica para el container en páginas admin */
+@media (max-width: 991.98px) {
+  body.admin-page .container-fluid,
+  .admin-solicitudes .container-fluid {
+    max-width: 100% !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
+/* Mejoras para mostrar estado en lugar de email */
+@media (max-width: 1199.98px) {
+  .admin-solicitudes .d-xl-none .badge {
+    font-size: 0.7rem;
+    padding: 0.25em 0.5em;
+    margin-top: 0.25rem;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .admin-solicitudes .d-xl-none .badge {
+    font-size: 0.65rem;
+    padding: 0.2em 0.4em;
+  }
+}
+
+/* Ajustes para el sidebar en páginas de administración */
+@media (max-width: 991.98px) {
+  .body-wrapper {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+  
+  /* Asegurar que no haya overflow horizontal */
+  .row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  
+  .row > * {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+}
+
+/* ========================================================================
+   FIN RESPONSIVE VER-SOLICITUDES
+   ======================================================================== */
+
+/* ========================================================================
+   RESPONSIVE EMPLEADOS
+   ======================================================================== */
+
+/* Ajustes para página de empleados en tablet y móvil */
+@media (max-width: 991.98px) {
+  /* Títulos más visibles en tarjetas de empleados */
+  .d-lg-none .fw-bold {
+    color: #495057 !important;
+    font-weight: 600 !important;
+  }
+  
+  /* Texto más legible en lugar de muted */
+  .d-lg-none .text-dark {
+    color: #212529 !important;
+    font-weight: 500 !important;
+  }
+  
+  /* Mejorar contraste de emails */
+  .d-lg-none small:not(.fw-bold):not(.text-dark) {
+    color: #495057 !important;
+    font-weight: 500 !important;
+  }
+}
+
+@media (max-width: 575.98px) {
+  /* Ajustes específicos para móvil */
+  .d-lg-none .fw-bold {
+    font-size: 0.8rem !important;
+  }
+  
+  .d-lg-none .text-dark {
+    font-size: 0.75rem !important;
+  }
+}
+
+.text-date {
+  color: #6c757d;
+  font-size: 12px;
+}
+
+/* Mejoras específicas para empleados responsive */
+@media (max-width: 991.98px) {
+  /* Badge de rol en tarjetas de empleados móvil */
+  .d-lg-none .fw-semibold + .badge {
+    margin-top: 0.25rem;
+    font-size: 0.7rem;
+    padding: 0.25em 0.5em;
+  }
+}
+
+@media (max-width: 575.98px) {
+  /* Badges más pequeños en móvil */
+  .d-lg-none .fw-semibold + .badge {
+    font-size: 0.65rem;
+    padding: 0.2em 0.4em;
+  }
+}
+
+/* ========================================================================
+   FIN RESPONSIVE EMPLEADOS
+   ======================================================================== */
+
+/* Botones de filtro responsive para todas las páginas admin */
+@media (max-width: 991.98px) {
+  /* Botones de filtro solo con iconos en tablet/móvil */
+  .btn .d-none.d-lg-inline {
+    display: none !important;
+  }
+  
+  /* Ajustar tamaño de iconos en botones de filtro */
+  .btn .ti {
+    font-size: 1rem;
+  }
+  
+  /* Centrar iconos en botones pequeños */
+  .btn.flex-grow-1 {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
+
+@media (max-width: 575.98px) {
+  /* Botones de filtro más compactos en móvil */
+  .btn.flex-grow-1 {
+    padding: 0.5rem 0.75rem;
+    min-width: 44px; /* Área táctil mínima */
+  }
+  
+  .btn .ti {
+    font-size: 0.9rem;
+  }
+}
+
+/* ==== Ajustes específicos para el calendario en móvil ==== */
+@media (max-width: 767.98px) {
+  /* fuerza lista a ocupar todo */
+  #leave-calendar {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 320px !important;
+    font-size: 0.85rem;
+  }
+
+  /* esconder textos largos del toolbar */
+  .fc .fc-toolbar-title {
+    font-size: 1rem !important;
+  }
+  .fc .fc-list-heading-main {
+    font-size: 0.9rem !important;
+  }
+
+  /* líneas de evento más compactas */
+  .fc-list-item .fc-list-event-time { width: 20%; }
+  .fc-list-item .fc-list-event-title { width: 80%; }
+
+  /* botones del toolbar más pequeños */
+  .fc .fc-button {
+    padding: 0.2em 0.4em !important;
+    font-size: 0.8rem !important;
+  }
+}
+
+/* ==== Ajustes para tablet grande (768px–991px) ==== */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  #leave-calendar {
+    min-height: 380px !important;
+    font-size: 0.9rem;
+  }
+  .fc-daygrid-day-number {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  #leave-calendar + small {
+    display: none;
+  }
+}
+
+/* ==== MÓVIL (<768px): vista listWeek más compacta ==== */
+@media (max-width: 767.98px) {
+  #leave-calendar {
+    width: 100% !important;
+    min-height: 220px !important;  /* menos alto */
+    font-size: 0.85rem;
+  }
+
+  /* reduce espacio de cada fila */
+  .fc-list-item {
+    padding: 0.2em 0.4em !important;
+  }
+  .fc-list-item .fc-list-item-time {
+    width: 20%;
+    font-size: 0.8rem;
+  }
+  .fc-list-item .fc-list-item-title {
+    width: 80%;
+    font-size: 0.9rem;
+  }
+
+  /* toolbar ultra‑compacto */
+  
+  .fc .fc-button {
+    padding: 0.2em 0.4em !important;
+    font-size: 0.75rem !important;
+  }
+}
+
+/* ==== Tablet pequeña (768–991px): ajustar altura y números ==== */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  #leave-calendar {
+    min-height: 320px !important;
+    font-size: 0.9rem;
+  }
+  .fc-daygrid-day-number {
+    font-size: 0.75rem;
+  }
+}
+
+
+.fc-list-day-side-text {
+  display: none !important;
+}
+
+
+
+/* ============================= */
+/* Ajustes específicos para iPad Pro (1024px–1366px) */
+/* ============================= */
+@media only screen and (min-width: 1024px) and (max-width: 1366px) {
+  /* Reduce los padding generales */
+  .container-fluid {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  /* Haz más alta la columna del calendario para que no se “corte” */
+  #leave-calendar {
+    min-height: 420px !important;
+    height: auto !important;
+    font-size: 0.9rem;
+  }
+
+  /* Ajusta el tamaño de los números de cada día */
+  .fc-daygrid-day-number {
+    font-size: 0.85rem;
+  }
+
+  /* Toolbar un poco más compacto */
+  .fc .fc-toolbar-title {
+    font-size: 1rem;
+  }
+  .fc .fc-button {
+    padding: 0.4em 0.6em !important;
+    font-size: 0.85rem !important;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .fc-list-day-side-text { display: none !important; }
+}
+
+
+/* ================================================= */
+/*  iPad Pro (1024px – 1366px)                        */
+/*  OVERRIDES ESPECÍFICOS PARA ESTA RESOLUCIÓN       */
+/* ================================================= */
+@media only screen and (min-width: 1024px) and (max-width: 1366px) {
+  /* 1) Ajustamos el container para aprovechar más ancho */
+  .container-fluid {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  /* 2) Hacemos que el calendario sea un poco más alto */
+  #leave-calendar {
+    min-height: 420px !important;
+    height: auto !important;
+    font-size: 0.9rem !important;
+  }
+
+  /* 3) Números del grid más grandes para no saturar */
+  .fc-daygrid-day-number {
+    font-size: 0.85rem !important;
+  }
+
+  /* 4) Toolbar un poco más compacta */
+  .fc .fc-toolbar-title {
+    font-size: 1rem !important;
+  }
+  .fc .fc-button {
+    padding: 0.3em 0.5em !important;
+    font-size: 0.8rem !important;
+  }
+
+  /* 5) Reducir altura de cada fila de listWeek si la usas */
+  .fc-list-item {
+    padding: 0.3em 0.5em !important;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1366px) {
+  .row.g-3.g-md-4.mb-3.mb-md-4 > .col-lg-3,
+  .row.g-3.g-md-4.mb-3.mb-md-4 > .col-lg-6 {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+  }
+}
+
+/* ========================================================================
+   iPad Pro (1024px – 1366px): dos cards en la primera fila, tercero al 100%
+   ======================================================================== */
+@media only screen and (min-width: 1024px) and (max-width: 1366px) {
+  /* Nos dirigimos únicamente a la "primera fila" */
+  .row.g-3.g-md-4.mb-3.mb-md-4 {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -0.75rem;  /* coincide con tus paddings */
+    margin-right: -0.75rem;
+  }
+
+  /* Mi saldo + Próximos eventos = 50% cada uno */
+  .row.g-3.g-md-4.mb-3.mb-md-4 .col-lg-3 {
+    flex: 0 0 50% !important;
+    max-width: 50%    !important;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  /* Nueva solicitud saca a segunda fila y ocupa 100% */
+  .row.g-3.g-md-4.mb-3.mb-md-4 .col-lg-6 {
+    flex: 0 0 100% !important;
+    max-width: 100%   !important;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    margin-top: 1rem;  /* un poco de espacio por encima */
+  }
+}
+
+/* ================================================================
+   iPad Pro (1024px – 1366px): apilar Historial y Calendario
+   ================================================================ */
+@media only screen and (min-width: 1024px) and (max-width: 1366px) {
+  /* Selecciona la segunda fila (historial + calendario) */
+  .container-fluid > .row.g-3.g-md-4:not(.mb-3.mb-md-4) {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -0.75rem;
+    margin-right: -0.75rem;
+  }
+
+  /* Historial (antes col-lg-3) y Calendario (col-lg-9) ocupan 100% */
+  .container-fluid > .row.g-3.g-md-4:not(.mb-3.mb-md-4) .col-lg-3,
+  .container-fluid > .row.g-3.g-md-4:not(.mb-3.mb-md-4) .col-lg-9 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    margin-top: 1rem;
+  }
+}
+
+/* ========================================================================
+   MEJORAS RESPONSIVE PARA FILTROS DE CALENDARIO
+   ======================================================================== */
+
+/* Ocultar texto en filtros para tablet y móvil - solo mostrar iconos */
+@media (max-width: 991.98px) {
+  /* Ocultar texto en botones de filtro de calendario */
+  #calendar-filters .btn .d-none.d-sm-inline {
+    display: none !important;
+  }
+  
+  /* Ajustar padding de botones para que se vean bien solo con iconos */
+  #calendar-filters .btn {
+    padding: 0.5rem 0.75rem;
+    min-width: 44px; /* Área táctil mínima */
+  }
+  
+  /* Centrar iconos en los botones */
+  #calendar-filters .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Ajustes específicos para móvil pequeño */
+@media (max-width: 575.98px) {
+  #calendar-filters .btn {
+    padding: 0.375rem 0.5rem;
+    min-width: 40px;
+  }
+  
+  /* Reducir gap entre botones en móvil */
+  #calendar-filters {
+    gap: 0.375rem !important;
+  }
+}
+
+/* ========================================================================
+   FIN MEJORAS RESPONSIVE FILTROS CALENDARIO
+   ======================================================================== */
+
+/* ========================================================================
+   RESPONSIVE TOOLBAR CALENDARIO - REORGANIZACIÓN MÓVIL/TABLET
+   ======================================================================== */
+
+/* Reorganizar toolbar del calendario en móvil y tablet */
+@media (max-width: 991.98px) {
+  /* Hacer que el toolbar tenga dos filas */
+  #leave-calendar .fc-header-toolbar {
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+    align-items: stretch !important;
+  }
+  
+  /* Primera fila: Navegación y título - todo centrado */
+  #leave-calendar .fc-toolbar-chunk:nth-child(1),
+  #leave-calendar .fc-toolbar-chunk:nth-child(2) {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    order: 1 !important;
+    flex: 1 !important;
+  }
+  
+  /* Grupo de navegación (prev/next) - centrado */
+  #leave-calendar .fc-toolbar-chunk:nth-child(1) {
+    justify-content: center !important;
+    flex: 0 0 auto !important;
+    margin-right: 1rem !important;
+  }
+  
+  /* Título centrado */
+  #leave-calendar .fc-toolbar-chunk:nth-child(2) {
+    flex: 1 !important;
+    text-align: center !important;
+  }
+  
+  /* Segunda fila: Botones de vista */
+  #leave-calendar .fc-toolbar-chunk:nth-child(3) {
+    order: 2 !important;
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+  }
+  
+  /* Crear contenedor flex para primera fila */
+  #leave-calendar .fc-header-toolbar::before {
+    content: '';
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    order: 1;
+  }
+  
+  /* Reorganizar chunks en contenedores apropiados */
+  #leave-calendar .fc-toolbar-chunk:nth-child(1),
+  #leave-calendar .fc-toolbar-chunk:nth-child(2) {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+/* Ajustes específicos para móvil pequeño */
+@media (max-width: 575.98px) {
+  #leave-calendar .fc-header-toolbar {
+    gap: 0.5rem !important;
+  }
+  
+  /* Botones de vista más compactos */
+  #leave-calendar .fc-toolbar-chunk:nth-child(3) .fc-button {
+    padding: 0.375rem 0.5rem !important;
+    font-size: 0.75rem !important;
+  }
+  
+  /* Título más pequeño */
+  #leave-calendar .fc-toolbar-title {
+    font-size: 0.95rem !important;
+  }
+  
+  /* Botones de navegación más compactos */
+  #leave-calendar .fc-toolbar-chunk:nth-child(1) .fc-button {
+    padding: 0.375rem 0.5rem !important;
+    min-width: 36px !important;
+  }
+}
+
+/* Alternativa: Enfoque con flexbox más directo */
+@media (max-width: 991.98px) {
+  /* Forzar layout en dos filas usando flexbox */
+  #leave-calendar .fc-header-toolbar {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 0.75rem !important;
+  }
+  
+  /* Primera fila: prev/next + título - ambos centrados */
+  #leave-calendar .fc-toolbar-chunk:nth-child(1) {
+    order: 1 !important;
+    flex: 0 0 auto !important;
+    display: flex !important;
+    justify-content: center !important;
+    margin-right: 1rem !important;
+  }
+  
+  #leave-calendar .fc-toolbar-chunk:nth-child(2) {
+    order: 2 !important;
+    flex: 1 !important;
+    text-align: center !important;
+  }
+  
+  /* Segunda fila: botones de vista ocupan toda la fila */
+  #leave-calendar .fc-toolbar-chunk:nth-child(3) {
+    order: 3 !important;
+    flex: 1 1 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+  }
+  
+  /* Espaciado entre botones de vista */
+  #leave-calendar .fc-toolbar-chunk:nth-child(3) .fc-button-group .fc-button {
+    margin: 0 0.125rem !important;
+  }
+}
+
+/* ========================================================================
+   FIN RESPONSIVE TOOLBAR CALENDARIO
+   ======================================================================== */
+
+/* ========================================================================
+   HISTORIAL DE SOLICITUDES CON SCROLL
+   ======================================================================== */
+
+/* Contenedor del historial con scroll y altura fija */
+#request-history {
+  max-height: 600px; /* Altura máxima mayor para desktop */
+  overflow-y: auto;
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #cbd5e0 #f7fafc; /* Firefox */
+  position: relative; /* Asegurar posicionamiento para scroll */
+}
+
+/* Webkit scrollbar para Chrome/Safari */
+#request-history::-webkit-scrollbar {
+  width: 6px;
+}
+
+#request-history::-webkit-scrollbar-track {
+  background: #f7fafc;
+  border-radius: 3px;
+}
+
+#request-history::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+  border-radius: 3px;
+}
+
+#request-history::-webkit-scrollbar-thumb:hover {
+  background: #a0aec0;
+}
+
+/* Ajustes responsive exactos del calendario */
+@media (max-width: 991.98px) {
+  #request-history {
+    max-height: 420px; /* Igual que calendario en tablet */
+  }
+}
+
+@media (max-width: 767.98px) {
+  #request-history {
+    max-height: 340px; /* Igual que calendario en móvil */
+  }
+}
+
+/* Asegurar que la card que contiene el historial tenga la altura correcta */
+.card:has(#request-history) {
+  height: auto !important;
+  max-height: none !important;
+}
+
+/* Si el navegador no soporta :has(), usar clase específica */
+.request-history-card {
+  height: auto !important;
+  max-height: none !important;
+}
+
+/* ========================================================================
+   FIN HISTORIAL SOLICITUDES SCROLL
+   ======================================================================== */
+

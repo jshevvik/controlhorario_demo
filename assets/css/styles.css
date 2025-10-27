@@ -1,0 +1,4715 @@
+/*
+ * ========================================================================
+ * SISTEMA CONTROL HORARIO - ESTILOS CSS
+ * ========================================================================
+ * Estructura organizada:
+ * 1. Reset y estilos base
+ * 2. Layout general 
+ * 3. Componentes reutilizables
+ * 4. Páginas específicas
+ * 5. Responsive
+ * 6. Utilidades
+ * ========================================================================
+ */
+
+/* ========================================================================
+   1. RESET Y ESTILOS BASE
+   ======================================================================== */
+
+html, body {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: #edf3f7;
+}
+
+body {
+  padding-bottom: 4rem;
+}
+
+/* ========================================================================
+   2. LAYOUT GENERAL
+   ======================================================================== */
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page-wrapper > .position-relative {
+  flex: 1 0 auto;
+  min-height: auto;
+}
+
+/* ========================================================================
+   3. COMPONENTES REUTILIZABLES
+   ======================================================================== */
+
+/* ========================================================================
+   4. PÁGINAS ESPECÍFICAS
+   ======================================================================== */
+
+/* Administración - Configuración */
+.admin-configuracion .nav-tabs-responsive {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.admin-configuracion .nav-tabs-responsive::-webkit-scrollbar {
+    display: none;
+}
+
+.admin-configuracion .nav-tabs-responsive .nav-item {
+    flex-shrink: 0;
+}
+
+.admin-configuracion .nav-tabs-responsive .nav-link {
+    padding: 0.75rem 1rem;
+    min-width: auto;
+}
+
+/* Cards responsivas */
+.admin-configuracion .card {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.admin-configuracion .card-header {
+    border-radius: 12px 12px 0 0 !important;
+    border-bottom: none;
+    padding: 1rem 1.5rem;
+}
+
+/* Formularios más grandes en móvil */
+@media (max-width: 768px) {
+    .admin-configuracion .form-control-lg,
+    .admin-configuracion .form-select-lg {
+        font-size: 1rem;
+        padding: 0.75rem 1rem;
+    }
+    
+    .admin-configuracion .btn-lg {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .admin-configuracion .card-body {
+        padding: 1rem !important;
+    }
+    
+    .admin-configuracion .modal-body,
+    .admin-configuracion .modal-footer {
+        padding: 1rem !important;
+    }
+    
+    .admin-configuracion .modal-footer .btn {
+        min-height: 48px;
+    }
+}
+
+/* Mejoras para tabletas */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .admin-configuracion .col-xl-5 {
+        flex: 0 0 auto;
+        width: 45%;
+    }
+    
+    .admin-configuracion .col-xl-7 {
+        flex: 0 0 auto;
+        width: 55%;
+    }
+}
+
+/* Indicador de color para eventos */
+.admin-configuracion .color-indicator {
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+}
+
+/* Mejoras en badges */
+.admin-configuracion .badge {
+    font-size: 0.75rem;
+    padding: 0.4em 0.7em;
+}
+
+/* Botones en grupos más compactos */
+.admin-configuracion .btn-group .btn-sm {
+    padding: 0.25rem 0.5rem;
+}
+
+/* Dropdown en cards móviles */
+.admin-configuracion .dropdown-menu {
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.admin-configuracion .dropdown-item {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    margin: 0.125rem;
+}
+
+.admin-configuracion .dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+/* Geolocalización - Estilos modernos */
+.geo-card {
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    border: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.geo-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.status-online { 
+    background-color: #28a745; 
+}
+
+.status-offline { 
+    background-color: #dc3545; 
+}
+
+.status-pending { 
+    background-color: #ffc107; 
+}
+
+#map, #mapa {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.btn-fichar {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    border: none;
+    border-radius: 50px;
+    padding: 15px 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+    color: white;
+}
+
+.btn-fichar:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+    color: white;
+}
+
+.btn-fichar:disabled {
+    background: #6c757d;
+    box-shadow: none;
+    cursor: not-allowed;
+    color: white;
+}
+
+.info-metric {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.metric-icon {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.navbar-custom {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    box-shadow: 0 2px 20px rgba(0,123,255,0.3);
+}
+
+.loading-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.alert-custom {
+    border-radius: 12px;
+    border: none;
+    font-weight: 500;
+}
+
+.historial-item {
+    border-radius: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.historial-item:hover {
+    background-color: rgba(0,0,0,0.02);
+}
+
+.user-location-marker {
+    z-index: 1000;
+}
+
+/* ----- Cards y Estadísticas ----- */
+.stats-card {
+  border-radius: 16px;
+  border: none;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stats-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transform: translate(20px, -20px);
+}
+
+.stats-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Versiones mejoradas de bg-*-subtle para estadísticas */
+.bg-primary-subtle.stats-card {
+  background: linear-gradient(135deg, #e7f1ff 0%, #d4edfe 100%);
+  border-left: 4px solid #0d6efd;
+}
+
+.bg-success-subtle.stats-card {
+  background: linear-gradient(135deg, #d1e7dd 0%, #badbcc 100%);
+  border-left: 4px solid #198754;
+}
+
+.bg-info-subtle.stats-card {
+  background: linear-gradient(135deg, #cff4fc 0%, #b6effc 100%);
+  border-left: 4px solid #0dcaf0;
+}
+
+.bg-warning-subtle.stats-card {
+  background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+  border-left: 4px solid #ffc107;
+}
+
+/* Iconos para estadísticas */
+.stats-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.stats-icon.primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.stats-icon.success {
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  color: white;
+}
+
+.stats-icon.info {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+}
+
+.stats-icon.warning {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+  color: white;
+}
+
+.stats-icon.danger {
+  background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+  color: white;
+}
+
+/* Números grandes para estadísticas */
+.stats-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+/* Animaciones para números */
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.stats-number.animate {
+  animation: countUp 0.8s ease-out forwards;
+}
+
+/* Cards coloridas para estadísticas */
+.bg-stat1 {
+  background-color: #8dd3c7; /* Verde agua suave */
+  color: #2d5d58;
+}
+
+.bg-stat2 {
+  background-color: #a8d5ba; /* Verde pastel */
+  color: #2d5d3a;
+}
+
+.bg-stat3 {
+  background-color: #fdb462; /* Naranja suave */
+  color: #7a4f2d;
+}
+
+.bg-stat4 {
+  background-color: #fb8072; /* Rosa coral */
+  color: #7a3a35;
+}
+
+.bg-stat5 {
+  background-color: #80b1d3; /* Azul suave */
+  color: #3a5d7a;
+}
+
+/* Efectos hover para cards */
+.card:hover {
+  transition: transform 0.2s ease;
+}
+
+/* Iconos en cards */
+.card-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+/* Cards modernas con glassmorphism */
+.modern-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Tipografía moderna */
+.modern-title {
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.modern-subtitle {
+  color: #6c757d;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+/* Animaciones sutiles */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ----- Botones y Formularios ----- */
+.btn-pill {
+  border-radius: 50px;
+  padding: 0.6rem 1rem;
+  gap: 0.75rem;
+}
+
+.fichaje-pill {
+  border-radius: 50px;
+  padding: 0.6rem 1rem;
+  gap: 0.75rem;
+}
+
+.fichaje-pill i {
+  color: #6c757d;
+}
+
+.fichaje-pill .btn-lg {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+}
+
+.fichaje-pill .dropdown-menu {
+  min-width: 8rem;
+}
+
+/* ----- Tarjetas Resumen ----- */
+.resumen-card {
+  border-radius: 0.75rem;
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.4s ease-in-out;
+  background-color: #fff;
+}
+
+.resumen-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.resumen-card:hover .card-body {
+  background-color: #E5F1FF;
+}
+
+.resumen-card a,
+.resumen-card a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ----- Notificaciones ----- */
+#notificacionesModal .modal-content {
+  border-radius: 20px;
+  box-shadow: 0 6px 32px rgba(0,0,0,0.11);
+}
+
+#notificacionesModal .list-group-item {
+  border: none;
+  padding: 0.7rem 1.1rem;
+  font-size: 1.01rem;
+}
+
+#notificacionesModal .badge.bg-warning {
+  font-size: 0.8em;
+  margin-left: 1em;
+  vertical-align: baseline;
+}
+
+#notificacionesModal .modal-title {
+  font-weight: 600;
+}
+
+#notificacionesModal .modal-header {
+  border-bottom: 1px solid #e4e6ed;
+}
+
+/* ========================================================================
+   4. PÁGINAS ESPECÍFICAS
+   ======================================================================== */
+
+/* ----- LOGIN ----- */
+.logo-img img {
+  max-width: 200px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.card-body .text-center {
+  padding-top: 10px;
+  font-size: larger;
+}
+
+.card-body .mb-4 {
+  margin-bottom: 2.2rem !important;
+}
+
+/* ----- ADMIN PANEL ----- */
+/* Estilos específicos para panel de administración */
+
+/* ----- ADMIN SEGURIDAD ----- */
+.admin-seguridad .card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-seguridad .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.logs-container {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.log-item {
+    border-left: 4px solid #dee2e6;
+    transition: all 0.2s ease;
+}
+
+.log-item:hover {
+    border-left-color: #007bff;
+    background-color: #f8f9fa;
+}
+
+.log-item.login { border-left-color: #28a745; }
+.log-item.fichaje { border-left-color: #17a2b8; }
+.log-item.solicitud { border-left-color: #ffc107; }
+.log-item.error { border-left-color: #dc3545; }
+
+.password-strength {
+    height: 5px;
+    margin-top: 5px;
+    background-color: #e9ecef;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.password-strength-bar {
+    height: 100%;
+    transition: width 0.3s ease, background-color 0.3s ease;
+    width: 0%;
+    background-color: #dc3545;
+}
+
+.filters-panel {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 10px;
+    border: 1px solid #dee2e6;
+}
+
+@media (max-width: 768px) {
+    .admin-seguridad .col-md-6 {
+        margin-bottom: 1rem;
+    }
+    
+    .logs-container {
+        max-height: 400px;
+    }
+}
+
+/* ----- EMPLEADOS ----- */
+/* Estilos para estadísticas SOLO en empleados.php */
+body[data-page="empleados"] .row .col-md-6 .card,
+body[data-page="empleados"] .row .col-sm-6 .card,
+.empleados-stats .row .col-md-6 .card,
+.empleados-stats .row .col-sm-6 .card {
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+body[data-page="empleados"] .row .col-md-6 .card .card-body,
+body[data-page="empleados"] .row .col-sm-6 .card .card-body,
+.empleados-stats .row .col-md-6 .card .card-body,
+.empleados-stats .row .col-sm-6 .card .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  flex: 1;
+}
+
+/* ----- FICHAJES ----- */
+/* Estilos para detalle de fichajes */
+.detalle-fichajes-table {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* ----- SOLICITUDES ----- */
+/* Ver Solicitudes - Estilos específicos */
+.ver-solicitudes {
+  padding: 20px 0;
+}
+
+/* ----- INFORMES ----- */
+/* Estilos para Timeline - Solo página de informes */
+.page-informes .timeline {
+  position: relative;
+  padding-left: 30px;
+}
+
+.page-informes .timeline::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #e9ecef;
+}
+
+.page-informes .timeline-item {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.page-informes .timeline-marker {
+  position: absolute;
+  left: -22px;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  background: white;
+  border: 2px solid #e9ecef;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.page-informes .timeline-content {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 4px solid #007bff;
+  margin-left: 0;
+}
+
+.page-informes .timeline-title {
+  margin-bottom: 5px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.page-informes .timeline-description {
+  margin-bottom: 5px;
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+/* Mejoras para botones de acción en informes */
+.page-informes .card-header .d-flex.gap-2 .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hover effects para las cards de estadísticas - Informes */
+.page-informes .card:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Mejoras en botones de períodos rápidos - Informes */
+.page-informes .btn-outline-secondary:hover {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  color: white;
+}
+
+/* ----- GEOLOCALIZACIÓN ----- */
+.timeline-item {
+  position: relative;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -15px;
+  top: 20px;
+  width: 3px;
+  height: calc(100% + 15px);
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+  border-radius: 2px;
+}
+
+.timeline-item:last-child::before {
+  display: none;
+}
+
+.geolocalizacion-page .card {
+  transition: all 0.3s ease;
+}
+
+.geolocalizacion-page .card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important;
+}
+
+.geolocalizacion-page .btn {
+  transition: all 0.3s ease;
+}
+
+.geolocalizacion-page .btn:hover {
+  transform: translateY(-1px);
+}
+
+.geolocalizacion-page .card-body {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.geolocalizacion-page .spinner-border {
+  animation: spinner-grow 1.5s linear infinite;
+}
+
+/* ========================================================================
+   5. RESPONSIVE / MEDIA QUERIES
+   ======================================================================== */
+
+/* ----- Mobile First (575.98px and down) ----- */
+@media (max-width: 575.98px) {
+  .page-informes .btn-outline-secondary.btn-sm {
+    padding: 0.5rem 0.25rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    min-height: 40px;
+    border-radius: 0.375rem;
+  }
+  
+  .page-informes .btn-outline-secondary.btn-sm.w-100 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .page-informes .row.g-2.mt-1 {
+    margin-top: 0.5rem !important;
+  }
+}
+
+/* ----- Tablets (768px and down) ----- */
+@media (max-width: 768px) {
+  .container, .container-fluid {
+    max-width: 100vw;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+  
+  .card {
+    border-radius: 14px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.04);
+  }
+  
+  .modal-dialog {
+    margin: 1rem;
+    width: 98vw;
+    max-width: none;
+  }
+
+  .app-header .bi {
+    font-size: 1.7rem !important;
+  }
+
+  /* Responsive para estadísticas */
+  .stats-card {
+    margin-bottom: 1rem;
+  }
+  
+  /* Responsive para el timeline */
+  .page-informes .timeline {
+    padding-left: 20px;
+  }
+  
+  .page-informes .timeline::before {
+    left: 10px;
+  }
+  
+  .page-informes .timeline-marker {
+    left: -5px;
+    width: 20px;
+    height: 20px;
+  }
+  
+  .page-informes .timeline-content {
+    padding: 10px;
+    font-size: 0.85rem;
+  }
+  
+  /* Responsive para móviles - Informes */
+  .page-informes .d-flex.gap-2 {
+    gap: 0.5rem !important;
+  }
+  
+  .page-informes .d-flex.gap-2 .btn {
+    flex: 1;
+  }
+  
+  .page-informes .card-header .d-flex {
+    gap: 1rem !important;
+  }
+  
+  /* Responsive table improvements - Informes */
+  .page-informes .table-responsive {
+    border-radius: 0.375rem;
+    overflow: hidden;
+  }
+  
+  .page-informes .table {
+    font-size: 0.875rem;
+  }
+  
+  .page-informes .table th,
+  .page-informes .table td {
+    padding: 0.5rem 0.75rem;
+    vertical-align: middle;
+  }
+
+  .fichaje-pill {
+    margin-bottom: 3rem;
+  }
+
+  .text-muted {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-size: 18px;
+  }
+  
+  /* ----- FICHAJES RESPONSIVE TABLET ----- */
+  #fichajeTimer {
+    font-size: 2.5rem !important;
+    line-height: 1.1 !important;
+  }
+  
+  #fichajeTimer > div {
+    font-size: 1rem !important;
+  }
+  
+  .block-card {
+    padding: 0.7rem 1rem !important;
+    font-size: 0.95rem !important;
+  }
+}
+
+/* ----- RESPONSIVE ESPECÍFICO PARA PÁGINA DE INFORMES ----- */
+
+/* Extra Small devices (576px and down) */
+@media (max-width: 575.98px) {
+  .page-informes .container-fluid {
+    padding: 0 8px;
+  }
+  
+  /* Breadcrumb responsive */
+  .page-informes .breadcrumb {
+    font-size: 0.875rem;
+    padding: 0.5rem 0;
+  }
+  
+  .page-informes .breadcrumb-item + .breadcrumb-item::before {
+    font-size: 0.75rem;
+  }
+  
+  /* Header y filtros */
+  .page-informes .card-body h3 {
+    font-size: 1.5rem;
+  }
+  
+  .page-informes .form-select,
+  .page-informes .form-control {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .page-informes .btn {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  /* Métricas principales - Stack vertical en móvil */
+  .page-informes .display-2 {
+    font-size: 2rem !important;
+  }
+  
+  .page-informes .rounded-circle {
+    width: 60px !important;
+    height: 60px !important;
+  }
+  
+  .page-informes .rounded-circle i {
+    font-size: 1.5rem !important;
+  }
+  
+  .page-informes h5 {
+    font-size: 1rem;
+  }
+  
+  .page-informes .progress {
+    width: 90% !important;
+    height: 4px !important;
+  }
+  
+  /* Métricas secundarias */
+  .page-informes .fs-2 {
+    font-size: 1.5rem !important;
+  }
+  
+  .page-informes .fw-bold {
+    font-size: 1.1rem;
+  }
+  
+  .page-informes .text-muted {
+    font-size: 0.8rem;
+  }
+  
+  /* Estado de solicitudes - Una columna en móvil */
+  .page-informes .col-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  
+  .page-informes .h3 {
+    font-size: 1.5rem;
+  }
+  
+  /* Indicador circular más pequeño */
+  .page-informes svg {
+    width: 80px !important;
+    height: 80px !important;
+  }
+  
+  .page-informes .h4 {
+    font-size: 1.2rem;
+  }
+  
+  /* Tabla responsive */
+  .page-informes .table-responsive {
+    font-size: 0.8rem;
+  }
+  
+  .page-informes .table th,
+  .page-informes .table td {
+    padding: 0.3rem 0.5rem;
+    white-space: nowrap;
+  }
+  
+  .page-informes .badge {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+  }
+}
+
+/* Small devices (576px to 767.98px) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .page-informes .container-fluid {
+    padding: 0 12px;
+  }
+  
+  /* Métricas principales - 2 columnas en tablet pequeño */
+  .page-informes .col-lg-3 {
+    flex: 0 0 50%;
+    max-width: 50%;
+    margin-bottom: 1rem;
+  }
+  
+  .page-informes .display-2 {
+    font-size: 2.25rem;
+  }
+  
+  .page-informes .rounded-circle {
+    width: 70px !important;
+    height: 70px !important;
+  }
+  
+  .page-informes .rounded-circle i {
+    font-size: 2rem !important;
+  }
+  
+  /* Métricas secundarias - Ajustar layout */
+  .page-informes .col-lg-8 .col-md-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-bottom: 0.75rem;
+  }
+  
+  .page-informes .col-lg-4 {
+    margin-top: 1rem;
+  }
+  
+  /* Estado de solicitudes - 2 columnas */
+  .page-informes .col-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+/* Medium devices (768px to 991.98px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .page-informes .container-fluid {
+    padding: 0 16px;
+  }
+  
+  /* Métricas principales - 2 columnas en tablet */
+  .page-informes .col-lg-3 {
+    flex: 0 0 50%;
+    max-width: 50%;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Layout de métricas secundarias */
+  .page-informes .col-lg-8 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-bottom: 1.5rem;
+  }
+  
+  .page-informes .col-lg-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  
+  /* Métricas detalladas - 2 columnas */
+  .page-informes .col-lg-8 .col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+/* Large devices (992px to 1199.98px) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .page-informes .container-fluid {
+    padding: 0 20px;
+  }
+  
+  /* Ajustes menores para pantallas grandes */
+  .page-informes .display-2 {
+    font-size: 2.5rem;
+  }
+  
+  .page-informes .rounded-circle {
+    width: 75px !important;
+    height: 75px !important;
+  }
+}
+
+/* Mejoras generales responsive para informes */
+@media (max-width: 991.98px) {
+  /* Espaciado mejorado */
+  .page-informes .mb-5 {
+    margin-bottom: 2rem !important;
+  }
+  
+  .page-informes .mb-4 {
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .page-informes .mb-3 {
+    margin-bottom: 1rem !important;
+  }
+  
+  /* Cards con menos padding */
+  .page-informes .card-body {
+    padding: 1rem;
+  }
+  
+  .page-informes .p-4 {
+    padding: 1.5rem !important;
+  }
+  
+  .page-informes .p-3 {
+    padding: 0.75rem !important;
+  }
+  
+  /* Botones más pequeños */
+  .page-informes .btn-sm {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  /* Formularios más compactos */
+  .page-informes .form-label {
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  /* Tabla más compacta */
+  .page-informes .table {
+    font-size: 0.875rem;
+  }
+  
+  .page-informes .table th {
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+}
+
+/* Optimizaciones específicas para touch */
+@media (max-width: 767.98px) {
+  /* Botones más grandes para touch */
+  .page-informes .btn {
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+  
+  /* Select y inputs más grandes */
+  .page-informes .form-select,
+  .page-informes .form-control {
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+  
+  /* Links del breadcrumb más grandes */
+  .page-informes .breadcrumb-item a {
+    padding: 0.5rem 0.25rem;
+    touch-action: manipulation;
+  }
+  
+  /* Cards con mejor espaciado para touch */
+  .page-informes .card {
+    margin-bottom: 1rem;
+    touch-action: manipulation;
+  }
+  
+  /* Asegurar que el contenido no se salga */
+  .page-informes .text-truncate {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  
+  /* Mejorar el viewport en móviles */
+  .page-informes .container-fluid {
+    overflow-x: hidden;
+  }
+  
+  /* Asegurar que las cards no se desborden */
+  .page-informes .card {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+}
+
+/* Utilidades adicionales para responsividad en informes */
+.page-informes .fs-3 { font-size: 1.75rem !important; }
+.page-informes .fs-md-2 { font-size: 2rem !important; }
+
+@media (min-width: 768px) {
+  .page-informes .h5-md { font-size: 1.25rem !important; }
+  .page-informes .h4-md { font-size: 1.5rem !important; }
+  .page-informes .h3-md { font-size: 1.75rem !important; }
+  .page-informes .display-md-2 { font-size: 3.5rem !important; }
+}
+
+/* ========================================================================
+   6. UTILIDADES Y HELPERS
+   ======================================================================== */
+
+/* ----- Colores: Paleta ampliada ----- */
+.bg-teal-subtle    { background-color:#e0f7f9 !important; }
+.text-teal         { color:#20c997 !important; }
+.text-bg-teal      { background-color:#20c997 !important; color:#fff !important; }
+
+.bg-indigo-subtle  { background-color:#eceeff !important; }
+.text-indigo       { color:#6610f2 !important; }
+.text-bg-indigo    { background-color:#6610f2 !important; color:#fff !important; }
+
+.bg-orange-subtle  { background-color:#fff4e6 !important; }
+.text-orange       { color:#fd7e14 !important; }
+.text-bg-orange    { background-color:#fd7e14 !important; color:#fff !important; }
+
+.bg-pink-subtle    { background-color:#ffe6f2 !important; }
+.text-pink         { color:#d63384 !important; }
+.text-bg-pink      { background-color:#d63384 !important; color:#fff !important; }
+
+.bg-lime-subtle    { background-color:#f7fee7 !important; }
+.text-lime         { color:#84cc16 !important; }
+.text-bg-lime      { background-color:#84cc16 !important; color:#fff !important; }
+
+.bg-dark-subtle    { background-color:#e9ecef !important; }
+.text-bg-dark      { background-color:#343a40 !important; color:#fff !important; }
+
+/* ----- Gradientes personalizados ----- */
+.gradient-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.gradient-success {
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+
+.gradient-info {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.gradient-warning {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.logo-img img {
+  max-width: 200px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+
+.card-body .text-center{
+
+  padding-top: 10px;
+  font-size: larger;
+
+}
+
+.card-body .mb-4 {
+    margin-bottom: 2.2rem !important;
+}
+
+/*Admin panel*/
+
+/* ==============================================
+   ESTILOS BONITOS PARA ESTADÍSTICAS MEJORADAS
+   ============================================== */
+
+/* Estadísticas con fondos sutiles pero bonitos */
+.stats-card {
+  border-radius: 16px;
+  border: none;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stats-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transform: translate(20px, -20px);
+}
+
+.stats-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Versiones mejoradas de bg-*-subtle para estadísticas */
+.bg-primary-subtle.stats-card {
+  background: linear-gradient(135deg, #e7f1ff 0%, #d4edfe 100%);
+  border-left: 4px solid #0d6efd;
+}
+
+.bg-success-subtle.stats-card {
+  background: linear-gradient(135deg, #d1e7dd 0%, #badbcc 100%);
+  border-left: 4px solid #198754;
+}
+
+.bg-info-subtle.stats-card {
+  background: linear-gradient(135deg, #cff4fc 0%, #b6effc 100%);
+  border-left: 4px solid #0dcaf0;
+}
+
+.bg-warning-subtle.stats-card {
+  background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+  border-left: 4px solid #ffc107;
+}
+
+.bg-danger-subtle.stats-card {
+  background: linear-gradient(135deg, #f8d7da 0%, #f1aeb5 100%);
+  border-left: 4px solid #dc3545;
+}
+
+/* Iconos para estadísticas */
+.stats-icon {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.stats-icon.text-primary {
+  background: linear-gradient(135deg, #0d6efd 0%, #0056b3 100%);
+  color: white !important;
+}
+
+.stats-icon.text-success {
+  background: linear-gradient(135deg, #198754 0%, #146c43 100%);
+  color: white !important;
+}
+
+.stats-icon.text-info {
+  background: linear-gradient(135deg, #0dcaf0 0%, #0aa2c0 100%);
+  color: white !important;
+}
+
+.stats-icon.text-warning {
+  background: linear-gradient(135deg, #ffc107 0%, #ffb300 100%);
+  color: white !important;
+}
+
+.stats-icon.text-danger {
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  color: white !important;
+}
+
+/* Números grandes para estadísticas */
+.stats-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+  margin: 0.5rem 0;
+}
+
+.stats-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  opacity: 0.8;
+  margin: 0;
+}
+
+.stats-subtitle {
+  font-size: 0.8rem;
+  opacity: 0.6;
+  margin: 0;
+}
+
+/* Animaciones para números */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.stats-number {
+  animation: countUp 0.6s ease-out;
+}
+
+/* Responsive para estadísticas */
+@media (max-width: 768px) {
+  .stats-number {
+    font-size: 2rem;
+  }
+  
+  .stats-icon {
+    padding: 8px;
+  }
+}
+
+/* Cards coloridas para estadísticas - estilo sólido inspirado en la captura */
+.gradient-primary {
+  background-color: #8dd3c7; /* Verde agua suave */
+  color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(141, 211, 199, 0.3);
+  transition: all 0.3s ease;
+}
+
+.gradient-success {
+  background-color: #a8d5ba; /* Verde pastel */
+  color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(168, 213, 186, 0.3);
+  transition: all 0.3s ease;
+}
+
+.gradient-info {
+  background-color: #fdb462; /* Naranja suave */
+  color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(253, 180, 98, 0.3);
+  transition: all 0.3s ease;
+}
+
+.gradient-warning {
+  background-color: #fb8072; /* Rosa coral */
+  color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(251, 128, 114, 0.3);
+  transition: all 0.3s ease;
+}
+
+.gradient-orange {
+  background-color: #80b1d3; /* Azul suave */
+  color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(128, 177, 211, 0.3);
+  transition: all 0.3s ease;
+}
+
+/* Efectos hover para cards - estilo simple */
+.gradient-primary:hover,
+.gradient-success:hover,
+.gradient-info:hover,
+.gradient-warning:hover,
+.gradient-orange:hover {
+  transform: translateY(-6px);
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Iconos en cards */
+.icon-box {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Cards modernas con glassmorphism */
+.card.border-0 {
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.card.shadow-sm {
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Tipografía moderna */
+.card-body h2 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.card-body h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.card-body p {
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.card-body small {
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+/* Animaciones sutiles */
+.card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(31, 38, 135, 0.2);
+}
+
+/* Estilos para el header principal */
+.card[style*="linear-gradient"] {
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.card[style*="linear-gradient"]::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  transform: translate(50px, -50px);
+}
+
+/* Mejorar los botones de períodos rápidos */
+.btn-outline-primary {
+  border-width: 2px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(13, 110, 253, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .card-body h2 {
+    font-size: 2.2rem;
+  }
+  
+  .card-body h1 {
+    font-size: 1.8rem;
+  }
+  
+  .icon-box {
+    padding: 10px;
+  }
+  
+  .icon-box i {
+    font-size: 1.5rem !important;
+  }
+  
+  /* Reducir efectos en móvil para mejor rendimiento */
+  .gradient-primary::before,
+  .gradient-success::before,
+  .gradient-info::before,
+  .gradient-warning::before,
+  .gradient-orange::before {
+    display: none;
+  }
+}
+
+/*Admin panel*/
+
+.left-sidebar{
+  width: 230px;
+}
+
+.body-wrapper .container-fluid{
+  padding-top: 24px;
+}
+
+/* Tarjetas “Resumen” */
+.resumen-card {
+  border-radius: .75rem;
+  transition: transform .2s, box-shadow .2s;
+}
+.resumen-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.resumen-card .card-body {
+  padding: 1.5rem;
+}
+
+/* Cronómetro estilo “pill” */
+#fichajeTimer {
+  font-family: monospace;
+ /* font-size: 1.2rem;*/
+  min-width: 6ch;       
+  text-align: center;
+}
+#ficharBtn {
+  margin: 0;             
+  padding: 0.35rem 0.75rem;
+}
+
+.dropdown {
+  margin-left: .5rem;
+}
+
+.fichaje-pill {
+  border-radius: 999px;
+  padding: 0.75rem 1.25rem;
+}
+
+.fichaje-pill i {
+
+  color: #6c757d;
+}
+
+.fichaje-pill .btn-lg {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+}
+
+.fichaje-pill .dropdown-menu {
+  min-width: 8rem;
+}
+
+/* Tarjetas “Resumen” */
+.resumen-card {
+  border-radius: .75rem;
+  transition: transform .2s, box-shadow .2s, background-color .4s ease-in-out;
+  background-color: #fff;
+}
+
+/* Efecto lift */
+.resumen-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Efecto “hover” de fondo igual al sidebar */
+.resumen-card:hover .card-body {
+  background-color: #E5F1FF;
+}
+
+
+.resumen-card a,
+.resumen-card a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Cronómetro */
+.fichaje-pill{
+  border-radius:50px;
+  padding:.6rem 1rem;
+  gap:.75rem
+}
+
+@media(min-width:768px){
+  .fichaje-pill{
+    margin-bottom:3rem
+  }
+}
+
+.text-muted {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  font-size: 18px;
+}
+
+/* notificaciones campana*/
+  #notificacionesModal .modal-content {
+    border-radius: 20px;
+    box-shadow: 0 6px 32px rgba(0,0,0,0.11);
+  }
+  #notificacionesModal .list-group-item {
+    border: none;
+    padding: 0.7rem 1.1rem;
+    font-size: 1.01rem;
+  }
+  #notificacionesModal .badge.bg-warning {
+    font-size: .8em;
+    margin-left: 1em;
+    vertical-align: baseline;
+  }
+  #notificacionesModal .modal-title {
+    font-weight: 600;
+  }
+  #notificacionesModal .modal-header {
+    border-bottom: 1px solid #e4e6ed;
+  }
+
+
+@media (max-width: 768px) {
+  .container, .container-fluid {
+    max-width: 100vw;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+  .card {
+    border-radius: 14px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.04);
+  }
+  .modal-dialog {
+    margin: 1rem;
+    width: 98vw;
+    max-width: none;
+  }
+
+  .app-header .bi {
+    font-size: 1.7rem !important;
+  }
+  .app-header .badge {
+    font-size: .8em;
+  }
+}
+
+.navbar-nav .nav-link:hover,
+.dropdown-item:hover {
+  background: #f5f5f7 !important;
+  color: #2c2d2f !important;
+  border-radius: 12px;
+  transition: all .12s;
+}
+
+
+/* En escritorio mantiene sidebar siempre visible */
+@media (min-width: 992px) {
+  .left-sidebar, .sidebar {
+    margin-left: 0 !important;
+  }
+}
+
+
+/* Spike-like Sidebar Colors & Effects */
+.left-sidebar {
+  background: #f6f8fc;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.04);
+  transition: all 0.3s cubic-bezier(.68,-0.55,.27,1.55);
+  width: 260px;
+  min-height: 100vh;
+  z-index: 101;
+  border-right: 1px solid #e3e6f0;
+}
+
+@media (max-width: 991.98px) {
+  .left-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1055;
+    min-height: 100vh;
+  }
+  
+}
+
+#main-wrapper.sidebar-collapsed .body-wrapper {
+  margin-left: 0 !important;
+}
+.body-wrapper {
+  transition: margin-left 0.3s;
+  margin-left: 260px;
+}
+
+@media (max-width: 991.98px) {
+  .body-wrapper {
+    margin-left: 0 !important;
+  }
+}
+
+/* Sidebar nav link */
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: #6e7a8a;
+  font-weight: 500;
+  transition: all 0.16s;
+  background: transparent;
+  margin-bottom: 4px;
+  font-size: 1rem;
+}
+
+.sidebar-link:hover,
+.sidebar-item.active > .sidebar-link,
+.sidebar-link.active {
+  background: linear-gradient(90deg, #0085db 0, #61a0ff 100%);
+  color: #fff !important;
+  box-shadow: 0 3px 10px 0 rgba(58, 122, 254, 0.09);
+}
+
+/* Sidebar link: estilo de selección más transparente y suave */
+.sidebar-link.primary-hover-bg:hover,
+.sidebar-link.primary-hover-bg.active,
+.sidebar-item.active > .sidebar-link.primary-hover-bg {
+  background: rgba(13, 110, 253, 0.12) !important; /* Azul Bootstrap con transparencia */
+  color: #0d6efd !important;
+  box-shadow: 0 2px 8px 0 rgba(13,110,253,0.07);
+  transition: all 0.18s;
+}
+
+.sidebar-link.primary-hover-bg:focus {
+  background: rgba(13, 110, 253, 0.18) !important;
+  color: #0d6efd !important;
+}
+
+.sidebar-link.primary-hover-bg i,
+.sidebar-link.primary-hover-bg iconify-icon {
+  color: #0d6efd !important;
+  transition: color 0.18s;
+}
+
+.sidebar-link.primary-hover-bg:hover i,
+.sidebar-link.primary-hover-bg.active i,
+.sidebar-link.primary-hover-bg:focus i,
+.sidebar-link.primary-hover-bg:hover iconify-icon,
+.sidebar-link.primary-hover-bg.active iconify-icon,
+.sidebar-link.primary-hover-bg:focus iconify-icon {
+  color: #0d6efd !important;
+}
+
+/* Sidebar link: colores personalizados por sección */
+
+.sidebar-link.sidebar-blue:hover,
+.sidebar-link.sidebar-blue.active,
+.sidebar-item.active > .sidebar-link.sidebar-blue {
+  background: rgba(13, 110, 253, 0.18) !important;
+  color: #0d6efd !important;
+}
+.sidebar-link.sidebar-blue:focus {
+  background: rgba(40, 167, 69, 0.18) !important;
+  color: #0d6efd!important;
+}
+.sidebar-link.sidebar-blue i,
+.sidebar-link.sidebar-blue iconify-icon {
+  color: #0d6efd !important;
+}
+
+.sidebar-link.sidebar-green:hover,
+.sidebar-link.sidebar-green.active,
+.sidebar-item.active > .sidebar-link.sidebar-green {
+  background: rgba(40, 167, 69, 0.13) !important;
+  color: #29b976 !important;
+}
+.sidebar-link.sidebar-green:focus {
+  background: rgba(40, 167, 69, 0.18) !important;
+  color: #29b976 !important;
+}
+.sidebar-link.sidebar-green i,
+.sidebar-link.sidebar-green iconify-icon {
+  color: #29b976 !important;
+}
+
+.sidebar-link.sidebar-orange:hover,
+.sidebar-link.sidebar-orange.active,
+.sidebar-item.active > .sidebar-link.sidebar-orange {
+  background: rgba(255, 193, 7, 0.13) !important;
+  color: #dbb952 !important;
+}
+.sidebar-link.sidebar-orange:focus {
+  background: rgba(255, 193, 7, 0.18) !important;
+  color: #dbb952 !important;
+}
+.sidebar-link.sidebar-orange i,
+.sidebar-link.sidebar-orange iconify-icon {
+  color: #dbb952 !important;
+}
+
+.sidebar-link.sidebar-violet:hover,
+.sidebar-link.sidebar-violet.active,
+.sidebar-item.active > .sidebar-link.sidebar-violet {
+  background: rgba(111, 66, 193, 0.13) !important;
+  color: #6f42c1 !important;
+}
+.sidebar-link.sidebar-violet:focus {
+  background: rgba(111, 66, 193, 0.18) !important;
+  color: #6f42c1 !important;
+}
+.sidebar-link.sidebar-violet i,
+.sidebar-link.sidebar-violet iconify-icon {
+  color: #6f42c1 !important;
+}
+
+.sidebar-link.sidebar-red:hover,
+.sidebar-link.sidebar-red.active,
+.sidebar-item.active > .sidebar-link.sidebar-red {
+  background: rgba(220, 53, 69, 0.13) !important;
+  color: #dc3545 !important;
+}
+.sidebar-link.sidebar-red:focus {
+  background: rgba(220, 53, 69, 0.18) !important;
+  color: #dc3545 !important;
+}
+.sidebar-link.sidebar-red i,
+.sidebar-link.sidebar-red iconify-icon {
+  color: #dc3545 !important;
+}
+
+.sidebar-link.sidebar-pink:hover,
+.sidebar-link.sidebar-pink.active,
+.sidebar-item.active > .sidebar-link.sidebar-pink {
+  background: rgba(232, 62, 140, 0.13) !important;
+  color: #e83e8c !important;
+}
+.sidebar-link.sidebar-pink:focus {
+  background: rgba(232, 62, 140, 0.18) !important;
+  color: #e83e8c !important;
+}
+.sidebar-link.sidebar-pink i,
+.sidebar-link.sidebar-pink iconify-icon {
+  color: #e83e8c !important;
+}
+
+.nav-small-cap {
+  color: #b6becd;
+  /*margin: 20px 20px 10px;*/
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+/* Logo paddings and sidebar close button */
+.brand-logo {
+  padding: 0 16px 0 16px !important;
+  background: #fff;
+  border-bottom: 1px solid #e8edf1;
+}
+.brand-logo .close-btn {
+  font-size: 1.3rem;
+  color: #6e7a8a;
+}
+
+/* === Navbar / Topbar Spike-Like === */
+
+
+/* .topbar {
+  background: #fff !important;
+  box-shadow: 0 2px 6px 0 rgba(99,112,183,0.06);
+  border-bottom: 1px solid #e3e6f0;
+  z-index: 1000;
+}*/
+
+/* --- Topbar redondeada --- */
+.topbar{
+ 
+  background: transparent !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+  padding: 10px 16px;         
+}
+
+
+.topbar .navbar{
+  background: #fff;
+  border-radius: 18px;    
+  box-shadow: 0 8px 24px rgba(2,6,23,.06);
+  padding-block: 14px;
+  min-height: 72px;            
+  padding: 8px 24px;          
+  border: 1px solid #e9eef5; 
+}
+
+/* si la quieres súper redonda tipo “pill” añade .topbar--pill al <header> */
+.topbar.topbar--pill .navbar{
+  border-radius: 9999px;
+}
+
+/* compacta en móvil */
+@media (max-width: 576px){
+  .topbar{ padding: 8px 10px; }
+  .topbar .navbar{ border-radius: 12px; min-height: 48px; padding: 8px 16px; }
+  
+  /* ----- FICHAJES RESPONSIVE ----- */
+  .resumen-card .card-body {
+    padding: 1rem !important;
+  }
+  
+  .fichaje-pill {
+    padding: 1rem 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+    border-radius: 20px !important;
+  }
+  
+  #fichajeTimer {
+    font-size: 3rem !important;
+    line-height: 1.1 !important;
+    margin: 1rem 0 !important;
+    font-weight: 700 !important;
+  }
+  
+  #fichajeTimer > div {
+    font-size: 1.2rem !important;
+    margin-top: 0.75rem !important;
+    line-height: 1.5 !important;
+  }
+  
+  .block-card {
+    padding: 0.75rem 1rem !important;
+    font-size: 1rem !important;
+    border-radius: 15px !important;
+    min-height: 50px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.5rem !important;
+  }
+  
+  .fichaje-pill .btn {
+    padding: 0.75rem 1rem !important;
+    font-size: 1rem !important;
+  }
+}
+
+
+
+.navbar .navbar-nav .nav-link {
+  color: #7a8fa6;
+  border-radius: 50px;
+  /*padding: 8px 14px;*/
+  transition: background 0.16s, color 0.16s;
+}
+.navbar .navbar-nav .nav-link:hover,
+.navbar .navbar-nav .show > .nav-link,
+.navbar .navbar-nav .active > .nav-link {
+  background: #eaf1ff;
+  color: #0085db !important;
+}
+.navbar .navbar-nav .dropdown-menu {
+  border-radius: 12px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.08);
+}
+
+/* Noti y user icon hovers */
+.navbar-nav .nav-icon-hover-bg {
+  transition: background 0.12s;
+}
+.navbar-nav .nav-icon-hover-bg:hover,
+.navbar-nav .nav-icon-hover-bg:focus {
+  background: #eaf1ff !important;
+  color: #0085db !important;
+}
+
+.user-profile {
+  background: #eaf1ff;
+  border-radius: 50%;
+}
+
+/* Dropdown fix */
+.dropdown-menu.dropdown-menu-animate-up {
+  animation: dropdownSlideIn .2s cubic-bezier(.68,-0.55,.27,1.55);
+}
+@keyframes dropdownSlideIn {
+  0% { transform: translateY(10px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Sidebar Spike-Like Toggle Effect */
+#main-wrapper {
+  transition: margin-left 0.3s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+.left-sidebar {
+  width: 260px;
+  min-width: 260px;
+  min-height: 100vh;
+  transition: margin-left 0.3s cubic-bezier(.68,-0.55,.27,1.55), box-shadow .3s;
+  background: #f6f8fc;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.04);
+  z-index: 1101;
+}
+
+
+.body-wrapper {
+  margin-left: 260px;
+  transition: margin-left 0.3s cubic-bezier(.68,-0.55,.27,1.55);
+}
+#main-wrapper.sidebar-collapsed .body-wrapper {
+  margin-left: 0;
+}
+
+@media (max-width: 991.98px) {
+  .left-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin-left: 0;
+    height: 100vh;
+    z-index: 2002;
+    box-shadow: 2px 0 12px 0 rgba(31,38,135,0.08);
+  }
+
+  .body-wrapper {
+    margin-left: 0;
+  }
+}
+
+/* Hover para botones de tarjetas tipo block-card */
+.block-card:hover,
+.block-card:focus {
+  filter: brightness(1.08);
+  box-shadow: 0 4px 16px 0 rgba(0,0,0,0.08);
+  text-decoration: none;
+  transition: all 0.18s;
+}
+
+/* Botones block-card: sin borde y hover más oscuro */
+.block-card {
+  border: none !important;
+  outline: none !important;
+}
+
+.bg-success-subtle.block-card:hover,
+.bg-success-subtle.block-card:focus {
+  background-color: #30d085 !important; 
+  color: #fff !important;
+}
+
+.bg-danger-subtle.block-card:hover,
+.bg-danger-subtle.block-card:focus {
+  background-color: #de4d5b !important;
+  color: #fff !important;
+}
+
+.bg-info-subtle.block-card:hover,
+.bg-info-subtle.block-card:focus {
+  background-color: #2cd4f6 !important;
+  color: #fff !important;
+}
+
+.bg-primary-subtle.block-card:hover,
+.bg-primary-subtle.block-card:focus {
+  background-color: #448efc !important;
+  color: #fff !important;
+}
+
+/* Fondo oscuro tras sidebar en móvil */
+.dark-transparent{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  z-index:1100;
+  transition:opacity .25s;
+}
+
+@media (min-width: 992px){   
+  .dark-transparent{display:none !important;}
+}
+
+/* -- Sidebar abierto en móvil/tablet (Spike-like) -- */
+@media (max-width: 991.98px) {
+  body.sidebar-open .left-sidebar {
+    left: 0 !important;
+    box-shadow: 2px 0 12px 0 rgba(31,38,135,0.18);
+    transition: left 0.25s cubic-bezier(.4,0,.2,1);
+  }
+  .left-sidebar {
+    left: -260px; /* sidebar oculto fuera de pantalla */
+    transition: left 0.25s cubic-bezier(.4,0,.2,1);
+  }
+  .dark-transparent {
+    opacity: 1;
+    pointer-events: auto;
+    display: block;
+  }
+  body:not(.sidebar-open) .dark-transparent {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s;
+  }
+}
+
+/* Sidebar siempre visible en escritorio */
+@media (min-width: 1024px) {
+  .left-sidebar {
+    position: flex !important;
+    left: 0 !important;
+    margin-left: 0 !important;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.04);
+  }
+  .dark-transparent {
+    display: none !important;
+  }
+}
+
+.left-sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+}
+.sidebar-nav {
+  flex: 1 1 auto;
+}
+
+
+
+@media (max-width: 576px) {
+  .card-body.py-4 { padding: 1.25rem 0.5rem !important; }
+  .fichaje-pill { font-size: 1.1rem; padding: 1rem 0.4rem !important; }
+}
+
+@media (max-width: 576px) {
+  .table td, .table th {
+    font-size: 0.96em;
+    padding: 0.4rem 0.25rem;
+  }
+}
+
+.card-img-top {
+  object-fit: cover;
+  width: 100%;
+  max-height: 110px;
+  height: auto;
+}
+@media (max-width: 576px) {
+  .card-img-top { max-height: 60px; }
+}
+
+.fichaje-pill #fichajeTimer {
+  font-size: 5.1rem;
+  font-family: 'Roboto Mono', 'Menlo', monospace;
+  line-height: 1.1;
+  min-width: 8ch;
+  text-align: center;
+  word-break: break-all;
+  letter-spacing: 2px;
+}
+
+@media (max-width: 992px) {
+  .fichaje-pill #fichajeTimer {
+    font-size: 3.1rem !important;
+    min-width: 8ch;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .fichaje-pill {
+    padding: 1.2rem 0.2rem !important;
+  }
+}
+
+/* ------ Footer ------ */
+.footer-modern {
+  width: 100%;
+  padding: 16px 0 12px 0;
+  text-align: center;
+  font-size: 1rem;
+  color: #616161;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.footer-content {
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.app-footer {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-bottom: auto;
+}
+
+@media (max-width: 991px) {
+  .left-sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: -260px;
+    width: 260px;   
+    height: 100vh;
+    z-index: 3000 !important;
+    box-shadow: 2px 0 12px 0 rgba(31,38,135,0.18);
+  }
+  .topbar {
+    position: sticky !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 1000 !important;
+  }
+}
+@media (max-width: 576px) {
+  .fichaje-pill {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    padding: 0.5rem 0.6rem !important;
+  }
+   .fichaje-pill #fichajeTimer {
+    font-size: 2.4rem !important;
+    min-width: 7ch;
+    margin-bottom: 0.3rem;
+  }
+
+  .fichaje-pill .bi {
+    font-size: 1.3rem !important;
+    margin-right: 0.6rem !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .avatar-profile {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media (max-width: 576px) {
+  .card {
+    max-width: 99vw !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    border-radius: 13px !important;
+  }
+  /* .card-body {
+    padding: 1.1rem 0.4rem !important;
+  } */
+}
+
+@media (max-width: 577px) {
+  #fichajeTimer, .resumen-card .card-body .text-success {
+    /*line-height: 1.1;*/
+    word-break: break-all;
+    letter-spacing: 1px;
+  }
+}
+
+@media (max-width: 525px) {
+  .row .col-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+
+@media (max-width: 576px) {
+  .card-body.p-2 {
+    padding: 0.5rem !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .badge {
+    font-size: 0.92em !important;
+    padding: 0.35em 0.7em !important;
+    min-width: unset !important;
+    min-height: unset !important;
+  }
+
+}
+
+
+
+@media (max-width: 576px) {
+  .mb-4, .mt-4 {
+    margin-bottom: 1.2rem !important;
+    margin-top: 1.2rem !important;
+  }
+  .py-4, .pt-3 {
+    padding-top: 1.2rem !important;
+    padding-bottom: 1.2rem !important;
+  }
+}
+
+.fichaje-mini-card {
+  border-radius: 15px;
+  background: #f8fafc;
+  transition: box-shadow .14s, background .13s;
+}
+.fichaje-mini-card:hover {
+  background: #eaf1ff;
+  box-shadow: 0 2px 8px 0 rgba(13,110,253,0.11);
+}
+
+.fichaje-mini-card .badge.bg-success,
+.fichaje-mini-card .badge.bg-danger {
+  min-width: 100px;
+  text-align: center;
+  justify-content: center;
+  font-size: 0.75rem;
+}
+
+
+
+@media (max-width: 600px) {
+  .fichaje-mini-card .card-body {
+    padding: 0.8em 0.5em !important;
+  }
+}
+
+
+@media (max-width: 450px) {
+  .resumen-card .d-flex.justify-content-around.mb-2 {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.5em;
+  }
+  .resumen-card .d-flex.justify-content-around.mb-2 > div {
+    width: 100%;
+    text-align: left !important;
+    margin-bottom: .2em;
+  }
+
+  .fichaje-mini-card {
+  margin-bottom: 1em;
+  }
+  .horario-semanal-scroll .badge {
+    display: block;
+    margin-bottom: 0.3em;
+    width: 100%;
+    text-align: center;
+  }
+
+}
+
+@media (max-width: 600px) {
+  .container, .container-fluid {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    max-width: 100vw !important;
+  }
+  body {
+    overflow-x: hidden;
+  }
+  
+  /* Tablas más compactas en móvil */
+  .table {
+    font-size: 0.8rem;
+  }
+  
+  .table td, .table th {
+    padding: 6px 3px !important;
+    word-break: break-word;
+  }
+  
+  /* Badges más pequeños */
+  .badge {
+    font-size: 0.65rem !important;
+    padding: 3px 6px !important;
+  }
+}
+
+
+.btn-lg, .btn.btn-lg {
+  font-size: 1.2rem !important;
+  padding: 0.55em 1.0em !important;
+}
+@media (max-width: 576px) {
+  .btn-lg, .btn.btn-lg {
+    font-size: 1.05rem !important;
+    padding: 0.49em 0.78em !important;
+  }
+}
+
+
+
+.container-fluid, .container {
+  max-width: 90vw !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+  margin: 0 auto !important;
+}
+
+@media (max-width: 900px) {
+  .container-fluid, .container {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+}
+
+body {
+  overflow-x: hidden;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: #edf3f7;
+}
+@media (max-width: 430px) {
+  .card-body .fs-5 { font-size: 1.2rem !important; }
+  .card-body small, .card-body .fw-bold { font-size: 0.97em !important; }
+  .card-body .flex-fill { padding: 0.18em 0 !important; }
+}
+
+.card {
+  border-radius: 16px !important;
+  margin-bottom: 1.3rem;
+  box-shadow: 0 1px 8px 0 rgba(0,0,0,0.06);
+}
+
+.card-body {
+  padding: 1.4rem 1.2rem;
+}
+
+.resumen-card .d-flex.justify-content-around.mb-2 {
+  gap: 0.2em;
+}
+
+@media (max-width: 600px) {
+  .resumen-card .d-flex.justify-content-around.mb-2 {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.2em !important;
+    margin-bottom: 0.7em !important;
+  }
+  .resumen-card .d-flex.justify-content-around.mb-2 > div {
+    text-align: left !important;
+    margin-bottom: 0.4em !important;
+    width: 100% !important;
+  }
+}
+
+.table {
+  width: 100% !important;
+  min-width: 0 !important;
+}
+@media (max-width: 600px) {
+  .table {
+    font-size: 0.92em !important;
+    min-width: 0 !important;
+  }
+  .table td, .table th {
+    padding: 0.32em 0.15em !important;
+  }
+}
+
+@media(max-width:767px){
+  #fichajeTimer small {
+    font-size: 14px !important;
+    letter-spacing: 0;
+    padding-left: 0.1em;
+    padding-right: 0.1em;
+  }
+}
+
+/* Navbar más estrecha */
+.topbar,
+.topbar .navbar {
+  min-height: 60px !important; 
+  height: 48px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+.topbar .container-fluid {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  min-height: 46px !important;
+}
+
+
+/*.topbar .navbar-nav .nav-link,
+.topbar .navbar-nav .nav-item {
+  padding-top: 4px !important;
+  /*padding-bottom: 4px !important;
+  height: 46px !important;
+}*/
+
+
+.topbar .user-profile img,
+.topbar .navbar-nav img {
+  max-height: 34px !important;
+  height: 34px !important;
+  width: 34px !important;
+  object-fit: cover;
+}
+
+@media (max-width: 991px) {
+  .fichaje-pill {
+    flex-direction: row !important;       
+    align-items: center !important;     
+    padding: 0.4rem 0.3rem !important; 
+    gap: 1rem !important;
+    justify-content: center !important; 
+    display: flex;
+  }
+  .fichaje-pill #fichajeTimer{
+    font-size: 1.08rem !important;     
+  }
+  .fichaje-pill .btn {
+    font-size: 0.95rem !important;
+    padding: 0.45em 1.2em !important;
+    white-space: nowrap !important;
+    margin-left: auto !important;
+    margin-right: auto !important;   
+  }
+
+}
+
+ @media (max-width: 600px) { 
+  
+  .fichaje-pill .bi {
+    display: none;
+  }
+  .fichaje-pill{
+    max-width: 98vw !important;
+    width: 100% !important;
+
+  }
+ }
+
+ @media (max-width: 991.98px) {
+  .fichaje-pill #fichajeTimer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .fichaje-pill #fichajeTimer small {
+    display: block;
+    margin-top: 0.2em;
+    text-align: center !important;
+    font-size: 0.95em;
+    color: #888;
+  }
+
+  .fichaje-pill {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 991.98px) {
+  /* SOLO para el fichaje-pill dentro de una card-body dentro de resumen-card */
+  .resumen-card > .card-body > .fichaje-pill {
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    gap: 0.7em !important;
+    width: 100% !important;
+    max-width: 95vw !important;
+    margin: 0 auto !important;
+  }
+  .resumen-card > .card-body > .fichaje-pill > * {
+    width: 100% !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+    justify-content: center !important;
+    float: none !important;
+  }
+  .resumen-card > .card-body > .fichaje-pill .fw-bold.text-primary-emphasis,
+  .resumen-card > .card-body > .fichaje-pill .fw-bold.text-success {
+    width: 100% !important;
+    margin: 0.2em 0 !important;
+    text-align: center !important;
+    display: block !important;
+  }
+  .resumen-card > .card-body > .fichaje-pill #fichajeTimer {
+    width: 100% !important;
+    font-size: 2.7rem !important;
+    min-width: 7ch;
+    margin: 0.2em auto 0.2em auto !important;
+    text-align: center !important;
+  }
+  .resumen-card > .card-body > .fichaje-pill small,
+  .resumen-card > .card-body > .fichaje-pill .text-muted {
+    display: block !important;
+    margin-top: 0.3em !important;
+    margin-bottom: 0 !important;
+    font-size: 1.05rem !important;
+    width: 100%;
+    text-align: center !important;
+  }
+}
+
+/*empleados*/
+.btn-icon-no-bg {
+  background: transparent !important;
+  border: none !important;
+  padding: 6px;
+  border-radius: 50%;
+  color: #90a4ae;
+  font-size: 1.35rem;
+  transition: background 0.18s, color 0.18s, box-shadow 0.15s;
+  box-shadow: none;
+}
+.btn-icon-no-bg:hover, .btn-icon-no-bg:focus {
+  background: rgba(33, 150, 243, 0.10);  
+  color: #1976d2;
+  box-shadow: 0 2px 8px 0 rgba(33,150,243,0.09);
+  text-decoration: none;
+}
+.btn-icon-no-bg .bi-eye      { color: #26c6da; } 
+.btn-icon-no-bg .bi-pencil   { color: #1976d2; } 
+.btn-icon-no-bg .bi-trash    { color: #e57373; }   
+
+.rol-chip {
+  display: inline-block;
+  background: #eaf4fd;     
+  color: #2196f3;             
+  font-weight: 500;
+  font-size: 16px;
+  padding: 3px 18px;        
+  border-radius: 999px;
+  margin: 0.5em auto 1em auto;
+  line-height: 1.2;
+  box-shadow: none;
+  border: none;
+}
+
+.btn-custom {
+  min-width: 130px; 
+  padding: 8px 0;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 24px;  
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  transition: box-shadow 0.15s;
+  box-shadow: none;
+}
+
+.btn-primary.btn-custom {
+  background-color: #2196f3;
+  color: #fff;
+  border: none;
+}
+
+.btn-primary.btn-custom:hover {
+  background-color: #1976d2;
+  color: #fff;
+}
+
+.btn-danger.btn-custom {
+  background-color: #ff9e96;
+  color: #fff;
+  border: none;
+}
+
+.btn-danger.btn-custom:hover {
+  background-color: #f05a49;
+  color: #fff;
+}
+
+.btn-icon-no-bg {
+  background: none;
+  border: none;
+  padding: 0.3rem;
+  box-shadow: none;
+}
+.btn-icon-no-bg:focus {
+  outline: none;
+  box-shadow: none;
+}
+.btn-icon-no-bg:hover i {
+  opacity: 0.8;
+  transform: scale(1.15);
+}
+
+.dataTables_wrapper .dataTables_filter input {
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+}
+.dataTables_wrapper .dataTables_length select {
+  border-radius: 12px;
+  padding: 4px 8px;
+}
+
+
+
+.small-col {
+    font-size: 0.9rem !important;
+    padding-top: 0.3rem !important;
+    padding-bottom: 0.3rem !important;
+}
+.perfil-col {
+    width: 140px;
+    min-width: 100px;
+    max-width: 160px;
+    white-space: nowrap;
+}
+.tabla-compacta th,
+.tabla-compacta td {
+  padding: 0.25rem 0.4rem !important;
+  font-size: 13px !important;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* Quitar fondo negro al hover y active */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    background: transparent !important;
+    color: var(--bs-primary, #0085db) !important;
+    border: none !important;
+    box-shadow: none !important;
+    transition: all .15s;
+    border-radius: 8px !important;
+    margin: 0 3px;
+    font-size: 1rem;
+    padding: 7px 15px;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.dataTables_wrapper .dataTables_paginate .paginate_button:active {
+    background: var(--bs-primary, #0085db) !important;
+    color: #fff !important;
+    border: none !important;
+    box-shadow: 0 0 0 2px rgba(0,133,219,0.2) !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover:not(.current):not(.disabled) {
+    background: #fff !important;  
+    color: var(--bs-primary, #0085db) !important;
+}
+
+
+.dataTables_wrapper .dataTables_paginate .paginate_button,
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    border-radius: 8px !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+    
+    pointer-events: none;
+    border: none !important;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    margin-top: 18px !important;
+}
+
+
+.calendario-mes { 
+  font-size: .9rem; 
+}
+    .calendario-mes td { 
+      width: 2rem; 
+      height: 2rem; 
+      text-align: center; 
+      cursor: pointer; 
+    }
+    .calendario-mes td.disabled { 
+      background: #f8f9fa; 
+      color: #ccc; 
+      cursor: not-allowed; }
+
+    .calendario-mes td.selected { 
+      background: #0d6efd; 
+      color: white; 
+    }
+
+/* Ver Solicitudes - Estilos específicos */
+.admin-solicitudes {
+    padding: 1rem;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Prevenir overflow horizontal */
+.admin-solicitudes * {
+    box-sizing: border-box;
+}
+
+.admin-solicitudes .row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.admin-solicitudes .col-12 {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* Modales - Configuración correcta */
+.modal-backdrop {
+    z-index: 1040;
+}
+
+.modal {
+    z-index: 1050;
+}
+
+body.modal-open {
+    overflow: hidden;
+    padding-right: 0 !important;
+}
+
+.modal.fade:not(.show) {
+    display: none !important;
+}
+
+.modal-backdrop.fade:not(.show) {
+    display: none !important;
+}
+
+.modal-backdrop ~ .modal-backdrop {
+    display: none !important;
+}
+
+/* Badges y estadísticas */
+.badge-group {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.badge-group .badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    margin: 0.125rem;
+    flex-shrink: 0;
+}
+
+/* Avatares */
+.avatar-sm {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    flex-shrink: 0;
+}
+
+.avatar-sm img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Botón de emergencia */
+#cerrarTodosModales {
+    opacity: 0.7;
+    transition: opacity 0.3s;
+    border: 1px solid #dc3545;
+    flex-shrink: 0;
+}
+
+#cerrarTodosModales:hover {
+    opacity: 1;
+}
+
+/* Prevenir texto largo */
+.text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.min-width-0 {
+    min-width: 0;
+}
+
+/* Responsive - Móvil */
+@media (max-width: 768px) {
+    .admin-solicitudes {
+        padding: 0.5rem;
+    }
+    
+    .container-fluid {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    
+    .table-responsive {
+        font-size: 0.875rem;
+    }
+    
+    .card {
+        border-radius: 12px;
+        margin-bottom: 1rem;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+        min-width: 36px;
+        min-height: 36px;
+    }
+    
+    .badge {
+        font-size: 0.75rem;
+    }
+    
+    .avatar-sm {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .text-truncate {
+        max-width: 120px;
+    }
+    
+    .gap-1 {
+        gap: 0.25rem !important;
+    }
+    
+    .gap-2 {
+        gap: 0.5rem !important;
+    }
+    
+    .modal-dialog {
+        margin: 0.5rem;
+        width: calc(100vw - 1rem);
+        max-width: none;
+    }
+    
+    /* Prevenir overflow en tarjetas móviles */
+    .card.border-0.shadow-sm {
+        width: 100%;
+        overflow: hidden;
+    }
+    
+    .card-body {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    /* Botones en móvil */
+    .btn-sm {
+        white-space: nowrap;
+    }
+    
+    /* Badges responsivos */
+    .badge-group {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+    
+    .badge-group .badge {
+        margin: 0.125rem 0.25rem 0.125rem 0;
+    }
+}
+
+/* Responsive - Tablet */
+@media (max-width: 992px) and (min-width: 769px) {
+    .admin-solicitudes {
+        padding: 0.75rem;
+    }
+    
+    .container-fluid {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+    
+    .card {
+        border-radius: 10px;
+    }
+    
+    .btn-sm {
+        padding: 0.375rem 0.75rem;
+        font-size: 0.875rem;
+    }
+}
+
+/* Mejorar tarjetas móviles */
+@media (max-width: 991.98px) {
+    .card.border-0.shadow-sm {
+        border: 1px solid #dee2e6 !important;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+        transition: all 0.2s ease;
+    }
+    
+    .card.border-0.shadow-sm:hover {
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+    }
+}
+
+/* Filtros responsive */
+@media (max-width: 576px) {
+    .row.g-2 {
+        row-gap: 0.5rem !important;
+    }
+    
+    .form-control,
+    .form-select {
+        font-size: 0.875rem;
+    }
+    
+    .form-control-sm,
+    .form-select-sm {
+        font-size: 0.875rem;
+        padding: 0.25rem 0.5rem;
+    }
+    
+    .btn {
+        font-size: 0.875rem;
+    }
+    
+    .d-flex.gap-1.flex-column.flex-sm-row {
+        flex-direction: column;
+        gap: 0.25rem !important;
+    }
+    
+    .d-flex.gap-1.flex-column.flex-sm-row .btn {
+        width: 100%;
+    }
+    
+    /* Títulos más pequeños */
+    .h4 {
+        font-size: 1.25rem !important;
+    }
+    
+    .h6 {
+        font-size: 1rem !important;
+    }
+}
+
+/* Prevenir overflow horizontal */
+.admin-solicitudes .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Mejorar accesibilidad táctil */
+@media (max-width: 768px) {
+    .btn-sm i {
+        font-size: 1rem;
+    }
+    
+    .form-control,
+    .form-select {
+        min-height: 40px;
+    }
+    
+    /* Flex fixes para móvil */
+    .d-flex.justify-content-between {
+        align-items: flex-start !important;
+    }
+    
+    .flex-grow-1 {
+        flex-grow: 1;
+        min-width: 0;
+    }
+    
+    .flex-shrink-0 {
+        flex-shrink: 0;
+    }
+}
+
+/* Ocultar texto en todos los botones - mostrar solo iconos */
+.btn span {
+    display: none !important;
+}
+
+/* Estilos para detalle de fichajes */
+.detalle-fichajes-table {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* .detalle-fichajes-table .table thead th {
+  background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+  color: white;
+  border: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 12px 10px;
+} */
+
+.detalle-fichajes-table .table tbody td {
+    padding: 10px;
+    vertical-align: middle;
+    border-bottom: 1px solid #e9ecef;
+    font-size: 0.9rem;
+}
+
+.detalle-fichajes-table .table tbody tr:hover {
+    background-color: rgba(78, 115, 223, 0.05);
+    transform: translateY(-1px);
+    transition: all 0.2s ease;
+}
+
+.detalle-fichajes-table .badge {
+    font-size: 0.75rem;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    min-width: 110px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Anchos fijos para columnas */
+.detalle-fichajes-table .col-hora {
+    width: 80px;
+    min-width: 80px;
+}
+
+.detalle-fichajes-table .col-accion {
+    width: 130px;
+    min-width: 130px;
+}
+
+.detalle-fichajes-table .col-duracion {
+    width: 90px;
+    min-width: 90px;
+}
+
+.detalle-fichajes-table .col-descripcion {
+    width: auto;
+}
+
+.detalle-fichajes-table .text-primary {
+    font-weight: 600;
+    color: #4e73df !important;
+}
+
+.fichaje-no-data {
+    background: linear-gradient(135deg, #e3f2fd 0%, #f8f9fa 100%);
+    border: 2px dashed #90caf9;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    color: #1976d2;
+}
+
+.fichaje-no-data i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    opacity: 0.7;
+}
+
+/* Animación suave para expandir */
+.detalle-row,
+.detalle-row-mobile {
+    transition: all 0.3s ease-in-out;
+}
+
+.expand-btn {
+    transition: all 0.2s ease;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: #6c757d;
+}
+
+.expand-btn:hover {
+    transform: scale(1.1);
+    background: rgba(13, 110, 253, 0.1);
+    color: #0d6efd;
+}
+
+.expand-btn i {
+    transition: transform 0.3s ease;
+    font-size: 1.1rem;
+    color: inherit;
+    font-weight: 600;
+}
+
+.expand-btn:hover i {
+    color: #0d6efd;
+}
+
+/* Estado rotado para botones expandidos */
+button[aria-expanded="true"] i,
+.btn[aria-expanded="true"] i,
+.expand-btn[aria-expanded="true"] i {
+    transform: rotate(180deg) !important;
+}
+
+/* Rotación específica para iconos plus */
+button[aria-expanded="true"] i.bi-plus,
+.btn[aria-expanded="true"] i.bi-plus,
+.expand-btn[aria-expanded="true"] i.bi-plus {
+    transform: rotate(45deg) !important;
+}
+
+/* Iconos específicos para desktop y mobile */
+.expand-btn .bi-plus,
+.expand-btn .bi-dash {
+    font-size: 1.1rem;
+    color: #0d6efd;
+    font-weight: bold;
+}
+
+.expand-btn .bi-chevron-down,
+.expand-btn .bi-chevron-up {
+    font-size: 1rem;
+    color: #6c757d;
+}
+
+/* Estilos específicos para la vista móvil de fichajes */
+.mobile-fichajes-list {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.mobile-fichaje-item {
+    background: white;
+    border-radius: 8px;
+    padding: 12px;
+    border-left: 4px solid #e9ecef;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+}
+
+.mobile-fichaje-item:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+/* Colores específicos para los bordes izquierdos según el tipo */
+.mobile-fichaje-item.tipo-entrada {
+    border-left-color: #28a745;
+}
+
+.mobile-fichaje-item.tipo-salida {
+    border-left-color: #dc3545;
+}
+
+.mobile-fichaje-item.tipo-pausa-inicio {
+    border-left-color: #ffc107;
+}
+
+.mobile-fichaje-item.tipo-pausa-fin {
+    border-left-color: #17a2b8;
+}
+
+/* Mejorar las tarjetas de fichajes móvil */
+@media (max-width: 768px) {
+    .card.shadow-sm {
+        border-radius: 16px;
+        border: none;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+        margin-bottom: 1rem;
+        overflow: hidden;
+    }
+    
+    .card-body {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    }
+    
+    .bg-light.rounded {
+        background: linear-gradient(135deg, #e9ecef 0%, #f1f3f4 100%) !important;
+        border: 1px solid rgba(0,0,0,0.08);
+        transition: all 0.2s ease;
+    }
+    
+    .bg-light.rounded:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+/* Mejorar los badges para móvil en ver-empleado */
+.ver-empleado-page .mobile-fichajes-list {
+    background: white;
+    border-radius: 12px;
+    padding: 0;
+    box-shadow: none;
+    border: none;
+}
+
+.ver-empleado-page .mobile-fichaje-item {
+    background: white;
+    border-radius: 12px;
+    padding: 16px 12px;
+    border-left: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+    margin-bottom: 12px;
+    border: 1px solid #e2e8f0;
+    position: relative;
+    text-align: center;
+}
+
+.ver-empleado-page .mobile-fichaje-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    border-radius: 0 4px 4px 0;
+}
+
+.ver-empleado-page .mobile-fichaje-item.tipo-entrada::before {
+    background: linear-gradient(180deg, #10b981 0%, #059669 100%);
+}
+
+.ver-empleado-page .mobile-fichaje-item.tipo-salida::before {
+    background: linear-gradient(180deg, #ef4444 0%, #dc2626 100%);
+}
+
+.ver-empleado-page .mobile-fichaje-item.tipo-pausa-inicio::before {
+    background: linear-gradient(180deg, #f59e0b 0%, #d97706 100%);
+}
+
+.ver-empleado-page .mobile-fichaje-item.tipo-pausa-fin::before {
+    background: linear-gradient(180deg, #3b82f6 0%, #1d4ed8 100%);
+}
+
+.ver-empleado-page .mobile-fichaje-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    border-color: #cbd5e1;
+}
+
+/* Mejorar badges en la vista móvil */
+.ver-empleado-page .mobile-fichajes-list .badge {
+    font-size: 0.8rem;
+    padding: 8px 12px;
+    min-width: 100px;
+    border-radius: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    display: inline-block;
+}
+
+/* Estilos específicos para el layout vertical */
+.ver-empleado-page .mobile-fichaje-item .fs-5 {
+    font-size: 1.35rem !important;
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+
+.ver-empleado-page .mobile-fichaje-item .fw-semibold {
+    font-weight: 600;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.ver-empleado-page .mobile-fichaje-item .badge {
+    margin: 8px 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Espaciado para el contexto */
+.ver-empleado-page .mobile-fichaje-item small {
+    line-height: 1.4;
+    color: #6b7280;
+}
+
+/* Responsive específico para ver-empleado */
+@media (max-width: 768px) {
+    .ver-empleado-page .container-fluid {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    
+    .ver-empleado-page .tiempo-stats {
+        min-height: 75px;
+        padding: 12px 8px;
+    }
+    
+    .ver-empleado-page .tiempo-stats .value {
+        font-size: 1.1rem;
+    }
+    
+    .ver-empleado-page .fecha-header {
+        padding: 12px 14px;
+        font-size: 0.95rem;
+    }
+    
+    .ver-empleado-page .stats-container {
+        padding: 12px 8px;
+    }
+    
+    .ver-empleado-page .detalle-row-mobile > div {
+        padding: 12px 6px;
+    }
+    
+    /* Layout vertical para móvil */
+    .ver-empleado-page .mobile-fichaje-item {
+        margin-bottom: 8px;
+    }
+    
+    .ver-empleado-page .mobile-fichaje-item .fs-5 {
+        font-size: 1.2rem !important;
+    }
+}
+
+/* Mejoras tipográficas específicas para ver-empleado */
+.ver-empleado-page .small {
+    font-size: 0.8rem;
+}
+
+.ver-empleado-page .badge {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.ver-empleado-page .text-muted {
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+/* Animaciones suaves */
+.ver-empleado-page .expand-btn i {
+    transition: transform 0.3s ease;
+}
+
+.ver-empleado-page .detalle-row-mobile {
+    transition: all 0.3s ease;
+}
+
+/* Estados del botón expandir con efecto rotate */
+.ver-empleado-page .expand-btn[aria-expanded="true"] i {
+    transform: rotate(180deg);
+}
+
+/* Efecto rotate para iconos de expandir generales */
+.expand-btn i {
+    transition: transform 0.3s ease;
+}
+
+.expand-btn[aria-expanded="true"] i.bi-chevron-down {
+    transform: rotate(180deg);
+}
+
+.expand-btn[aria-expanded="true"] i.bi-plus {
+    transform: rotate(45deg);
+}
+
+/* Efecto rotate específico para todos los expand-btn */
+.expand-btn[aria-expanded="true"] i {
+    transform: rotate(180deg);
+}
+
+/* Optimizar para pantallas muy pequeñas */
+@media (max-width: 375px) {
+    .ver-empleado-page .tiempo-stats .label {
+        font-size: 0.75rem;
+    }
+    
+    .ver-empleado-page .tiempo-stats .value {
+        font-size: 1rem;
+    }
+    
+    .ver-empleado-page .fecha-header {
+        font-size: 0.9rem;
+        padding: 12px 14px;
+    }
+    
+    .ver-empleado-page .stats-container {
+        padding: 14px;
+    }
+}
+    
+    /* Mejorar el texto del detalle móvil */
+    .detalle-row-mobile {
+        margin-top: 1rem !important;
+    }
+    
+    .detalle-row-mobile > div {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+        border-radius: 12px !important;
+        border: 1px solid rgba(0,0,0,0.08);
+    }
+}
+
+/* Estilos específicos para la página ver-empleado.php */
+.ver-empleado-page {
+    max-width: 1140px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.ver-empleado-page .container-fluid {
+    max-width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Asegurar que el contenido no sobresalga */
+.ver-empleado-page * {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
+}
+
+.ver-empleado-page .card {
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.ver-empleado-page .table-responsive {
+    overflow-x: auto;
+}
+
+/* Prevenir overflow en elementos específicos */
+.ver-empleado-page .fichaje-card-mobile,
+.ver-empleado-page .detalle-row-mobile,
+.ver-empleado-page .stats-container,
+.ver-empleado-page .fecha-header,
+.ver-empleado-page .horario-info {
+    max-width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* Rediseño completo de las tarjetas móviles */
+.ver-empleado-page .fichaje-card-mobile {
+    background: white;
+    border-radius: 16px;
+    border: none;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+/* Hacer las tarjetas móviles más anchas en dispositivos móviles */
+@media (max-width: 768px) {
+    .ver-empleado-page {
+        padding-left: 4px !important;
+        padding-right: 4px !important;
+    }
+    
+    .ver-empleado-page .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    .ver-empleado-page .col-12 {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    .ver-empleado-page .fichaje-card-mobile {
+        margin-left: 0;
+        margin-right: 0;
+        border-radius: 0;
+        width: 100%;
+    }
+    
+    .ver-empleado-page .card.p-3.p-md-4 {
+        margin-left: 0;
+        margin-right: 0;
+        border-radius: 0;
+        width: 100%;
+    }
+    
+    /* Ajustar el contenido dentro de las tarjetas */
+    .ver-empleado-page .fichaje-card-mobile .card-body {
+        padding: 16px 20px;
+    }
+    
+    .ver-empleado-page .card.p-3.p-md-4 {
+        padding: 16px 20px !important;
+    }
+}
+
+.ver-empleado-page .fichaje-card-mobile:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Encabezado moderno con gradiente */
+.ver-empleado-page .fecha-header {
+    background: linear-gradient(45deg, #2563eb 0%, #3b82f6 100%);
+    color: white;
+    padding: 16px 20px;
+    margin: 0;
+    font-weight: 600;
+    font-size: 1rem;
+    position: relative;
+    border-radius: 0;
+}
+
+.ver-empleado-page .fecha-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.3) 100%);
+}
+
+/* Información de horario */
+.ver-empleado-page .horario-info {
+    background: #f8fafc;
+    color: #64748b;
+    padding: 12px 20px;
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* Contenedor de estadísticas moderno */
+.ver-empleado-page .stats-container {
+    padding: 20px;
+    background: white;
+}
+
+/* Bloques de estadísticas rediseñados */
+.ver-empleado-page .tiempo-stats {
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    transition: all 0.3s ease;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.ver-empleado-page .tiempo-stats::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    transition: all 0.3s ease;
+}
+
+.ver-empleado-page .tiempo-stats.trabajado::before {
+    background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+}
+
+.ver-empleado-page .tiempo-stats.descanso::before {
+    background: linear-gradient(90deg, #3b82f6 0%, #1d4ed8 100%);
+}
+
+.ver-empleado-page .tiempo-stats:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    border-color: #cbd5e1;
+}
+
+.ver-empleado-page .tiempo-stats .label {
+    font-size: 0.8rem;
+    color: #64748b;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.ver-empleado-page .tiempo-stats .value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.ver-empleado-page .tiempo-stats.trabajado .value {
+    color: #059669;
+}
+
+.ver-empleado-page .tiempo-stats.descanso .value {
+    color: #1d4ed8;
+}
+
+/* Botón de expandir rediseñado */
+.ver-empleado-page .expand-btn {
+    background: rgba(255,255,255,0.9);
+    /*border: 1px solid rgba(255,255,255,0.6);*/
+    color: white;
+    border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    /*box-shadow: 0 2px 4px rgba(0,0,0,0.1);*/
+}
+/*
+.ver-empleado-page .expand-btn:hover {
+    background: white;
+    border-color: white;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}*/
+
+.ver-empleado-page .expand-btn i {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+/* Área de detalle mejorada */
+.ver-empleado-page .detalle-row-mobile {
+    margin-top: 0;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.ver-empleado-page .detalle-row-mobile > div {
+    background: #f8fafc;
+    border-radius: 0 0 16px 16px;
+    border: none;
+    border-top: 1px solid #e2e8f0;
+    padding: 15px 10px;
+    overflow-x: auto;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Contenido de detalles - prevenir overflow */
+.ver-empleado-page .detalle-row-mobile .table,
+.ver-empleado-page .detalle-row-mobile .table-responsive {
+    max-width: 100%;
+    overflow-x: auto;
+    margin: 0;
+}
+
+.ver-empleado-page .detalle-row-mobile .table td,
+.ver-empleado-page .detalle-row-mobile .table th {
+    padding: 8px 4px;
+    font-size: 0.85rem;
+    vertical-align: top;
+}
+
+.ver-empleado-page .detalle-row-mobile .badge {
+    font-size: 0.7rem;
+    padding: 4px 8px;
+    display: inline-block;
+    word-break: break-word;
+}
+
+.ver-empleado-page .detalle-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.ver-empleado-page .detalle-header strong {
+    color: #374151;
+    font-weight: 600;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Responsive adjustments específicos para ver-empleado móvil */
+@media (max-width: 768px) {
+    .ver-empleado-page .detalle-row-mobile .table {
+        font-size: 0.75rem;
+    }
+    
+    .ver-empleado-page .detalle-row-mobile .table td {
+        padding: 4px 2px;
+        word-break: break-word;
+        hyphens: auto;
+    }
+    
+    .ver-empleado-page .detalle-row-mobile .badge {
+        font-size: 0.6rem;
+        padding: 2px 6px;
+        margin: 1px;
+        display: inline-block;
+        word-break: break-word;
+    }
+    
+    /* Ajustar ancho de columnas específicas */
+    .ver-empleado-page .detalle-row-mobile .table td:first-child {
+        width: 15%;
+        min-width: 50px;
+    }
+    
+    .ver-empleado-page .detalle-row-mobile .table td:nth-child(2) {
+        width: 25%;
+        min-width: 80px;
+    }
+    
+    .ver-empleado-page .detalle-row-mobile .table td:nth-child(3) {
+        width: 15%;
+        min-width: 50px;
+    }
+    
+    .ver-empleado-page .detalle-row-mobile .table td:last-child {
+        width: 45%;
+        word-break: break-word;
+        hyphens: auto;
+    }
+}
+
+/* Responsive adjustments */
+
+/* Mejoras tipográficas específicas para ver-empleado */
+.ver-empleado-page .small {
+    font-size: 0.8rem;
+}
+
+.ver-empleado-page .badge {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.ver-empleado-page .text-muted {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Prevenir overflow en textos largos */
+.ver-empleado-page .card-body,
+.ver-empleado-page .stats-container,
+.ver-empleado-page .detalle-row-mobile {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+/* Mejorar la cabecera de fecha para que sea más compacta */
+.ver-empleado-page .fecha-header {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+}
+
+/* Estilos para horario móvil similar a la captura */
+.horario-mobile-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0 -12px; /* Extender hacia los bordes */
+}
+
+.horario-mobile-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    background: #f8f9fa;
+    border-radius: 0; /* Sin bordes redondeados para efecto más ancho */
+    border-left: 4px solid #e9ecef;
+    width: calc(100% + 24px);
+    margin-left: -12px;
+    margin-right: -12px;
+}
+
+.horario-mobile-item .dia-nombre {
+    font-size: 0.9rem;
+    color: #495057;
+    font-weight: 500;
+    min-width: 80px;
+}
+
+.horario-mobile-item .dia-nombre i {
+    color: #6c757d;
+}
+
+.horario-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-end;
+}
+
+.horario-badge {
+    background: #d4edda;
+    color: #155724;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid #c3e6cb;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.horario-badge i {
+    color: #28a745;
+}
+
+/* Optimizar para pantallas muy pequeñas */
+@media (max-width: 375px) {
+    .ver-empleado-page .tiempo-stats .label {
+        font-size: 0.7rem;
+    }
+    
+    .ver-empleado-page .tiempo-stats .value {
+        font-size: 0.85rem;
+    }
+    
+    .ver-empleado-page .fecha-header {
+        font-size: 0.85rem;
+        padding: 5px 10px;
+    }
+    
+    .horario-mobile-item {
+        padding: 6px 12px;
+        width: calc(100% + 20px);
+        margin-left: -10px;
+        margin-right: -10px;
+    }
+    
+    .horario-mobile-grid {
+        margin: 0 -10px;
+    }
+    
+    .horario-badge {
+        font-size: 0.7rem;
+        padding: 3px 6px;
+    }
+}
+
+/* Estilos para estadísticas SOLO en empleados.php */
+@media (min-width: 991px) and (max-width: 1083px) {
+    /* Hacer que todas las tarjetas de estadísticas tengan la misma altura SOLO en empleados */
+    body[data-page="empleados"] .row .col-lg-3 .card,
+    .empleados-stats .row .col-lg-3 .card {
+        height: 100%;
+        min-height: 120px;
+    }
+    
+    body[data-page="empleados"] .row .col-lg-3 .card .card-body,
+    .empleados-stats .row .col-lg-3 .card .card-body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem 0.5rem;
+    }
+    
+    /* Controlar el texto para evitar overflow SOLO en empleados */
+    body[data-page="empleados"] .row .col-lg-3 .card h3,
+    .empleados-stats .row .col-lg-3 .card h3 {
+        font-size: 1.5rem !important;
+        line-height: 1.2;
+        margin-bottom: 0.25rem !important;
+    }
+    
+    body[data-page="empleados"] .row .col-lg-3 .card p,
+    .empleados-stats .row .col-lg-3 .card p {
+        font-size: 0.8rem !important;
+        line-height: 1.2;
+        margin-bottom: 0 !important;
+        word-wrap: break-word;
+        hyphens: auto;
+    }
+}
+
+@media (max-width: 991px) {
+    /* En tablet y móvil, también asegurar consistencia SOLO en empleados */
+    body[data-page="empleados"] .row .col-md-6 .card,
+    body[data-page="empleados"] .row .col-sm-6 .card,
+    .empleados-stats .row .col-md-6 .card,
+    .empleados-stats .row .col-sm-6 .card {
+        height: 100%;
+        min-height: 110px;
+    }
+    
+    body[data-page="empleados"] .row .col-md-6 .card .card-body,
+    body[data-page="empleados"] .row .col-sm-6 .card .card-body,
+    .empleados-stats .row .col-md-6 .card .card-body,
+    .empleados-stats .row .col-sm-6 .card .card-body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+    }
+    
+    body[data-page="empleados"] .row .col-md-6 .card h3,
+    body[data-page="empleados"] .row .col-sm-6 .card h3,
+    .empleados-stats .row .col-md-6 .card h3,
+    .empleados-stats .row .col-sm-6 .card h3 {
+        font-size: 1.75rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    body[data-page="empleados"] .row .col-md-6 .card p,
+    body[data-page="empleados"] .row .col-sm-6 .card p,
+    .empleados-stats .row .col-md-6 .card p,
+    .empleados-stats .row .col-sm-6 .card p {
+        font-size: 0.9rem !important;
+        text-align: center;
+        word-wrap: break-word;
+    }
+}
+
+/* ===============================================
+   Estilos para Timeline - Solo página de informes
+   =============================================== */
+
+.page-informes .timeline {
+    position: relative;
+    padding-left: 30px;
+}
+
+.page-informes .timeline::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #e9ecef;
+}
+
+.page-informes .timeline-item {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.page-informes .timeline-marker {
+    position: absolute;
+    left: -22px;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    background: white;
+    border: 2px solid #e9ecef;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.page-informes .timeline-content {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #007bff;
+    margin-left: 0;
+}
+
+.page-informes .timeline-title {
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.page-informes .timeline-description {
+    margin-bottom: 5px;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+/* Responsive para el timeline */
+@media (max-width: 768px) {
+    .page-informes .timeline {
+        padding-left: 20px;
+    }
+    
+    .page-informes .timeline::before {
+        left: 10px;
+    }
+    
+    .page-informes .timeline-marker {
+        left: -5px;
+        width: 20px;
+        height: 20px;
+    }
+    
+    .page-informes .timeline-content {
+        padding: 10px;
+        font-size: 0.85rem;
+    }
+}
+
+/* ===========================================
+   GEOLOCALIZACIÓN - Estilos específicos
+   =========================================== */
+
+/* Timeline del historial de ubicaciones */
+.timeline-item {
+    position: relative;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -15px;
+    top: 20px;
+    width: 3px;
+    height: calc(100% + 15px);
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+    border-radius: 2px;
+}
+
+.timeline-item:last-child::before {
+    display: none;
+}
+
+/* Transiciones y efectos hover */
+.geolocalizacion-page .card {
+    transition: all 0.3s ease;
+}
+
+.geolocalizacion-page .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important;
+}
+
+.geolocalizacion-page .btn {
+    transition: all 0.3s ease;
+}
+
+.geolocalizacion-page .btn:hover {
+    transform: translateY(-1px);
+}
+
+/* Animaciones suaves */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.geolocalizacion-page .card-body {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Gradientes personalizados (mantenidos para posible uso futuro) */
+.gradient-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.gradient-success {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+
+.gradient-info {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.gradient-warning {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+/* Spinner personalizado para geolocalización */
+.geolocalizacion-page .spinner-border {
+    animation: spinner-grow 1.5s linear infinite;
+}
+
+
+
+
+/* Colores: Paleta ampliada  */
+.bg-teal-subtle    { background-color:#e0f7f9 !important; }
+.text-teal         { color:#20c997 !important; }
+.text-bg-teal      { background-color:#20c997 !important; color:#fff !important; }
+
+.bg-indigo-subtle  { background-color:#eceeff !important; }
+.text-indigo       { color:#6610f2 !important; }
+.text-bg-indigo    { background-color:#6610f2 !important; color:#fff !important; }
+
+.bg-orange-subtle  { background-color:#fff4e6 !important; }
+.text-orange       { color:#fd7e14 !important; }
+.text-bg-orange    { background-color:#fd7e14 !important; color:#fff !important; }
+
+.bg-pink-subtle    { background-color:#ffe6f2 !important; }
+.text-pink         { color:#d63384 !important; }
+.text-bg-pink      { background-color:#d63384 !important; color:#fff !important; }
+
+.bg-lime-subtle    { background-color:#f7fee7 !important; }
+.text-lime         { color:#84cc16 !important; }
+.text-bg-lime      { background-color:#84cc16 !important; color:#fff !important; }
+
+.bg-dark-subtle    { background-color:#e9ecef !important; }
+.text-bg-dark      { background-color:#343a40 !important; color:#fff !important; }
+/* .text-dark ya existe en Bootstrap */
+
+/* ====================================
+   ESTILOS RESPONSIVE - INFORMES
+   ==================================== */
+
+/* Mejoras para botones de acción en informes */
+.page-informes .card-header .d-flex.gap-2 .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Responsive para móviles - Informes */
+@media (max-width: 768px) {
+    .page-informes .d-flex.gap-2 {
+        gap: 0.5rem !important;
+    }
+    
+    .page-informes .d-flex.gap-2 .btn {
+        flex: 1;
+    }
+    
+    .page-informes .card-header .d-flex {
+        gap: 1rem !important;
+    }
+}
+
+/* Mejoras específicas para períodos rápidos en móvil - Informes */
+@media (max-width: 575.98px) {
+    .page-informes .btn-outline-secondary.btn-sm {
+        padding: 0.5rem 0.25rem;
+        font-size: 0.8rem;
+        font-weight: 500;
+        min-height: 40px;
+        border-radius: 0.375rem;
+    }
+    
+    .page-informes .btn-outline-secondary.btn-sm.w-100 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    
+    /* Espaciado entre filas de botones */
+    .page-informes .row.g-2.mt-1 {
+        margin-top: 0.5rem !important;
+    }
+}
+
+/* Hover effects para las cards de estadísticas - Informes */
+.page-informes .card:hover {
+    transform: translateY(-2px);
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Mejoras en botones de períodos rápidos - Informes */
+.page-informes .btn-outline-secondary:hover {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: white;
+}
+
+/* Responsive table improvements - Informes */
+@media (max-width: 768px) {
+    .page-informes .table-responsive {
+        border-radius: 0.375rem;
+        overflow: hidden;
+    }
+    
+    .page-informes .table {
+        font-size: 0.875rem;
+    }
+    
+    .page-informes .table th,
+    .page-informes .table td {
+        padding: 0.5rem 0.75rem;
+        vertical-align: middle;
+    }
+}
+
+/* ========================================================================
+   GEOLOCALIZACIÓN - ESTILOS ESPECÍFICOS
+   ======================================================================== */
+
+/* Información métrica con iconos */
+.info-metric {
+    text-align: center;
+}
+
+.info-metric .metric-icon {
+    font-size: 1.2rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 0.5rem auto;
+    border-radius: 50%;
+    background-color: rgba(var(--bs-primary-rgb), 0.1);
+}
+
+.info-metric .metric-icon.text-primary {
+    background-color: rgba(var(--bs-primary-rgb), 0.1);
+}
+
+.info-metric .metric-icon.text-info {
+    background-color: rgba(var(--bs-info-rgb), 0.1);
+}
+
+.info-metric .metric-icon.text-warning {
+    background-color: rgba(var(--bs-warning-rgb), 0.1);
+}
+
+.info-metric .metric-icon.text-success {
+    background-color: rgba(var(--bs-success-rgb), 0.1);
+}
+
+/* Responsive - Geolocalización para móviles */
+@media (max-width: 768px) {
+    /* Contenedor principal más compacto */
+    .container-fluid.py-4 {
+        padding: 1rem 0.5rem !important;
+    }
+    
+    /* Header responsive */
+    .row.mb-4 .d-flex {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .row.mb-4 .d-flex div:first-child {
+        text-align: center;
+    }
+    
+    /* Cards más compactas */
+    .geo-card {
+        margin-bottom: 1rem;
+    }
+    
+    .geo-card .card-header {
+        padding: 0.75rem 1rem;
+    }
+    
+    .geo-card .card-header h5 {
+        font-size: 0.95rem;
+    }
+    
+    .geo-card .card-body {
+        padding: 1rem;
+    }
+    
+    /* Información de oficina responsive */
+    .info-metric {
+        margin-bottom: 1.5rem;
+    }
+    
+    .info-metric .metric-icon {
+        font-size: 1.1rem;
+        width: 2.2rem;
+        height: 2.2rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .info-metric .small {
+        font-size: 0.8rem;
+        margin-bottom: 0.25rem;
+    }
+    
+    .info-metric .fw-bold {
+        font-size: 0.85rem !important;
+        line-height: 1.2;
+    }
+    
+    /* Grid responsive para coordenadas */
+    .row.g-2 {
+        gap: 0.5rem !important;
+    }
+    
+    /* Mapa responsive */
+    #mapa {
+        height: 250px !important;
+    }
+    
+    /* Panel de ubicación más compacto */
+    #panelUbicacion .py-5 {
+        padding: 2rem 1rem !important;
+    }
+    
+    #panelUbicacion h6 {
+        font-size: 0.9rem;
+    }
+    
+    #panelUbicacion .small {
+        font-size: 0.75rem;
+    }
+    
+    /* Historial responsive */
+    .card-body[style*="height: 400px"] {
+        height: 250px !important;
+    }
+    
+    .historial-item {
+        padding: 0.75rem !important;
+    }
+    
+    .historial-item .badge {
+        font-size: 0.7rem;
+    }
+    
+    .historial-item .small {
+        font-size: 0.7rem;
+    }
+    
+    .historial-item .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.7rem;
+    }
+    
+    /* Breadcrumb responsive */
+    .breadcrumb {
+        font-size: 0.8rem;
+    }
+    
+    .breadcrumb-item {
+        white-space: nowrap;
+    }
+    
+    /* Botón actualizar responsive */
+    .btn-outline-primary {
+        font-size: 0.8rem;
+        padding: 0.375rem 0.75rem;
+        min-width: 44px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* En móvil, centrar el icono y quitar el margen */
+    @media (max-width: 575.98px) {
+        .btn-outline-primary .bi-arrow-clockwise {
+            margin: 0 !important;
+            font-size: 1.1rem;
+        }
+    }
+    
+    /* Ajustes para pantallas muy pequeñas */
+    @media (max-width: 576px) {
+        .container-fluid.py-4 {
+            padding: 0.5rem 0.25rem !important;
+        }
+        
+        .geo-card .card-body {
+            padding: 0.75rem;
+        }
+        
+        .info-metric .metric-icon {
+            font-size: 1rem;
+            width: 2rem;
+            height: 2rem;
+        }
+        
+        .info-metric {
+            margin-bottom: 1rem;
+        }
+        
+        .info-metric .small {
+            font-size: 0.75rem;
+        }
+        
+        .info-metric .fw-bold {
+            font-size: 0.8rem !important;
+        }
+        
+        #mapa {
+            height: 200px !important;
+        }
+        
+        .card-body[style*="height: 400px"],
+        .card-body[style*="height: 250px"] {
+            height: 200px !important;
+        }
+        
+        .historial-item {
+            padding: 0.5rem !important;
+        }
+        
+        /* Botón actualizar para pantallas muy pequeñas */
+        .btn-outline-primary.btn-sm {
+            min-width: 40px;
+            height: 32px;
+            padding: 0.25rem 0.5rem;
+        }
+        
+        .btn-outline-primary .bi-arrow-clockwise {
+            font-size: 1rem !important;
+            margin: 0 !important;
+        }
+        
+        /* Layout en una sola columna para pantallas muy pequeñas */
+        .col-lg-6,
+        .col-lg-8,
+        .col-lg-4 {
+            margin-bottom: 1rem;
+        }
+        
+        /* Texto más pequeño para coordenadas */
+        .fw-bold.small {
+            font-size: 0.75rem !important;
+            line-height: 1.3;
+        }
+        
+        /* Dirección de oficina responsive */
+        #direccionOficina {
+            font-size: 0.75rem !important;
+            line-height: 1.3;
+        }
+        
+        /* Ajuste específico para el panel de ubicación en móviles */
+        #panelUbicacion .info-metric {
+            margin-bottom: 0.75rem;
+        }
+        
+        #panelUbicacion .info-metric .fw-bold {
+            font-size: 0.8rem !important;
+        }
+    }
+}
+
+/* ========================================================================
+   ANIMACIONES Y EFECTOS DE SEGURIDAD
+   ======================================================================== */
+
+.spinning {
+    animation: spin 0.5s linear;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.password-strength {
+    background-color: #e9ecef;
+    border-radius: 3px;
+}
+
+.password-strength-bar {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}
+
+
+/* Seguridad */
+@media (max-width: 767.98px) {
+  .fs-7 { font-size: 0.75rem !important; }
+  .fs-6-md { font-size: 0.875rem !important; }
+  .fs-5-md { font-size: 1rem !important; }
+  .fs-4-md { font-size: 1.125rem !important; }
+  .h3-md { font-size: calc(1.3rem + .6vw) !important; }
+  .container-fluid { padding-left: 0.75rem; padding-right: 0.75rem; }
+  .card-body { padding: 1rem !important; }
+  .password-strength { background-color: #e9ecef; }
+}
+
+@media (min-width: 768px) {
+  .fs-6-md { font-size: 1rem !important; }
+  .fs-5-md { font-size: 1.25rem !important; }
+  .fs-4-md { font-size: 1.5rem !important; }
+  .h3-md { font-size: calc(1.3rem + .6vw) !important; }
+}
+
+.password-strength {
+  background-color: #e9ecef;
+  border-radius: 3px;
+}
+
+.password-strength-bar {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.list-group-item:last-child {
+  border-bottom: none;
+}
