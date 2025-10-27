@@ -13,15 +13,16 @@ ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf \
  && sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
 
-# **Permitir .htaccess en /public (AllowOverride All)**
-RUN bash -lc 'cat > /etc/apache2/conf-available/public-dir.conf <<EOF
-<Directory ${APACHE_DOCUMENT_ROOT}>
-    Options Indexes FollowSymLinks
-    AllowOverride All
-    Require all granted
-</Directory>
-EOF' \
- && a2enconf public-dir
+# Permitir .htaccess en /public (AllowOverride All)
+RUN set -eux; \
+  { \
+    echo '<Directory "${APACHE_DOCUMENT_ROOT}">'; \
+    echo '    Options Indexes FollowSymLinks'; \
+    echo '    AllowOverride All'; \
+    echo '    Require all granted'; \
+    echo '</Directory>'; \
+  } > /etc/apache2/conf-available/public-dir.conf; \
+  a2enconf public-dir
 
 WORKDIR /var/www/html
 COPY . /var/www/html
