@@ -1,28 +1,13 @@
 <?php
-/**
- * Archivo de ejemplo de configuración.
- *
- * Renombra este archivo a `config.php` SOLO para uso local.
- * En producción (Render), las credenciales se leen desde variables de entorno.
- */
-
 $config = [];
 
-/**
- * Detectamos si estamos en entorno local.
- * Ajusta la lista si usas otra IP o dominio local.
- */
 $isLocal = in_array($_SERVER['SERVER_NAME'] ?? '', ['localhost','127.0.0.1','192.168.0.100']);
 
-/**
- * Rutas base del proyecto.
- */
+/** Rutas base del proyecto */
 $projectRoot = rtrim(str_replace('\\','/', dirname(__FILE__)), '/') . '/';
 $publicDir   = $projectRoot . 'public/';
 
-/**
- * URL base del proyecto.
- */
+/** URL base del proyecto */
 if ($isLocal) {
     $baseUrl = '//localhost/controlhorario_demo/';
 } else {
@@ -32,40 +17,38 @@ if ($isLocal) {
 }
 
 $config['ruta_absoluta'] = $baseUrl;
-$config['ruta_server']   = $publicDir;     // Carpeta pública servida por el servidor web
-$config['carpeta']       = $projectRoot;   // Carpeta raíz del proyecto
+$config['ruta_server']   = $publicDir;
+$config['carpeta']       = $projectRoot;
+
 
 $config['ASSET_URL']   = $config['ruta_absoluta'] . 'assets/';
 $config['UPLOADS_URL'] = $config['ruta_absoluta'] . 'uploads/usuarios/';
 
-/**
- * Directorio físico para las subidas de usuarios.
- */
+
 $config['UPLOADS_DIR'] = $isLocal
   ? $config['carpeta'] . 'uploads/usuarios/'
-  : (getenv('UPLOADS_DIR') ?: ($config['carpeta'] . 'uploads/usuarios/'));
+  : (getenv('UPLOADS_DIR') ?: ($publicDir . 'uploads/usuarios/'));  // <- cambio clave
 
-/**
- * Configuración de Base de Datos
- */
+/** Configuración de Base de Datos */
 if ($isLocal) {
     $config['DB_HOST'] = 'localhost';
     $config['DB_NAME'] = 'control_horario';
     $config['DB_USER'] = 'root';
     $config['DB_PASS'] = '';
+    $config['DB_PORT'] = '3306';
 } else {
     $config['DB_HOST'] = getenv('DB_HOST') ?: 'localhost';
     $config['DB_NAME'] = getenv('DB_NAME') ?: '';
     $config['DB_USER'] = getenv('DB_USER') ?: '';
     $config['DB_PASS'] = getenv('DB_PASS') ?: '';
+    $config['DB_PORT'] = getenv('DB_PORT') ?: '3306'; 
 }
 
-/**
- * Conexión PDO con manejo de errores.
- */
+/** Conexión PDO (con puerto explícito) */
 try {
+    $dsn = "mysql:host={$config['DB_HOST']};port={$config['DB_PORT']};dbname={$config['DB_NAME']};charset=utf8mb4";
     $pdo = new PDO(
-        "mysql:host={$config['DB_HOST']};dbname={$config['DB_NAME']};charset=utf8mb4",
+        $dsn,
         $config['DB_USER'],
         $config['DB_PASS'],
         [
@@ -77,9 +60,7 @@ try {
     die("Error de conexión a la base de datos: " . $e->getMessage());
 }
 
-/**
- * Zona horaria.
- */
+/** Zona horaria */
 if (!ini_get('date.timezone')) {
     date_default_timezone_set('Europe/Madrid');
 }
