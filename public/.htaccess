@@ -34,8 +34,8 @@ RewriteRule ^acciones/(.*\.php)$ acciones/$1 [L]
 RewriteRule ^logout$ logout.php [L]
 RewriteRule ^solicitudes\.php$ solicitudes.php [L]
 
-# Catch-all: todo lo demás va a index.php con querystring "page"
-RewriteRule ^(.*)$ index.php?page=$1 [QSA,L]
+# 4) Общий перехватчик
+RewriteRule ^(.+)$ index.php?page=$1 [QSA,L]
 
 # Páginas por defecto y error en este mismo directorio público
 DirectoryIndex index.php
