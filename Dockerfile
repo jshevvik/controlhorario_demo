@@ -1,17 +1,7 @@
-# =========================
-# Etapa 1: dependencias con Composer
-# =========================
-FROM composer:2 AS vendor
-WORKDIR /app
-COPY composer.json composer.lock ./
-RUN composer install --no-dev --optimize-autoloader
-
-# =========================
-# Etapa 2: PHP + Apache
-# =========================
+# Imagen base: PHP + Apache
 FROM php:8.2-apache
 
-# Extensiones y mod_rewrite
+# Extensiones necesarias y mod_rewrite
 RUN docker-php-ext-install pdo pdo_mysql \
  && a2enmod rewrite
 
@@ -22,13 +12,10 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-av
 
 WORKDIR /var/www/html
 
-# Código del proyecto
+# Copiar el código del proyecto
 COPY . /var/www/html
 
-# Dependencias de Composer
-COPY --from=vendor /app/vendor /var/www/html/vendor
-
-# Carpeta de subidas 
+# Asegurar carpeta de subidas (si no usas disco persistente)
 RUN mkdir -p uploads/usuarios \
  && chown -R www-data:www-data uploads
 
