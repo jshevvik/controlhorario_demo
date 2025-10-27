@@ -1,3 +1,4 @@
+# public/.htaccess
 RewriteEngine On
 RewriteBase /
 
@@ -6,37 +7,19 @@ RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
-# --- Rutas amigables hacia scripts internos ---
+RewriteRule ^(admin|acciones|fichaje|notificaciones)/(.*\.php)$ $1/$2 [L,NC]
 
-# Administración y empleados
-RewriteRule ^empleados/?$ admin/empleados.php [L,NC]
-RewriteRule ^ver-empleado/([0-9]+)/?$ admin/ver-empleado.php?id=$1 [L,NC,QSA]
-RewriteRule ^editar-empleado/([0-9]+)/?$ admin/editar-empleado.php?id=$1 [L,NC,QSA]
-RewriteRule ^borrar-empleado/([0-9]+)/?$ admin/borrar-empleado.php?id=$1 [L,NC,QSA]
 
-# Horarios y configuración
-RewriteRule ^editar-horario/([0-9]+)/?$ admin/editar-horario.php?id=$1 [L,NC,QSA]
-RewriteRule ^guardar-horario/([0-9]+)/?$ admin/guardar-horario.php?id=$1 [L,NC,QSA]
-RewriteRule ^configuracion/([0-9]+)/?$ admin/configuracion.php?id=$1 [L,NC,QSA]
-RewriteRule ^ver-solicitudes/([0-9]+)/?$ admin/ver-solicitudes.php?id=$1 [L,NC,QSA]
-
-# Archivos estáticos servidos tal cual
-RewriteRule ^assets/(.*)$ assets/$1 [L]
-RewriteRule ^uploads/(.*)$ uploads/$1 [L]
-
-# Secciones específicas
-RewriteRule ^fichaje/(.*\.php)$ fichaje/$1 [L]
-RewriteRule ^notificaciones/(.*\.php)$ notificaciones/$1 [L]
-RewriteRule ^admin/(.*\.php)$ admin/$1 [L]
-RewriteRule ^acciones/(.*\.php)$ acciones/$1 [L]
-
-# Otras rutas directas
-RewriteRule ^logout$ logout.php [L]
-RewriteRule ^solicitudes\.php$ solicitudes.php [L]
+RewriteRule ^dashboard/?$ dashboard.php [L,NC]
+RewriteRule ^login/?$ login.php [L,NC]
+RewriteRule ^logout/?$ logout.php [L,NC]
+RewriteRule ^solicitudes/?$ solicitudes.php [L,NC]
+RewriteRule ^informes/?$ informes.php [L,NC]
+RewriteRule ^editar-perfil/?$ editar-perfil.php [L,NC]
+RewriteRule ^miperfil/?$ miperfil.php [L,NC]
 
 # 4) Общий перехватчик
 RewriteRule ^(.+)$ index.php?page=$1 [QSA,L]
 
-# Páginas por defecto y error en este mismo directorio público
 DirectoryIndex index.php
 ErrorDocument 404 /404.php
