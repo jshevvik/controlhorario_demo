@@ -1,60 +1,49 @@
 <?php
-error_reporting(E_ALL);
-session_start();
-require_once __DIR__.'/../includes/init.php';
+require_once __DIR__ . '/../includes/init.php';
 
+// Determinar la página solicitada
 $page = $_GET['page'] ?? 'dashboard';
+$page = basename($page);
 
+// Lista blanca de páginas permitidas
 $allowed = [
     'dashboard','fichajes','solicitudes','permisos','bajas','horas-extras',
     'ausencias','informes','geolocalizacion','administracion','miperfil',
     'admin/crear-empleado','editar-perfil','admin/empleados','login', 'logout',
-    'admin/editar-empleado', 'admin/ver-empleado', 'admin/editar-horario', 'admin/ver-solicitudes',
-    'admin/configuracion', 'admin/seguridad', 'admin/contenido'
+    'admin/editar-empleado', 'admin/ver-empleado', 'admin/editar-horario',
+    'admin/ver-solicitudes','admin/configuracion','admin/seguridad','admin/contenido'
 ];
 
-/* Seguridad: ruta no permitida */
+// Si la página no está permitida → 404
 if (!in_array($page, $allowed)) {
     http_response_code(404);
-    include __DIR__.'/404.php';
-    exit;
+    $page = '404';
 }
 
-/* Sesión */
+// Si no hay sesión → ir a login (excepto página login)
 if (empty($_SESSION['empleado_id']) && $page !== 'login') {
     $page = 'login';
 }
 
-/* Solo login */
-if ($page === 'login') {
-    include __DIR__.'/login.php';
-    exit;
-}
+// Avatar para UI (sidebar/navbar)
+$avatar = $emp['avatar'] ?? null;
+$avatarFisica = $config['UPLOADS_DIR'] . $avatar;
+$avatarWeb    = $config['UPLOADS_URL'] . $avatar;
 
+$sidebarAvatar = (!empty($avatar) && file_exists($avatarFisica))
+    ? appendCacheBuster($avatarWeb)
+    : $config['ASSET_URL'] . 'img/avatar-default.jpg';
 
-/* Avatar (solo si $emp existe) */
-if (!empty($emp)) {
+$fotoPerfil = (!empty($avatar) && file_exists($avatarFisica))
+    ? appendCacheBuster($avatarWeb)
+    : 'https://ui-avatars.com/api/?name='
+        . urlencode($emp['nombre'].' '.$emp['apellidos'])
+        . '&background=0D8ABC&color=fff&size=80';
 
-    /* Ruta física en disco */
-    $avatarFisica = $config['UPLOADS_DIR'] . $emp['avatar'];
-
-    /* URL pública del avatar */
-    $avatarWeb = $config['UPLOADS_URL'] . $emp['avatar'];
-
-    /* Imagen que se muestra en el sidebar */
-    $sidebarAvatar = ( !empty($emp['avatar']) && file_exists($avatarFisica) )
-        ? appendCacheBuster($avatarWeb)
-        : $config['ASSET_URL'] . 'img/avatar-default.jpg';
-
-    /* Imagen que se muestra en la cabecera */
-    $fotoPerfil = ( !empty($emp['avatar']) && file_exists($avatarFisica) )
-        ? appendCacheBuster($avatarWeb)
-        : 'https://ui-avatars.com/api/?name='
-            . urlencode($emp['nombre'].' '.$emp['apellidos'])
-            . '&background=0D8ABC&color=fff&size=80';
-
-}
+// Archivo físico a incluir dentro del <main>
+$archivo = __DIR__ . '/' . $page . '.php';
 ?>
+
 
 
 <!doctype html>
