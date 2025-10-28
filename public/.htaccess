@@ -1,22 +1,13 @@
-# public/.htaccess
 RewriteEngine On
 RewriteBase /
 
-# Si el archivo o directorio físico existe, se sirve directamente
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
+
 RewriteRule ^(admin|acciones|fichaje|notificaciones)/(.*\.php)$ $1/$2 [L,NC]
 
-
-RewriteRule ^dashboard/?$ dashboard.php [L,NC]
-RewriteRule ^login/?$ login.php [L,NC]
-RewriteRule ^logout/?$ logout.php [L,NC]
-RewriteRule ^solicitudes/?$ solicitudes.php [L,NC]
-RewriteRule ^informes/?$ informes.php [L,NC]
-RewriteRule ^editar-perfil/?$ editar-perfil.php [L,NC]
-RewriteRule ^miperfil/?$ miperfil.php [L,NC]
 
 RewriteRule ^(.+)$ index.php?page=$1 [QSA,L]
 

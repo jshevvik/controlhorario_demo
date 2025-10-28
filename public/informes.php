@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../includes/init.php';
+//require_once __DIR__ . '/../includes/init.php';
 
 if (!isset($_SESSION['empleado_id'])) {
     header('Location: ' . $config['ruta_absoluta'] . 'login');

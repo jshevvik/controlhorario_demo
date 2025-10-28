@@ -20,10 +20,12 @@ if (!in_array($page, $allowed)) {
     $page = '404';
 }
 
-// Si no hay sesión → ir a login (excepto página login)
-if (empty($_SESSION['empleado_id']) && $page !== 'login') {
-    $page = 'login';
+// --- Página login SIN layout (sin sidebar/navbar) ---
+if ($page === 'login') {
+    include __DIR__ . '/login.php';
+    exit;
 }
+
 
 // Avatar para UI (sidebar/navbar)
 $avatar = $emp['avatar'] ?? null;

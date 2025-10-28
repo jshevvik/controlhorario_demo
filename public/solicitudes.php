@@ -1,6 +1,6 @@
 <?php
-session_start();
-require_once __DIR__ . '/../includes/init.php';
+// session_start();
+// require_once __DIR__ . '/../includes/init.php';
 
 // Endpoint AJAX para datos iniciales
 if (isset($_GET['action']) && $_GET['action'] === 'init') {
