@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 require_once __DIR__ . '/../includes/init.php';
 
 if (!empty($_SESSION['empleado_id'])) {

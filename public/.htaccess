@@ -1,9 +1,13 @@
 RewriteEngine On
 RewriteBase /
 
+
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
+
+
+RewriteRule ^login/?$ login.php [L,NC]
 
 
 RewriteRule ^(admin|acciones|fichaje|notificaciones)/(.*\.php)$ $1/$2 [L,NC]
