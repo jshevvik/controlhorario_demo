@@ -3,13 +3,13 @@
  * Script para limpiar tablas de logs creadas
  */
 
+// Configurar variables de servidor para CLI
+$_SERVER['SERVER_NAME'] = $_SERVER['SERVER_NAME'] ?? 'localhost';
+$_SERVER['HTTP_HOST']   = $_SERVER['HTTP_HOST']   ?? 'localhost';
+
+require_once __DIR__ . '/../config.php';
+
 try {
-    // Conexión directa
-    $pdo = new PDO('mysql:host=localhost;dbname=control_horario;charset=utf8mb4', 'root', '', [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    ]);
-    
     echo "=== LIMPIEZA DE TABLAS DE LOGS ===\n\n";
     
     // Verificar si existe la tabla logs_seguridad

@@ -26,6 +26,17 @@ if ($page === 'login') {
     exit;
 }
 
+// --- Página logout (puede accederse sin estar logeado) ---
+if ($page === 'logout') {
+    include __DIR__ . '/logout.php';
+    exit;
+}
+
+// --- PROTECCIÓN: Si no está logeado → redirigir a login ---
+if (empty($_SESSION['empleado_id'])) {
+    header('Location: ' . $config['ruta_absoluta'] . 'login');
+    exit;
+}
 
 // Avatar para UI (sidebar/navbar)
 $avatar = $emp['avatar'] ?? null;
