@@ -1,236 +1,589 @@
-# ⏱️ Control de Horario - Sistema de Gestión Laboral# ⏱️ Control de Horario - Sistema de Gestión Laboral# Control de Horario (Demo)
+# Control Horario - Sistema de Control de Fichajes y Asistencia [+ ⏱️ Control de Horario — Demo
 
 
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-[![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?logo=php&logoColor=white)](https://www.php.net/)
+![PHP](https://img.shields.io/badge/PHP-8.2-777BB4?logo=php&logoColor=white)[![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?logo=php&logoColor=white)](https://www.php.net/)
 
-[![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?logo=mysql&logoColor=white)[![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)
 
-[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?logo=bootstrap&logoColor=white)[![Leaflet](https://img.shields.io/badge/Leaflet-1.9.4-3b9fff.svg)](https://leafletjs.com/)
 
-[![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?logo=php&logoColor=white)](https://www.php.net/)
 
-Aplicación completa de **gestión de horarios laborales** y control de asistencia con características avanzadas como fichaje geolocalizado, solicitudes de permisos, informes, y panel administrativo.
 
-[![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)Aplicación PHP para gestión de control horario. Este repositorio incluye los archivos necesarios para ejecutar en local y desplegar una **demo** en Render.
+Sistema completo de gestión de fichajes, control de asistencia laboral y gestión de permisos/vacaciones para empresas.[Aplicación demo para control horario con fichaje geolocalizado, solicitudes, gestión de empleados y panel administrativo.
 
-**Demo en vivo:** [controlhorario-demo.onrender.com](https://controlhorario-demo.onrender.com)
 
-[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
+
+## CaracterísticasDemo (ejemplo): https://controlhorario-demo.onrender.com
+
+
+
+### Gestión de Fichajes## Índice
+
+- Sistema de entrada/salida con control horario
+
+- Validación de geolocalización para fichajes1. [Características](#características)
+
+- Registro automático de ubicación y hora2. [Stack tecnológico](#stack-tecnológico)
+
+- Historial completo de fichajes por empleado3. [Instalación local](#instalación-local)
+
+- Alertas de fichajes irregulares4. [Despliegue en Render (nota sobre Railway)](#despliegue-en-render)
+
+5. [Estructura del proyecto](#estructura-del-proyecto)
+
+### Administración de Empleados6. [Capturas / Screenshots](#capturas--screenshots)
+
+- CRUD completo de empleados7. [Contribuir](#contribuir)
+
+- Gestión de perfiles y roles8. [Licencia](#licencia)
+
+- Asignación de horarios personalizados
+
+- Control de permisos de acceso## Características
+
+- Subida de archivos y documentación
+
+- Fichaje (entrada / salida) con verificación geográfica (Leaflet)
+
+### Solicitudes y Permisos- Gestión de empleados y roles (Admin / Supervisor / Empleado)
+
+- Gestión de vacaciones, bajas y permisos- Solicitudes (vacaciones, permisos) con workflow de aprobación
+
+- Sistema de aprobación por administradores- Informes y exportación a PDF (mPDF)
+
+- Verificación automática de conflictos- Panel administrativo para gestión y reportes
+
+- Notificaciones en tiempo real
+
+- Historial de solicitudes## Stack tecnológico
+
+
+
+### Informes y Reportes- Backend: PHP 8.2 + Apache
+
+- Generación de informes en PDF- Base de datos: MySQL 8.0+ (en producción puede usarse Railway)
+
+- Estadísticas de asistencia- Frontend: HTML5, Bootstrap 5, JavaScript
+
+- Reportes por empleado o departamento- Mapas: Leaflet 1.9.4
+
+- Exportación de datos- PDFs: mPDF 8.2 (via Composer)
+
+- Contenedor: Docker (preparado para Deploy en Render)
+
+### Seguridad
+
+- Autenticación segura con bcrypt## Instalación local
+
+- Control de sesiones
+
+- Validación de geolocalizaciónRequisitos mínimos:
+
+- Gestión de permisos por rol
+
+- Protección contra inyección SQL (PDO)- PHP 8.2
+
+- Composer
+
+## Stack Tecnológico- MySQL 8+
+
+
+
+- **Backend**: PHP 8.2Pasos rápidos:
+
+- **Base de Datos**: MySQL 8.0+ (Railway)
+
+- **Frontend**: Bootstrap 5.31. Clona el repositorio:
+
+- **Mapas**: Leaflet.js 1.9.4
+
+- **PDF**: mPDF 8.2   git clone https://github.com/jshevvik/controlhorario_demo.git
+
+- **JavaScript**: jQuery   cd controlhorario_demo
+
+- **Servidor Web**: Apache con mod_rewrite
+
+- **Despliegue**: Docker (Render)2. Instala dependencias:
+
+
+
+## Requisitos   composer install
+
+
+
+- PHP >= 8.23. Crea copia de configuración y añade credenciales (local):
+
+- MySQL >= 8.0
+
+- Apache con mod_rewrite habilitado   cp config.example.php config.php
+
+- Composer   (editar config.php con las credenciales de la BD)
+
+- Extensiones PHP:
+
+  - PDO4. Inicializa la base de datos (scripts incluidos):
+
+  - pdo_mysql
+
+  - mbstring   php bin/configurar-sistema.php
+
+  - gd   php bin/configurar-geolocalizacion.php
+
+  - zip
+
+5. Ejecuta en local (modo desarrollo):
+
+## Instalación
+
+   php -S localhost:8000 -t public
+
+### 1. Clonar el Repositorio
+
+6. Abre http://localhost:8000
+
+```bash
+
+git clone https://github.com/jshevvik/controlhorario_demo.git## Despliegue en Render (nota sobre Railway)
+
+cd controlhorario_demo
+
+```Este repositorio contiene un Dockerfile preparado para ejecutarse en Render. En producción es habitual usar una BD gestionada (por ejemplo, Railway). Asegúrate de configurar las variables de entorno en el panel de Render:
+
+
+
+### 2. Instalar Dependencias- DB_HOST
+
+- DB_NAME
+
+```bash- DB_USER
+
+composer install- DB_PASS
+
+```- DB_PORT (3306 por defecto)
+
+- BASE_URL (p. ej. https://tu-app.onrender.com/)
+
+### 3. Configurar Base de Datos- UPLOADS_DIR (p. ej. /var/www/html/public/uploads/usuarios/)
+
+
+
+Crea una base de datos MySQL y ejecuta los scripts SQL:Notas:
+
+- Si usas Railway, copia las credenciales de la base de datos desde Railway y pégalas en las variables de entorno de Render.
+
+```bash- No incluyas credenciales en el repositorio. Añade `config.php` y `.env` a `.gitignore`.
+
+mysql -u usuario -p nombre_bd < bin/crear-configuracion.sql
+
+```## Estructura del proyecto
+
+
+
+### 4. Configurar el Sistema- public/ — DocumentRoot (páginas web, rutas, assets)
+
+- includes/ — Inicialización, funciones, helpers
+
+Copia el archivo de configuración de ejemplo:- bin/ — Scripts CLI (configuración, limpieza, etc.)
+
+- uploads/ — Archivos subidos por usuarios
+
+```bash- vendor/ — Dependencias Composer
+
+cp config.example.php public/config.php
+
+```## Capturas / Screenshots
+
+
+
+Edita `public/config.php` con tus credenciales:Si quieres añadir capturas, sube las imágenes a `assets/img/screenshots/` y referencia las rutas directamente en este README. Ejemplo:
+
+
+
+```php![Dashboard](assets/img/screenshots/dashboard-01.png)
+
+<?php
+
+define('DB_HOST', 'tu-host');Si quieres que las incluya yo, sube las imágenes al repositorio o indícame los archivos y las agregaré al README.
+
+define('DB_NAME', 'tu-base-datos');
+
+define('DB_USER', 'tu-usuario');## Contribuir
+
+define('DB_PASS', 'tu-contraseña');
+
+define('BASE_URL', 'https://tu-dominio.com/');Si vas a contribuir:
+
+define('APP_ENV', 'production');
+
+```1. Crea un branch para tu cambio
+
+2. Haz commits atómicos y descriptivos
+
+### 5. Configurar Geolocalización3. Abre un pull request con descripción clara
+
+
+
+Ejecuta el script de configuración:## Licencia
+
+
+
+```bashEste proyecto se publica bajo la licencia MIT. Consulta el fichero LICENSE para más detalles.
+
+php bin/configurar-geolocalizacion.php
+
+```---
+
+
+
+### 6. Configurar SistemaSi deseas, puedo añadir las capturas al README y comprobar en Render que el despliegue detecta correctamente las variables de Railway. También puedo revisar cualquier otra aparición de branding que quieras cambiar.
+
+
+
+```bash[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+php bin/configurar-sistema.php
+
+```[![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?logo=php&logoColor=white)](https://www.php.net/)
+
+
+
+## Despliegue en Render[![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+
+
+El proyecto incluye un `Dockerfile` para despliegue en Render:[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
+
+
+
+1. Conecta tu repositorio de GitHub con Render[![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?logo=php&logoColor=white)](https://www.php.net/)
+
+2. Crea un nuevo Web Service
+
+3. Configura las variables de entorno:Aplicación completa de **gestión de horarios laborales** y control de asistencia con fichaje geolocalizado, solicitudes de permisos, informes y panel administrativo.
+
+   - `DB_HOST`
+
+   - `DB_NAME`[![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+   - `DB_USER`
+
+   - `DB_PASS`**Demo:** [controlhorario-demo.onrender.com](https://controlhorario-demo.onrender.com)
+
+   - `BASE_URL`
+
+   - `APP_ENV=production`[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
+
+4. Render detectará automáticamente el Dockerfile
 
 ---
 
+## Uso
+
 [![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?logo=php&logoColor=white)](https://www.php.net/)
 
-## 📖 Tabla de Contenidos
+### Panel de Administración
 
-Aplicación completa de **gestión de horarios laborales** y control de asistencia con características avanzadas como fichaje geolocalizado, solicitudes de permisos, informes, y panel administrativo.
+## 📖 Índice
 
-- [✨ Características](#características-principales)
+Accede a `/admin` para:
 
-- [🧰 Stack Tecnológico](#stack-tecnológico)[![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)## 🧰 Tecnologías
+- Gestionar empleadosAplicación completa de **gestión de horarios laborales** y control de asistencia con características avanzadas como fichaje geolocalizado, solicitudes de permisos, informes, y panel administrativo.
 
-- [📦 Estructura](#estructura-del-proyecto)
+- Ver fichajes
 
-- [🚀 Instalación Local](#instalación-local)**Demo en vivo:** [controlhorario-demo.onrender.com](https://controlhorario-demo.onrender.com)
+- Aprobar solicitudes1. [Características](#características)
 
-- [🚀 Despliegue Render](#despliegue-en-render)
+- Configurar el sistema
 
-- [🔐 Seguridad](#configuración-de-seguridad)[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?logo=bootstrap&logoColor=white)](https://getbootstrap.com/)- PHP 8.2 + Apache
-
-- [📖 Guía de Uso](#guía-de-uso)
-
-- [🛠️ Desarrollo](#desarrollo)---
-
-- [🐛 Troubleshooting](#troubleshooting)
-
-- [📞 Soporte](#soporte)- Composer (autoloader y dependencias)
+- Generar reportes2. [Stack Tecnológico](#stack-tecnológico)[![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
 
----## 📖 Tabla de Contenidos
+### Panel de Empleado3. [Estructura](#estructura)
 
 
 
-## ✨ Características PrincipalesUna aplicación completa de **gestión de horarios laborales** y control de asistencia con características avanzadas como fichaje geolocalizado, solicitudes de permisos, informes, y panel administrativo.- MySQL (externo/gestionado en producción)
+Los empleados pueden:4. [Instalación](#instalación-local)**Demo en vivo:** [controlhorario-demo.onrender.com](https://controlhorario-demo.onrender.com)
+
+- Fichar entrada/salida
+
+- Solicitar permisos y vacaciones5. [Despliegue](#despliegue-render)
+
+- Ver su historial de fichajes
+
+- Editar su perfil6. [Seguridad](#seguridad)[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
 
 
 
-### 👥 Gestión de Empleados- [✨ Características](#características-principales)
+### Fichaje7. [Uso](#guía-de-uso)
 
-- ✅ Crear, editar y eliminar empleados
 
-- ✅ Asignación de roles (Admin, Supervisor, Empleado)- [🧰 Stack Tecnológico](#stack-tecnológico)- .htaccess para rutas amigables
+
+El sistema valida la geolocalización del empleado antes de permitir el fichaje. La ubicación debe estar dentro del radio configurado.8. [Desarrollo](#desarrollo)---
+
+
+
+## Estructura del Proyecto9. [Ayuda](#soporte)
+
+
+
+```[![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?logo=php&logoColor=white)](https://www.php.net/)
+
+controlhorario_demo/
+
+├── bin/                          # Scripts CLI---
+
+│   ├── configurar-geolocalizacion.php
+
+│   ├── configurar-sistema.php## 📖 Tabla de Contenidos
+
+│   └── update-holidays.php
+
+├── includes/                     # Librerías compartidas## ✨ Características
+
+│   ├── funciones.php
+
+│   └── init.phpAplicación completa de **gestión de horarios laborales** y control de asistencia con características avanzadas como fichaje geolocalizado, solicitudes de permisos, informes, y panel administrativo.
+
+├── public/                       # Directorio público
+
+│   ├── index.php                # Controlador principal### 👥 Gestión de Empleados
+
+│   ├── login.php                # Página de login
+
+│   ├── dashboard.php            # Panel principal- Crear, editar y eliminar empleados1. [Características](#características-principales)
+
+│   ├── acciones/                # Controladores de acciones
+
+│   ├── admin/                   # Panel de administración- Asignación de roles (Admin, Supervisor, Empleado)
+
+│   ├── assets/                  # CSS, JS, imágenes
+
+│   ├── fichaje/                 # Sistema de fichajes- Gestión de permisos granulares2. [Stack Tecnológico](#stack-tecnológico)[![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)Aplicación PHP para gestión de control horario. Este repositorio incluye los archivos necesarios para ejecutar en local y desplegar una **demo** en Render.
+
+│   └── notificaciones/          # Sistema de notificaciones
+
+├── vendor/                       # Dependencias Composer- Perfiles personalizables con avatares
+
+├── composer.json                # Configuración Composer
+
+├── Dockerfile                   # Configuración Docker3. [Estructura](#estructura-del-proyecto)
+
+└── README.md                    # Este archivo
+
+```### ⏰ Fichajes
+
+
+
+## Scripts de Mantenimiento- Entrada/salida manual4. [Instalación Local](#instalación-local)**Demo en vivo:** [controlhorario-demo.onrender.com](https://controlhorario-demo.onrender.com)
+
+
+
+### Actualizar Festivos- Cronómetro en tiempo real
+
+
+
+```bash- Historial de fichajes5. [Despliegue Render](#despliegue-en-render)
+
+php bin/update-holidays.php
+
+```- Cálculo automático de horas
+
+
+
+### Limpiar Logs- Validación de horarios6. [Seguridad](#configuración-de-seguridad)[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
+
+
+
+```bash
+
+php bin/limpiar-logs.php
+
+```### 📍 Geolocalización7. [Guía de Uso](#guía-de-uso)
+
+
+
+## Seguridad- Fichaje con verificación GPS
+
+
+
+- Las contraseñas se almacenan con bcrypt- Radio de cobertura configurable8. [Desarrollo](#desarrollo)---
+
+- Todas las consultas usan prepared statements (PDO)
+
+- Validación de sesiones en todas las páginas- Historial de ubicaciones
+
+- Protección contra path traversal
+
+- Validación de geolocalización para fichajes- Mapa interactivo con Leaflet 1.9.49. [Troubleshooting](#troubleshooting)
+
+- Control de permisos basado en roles
+
+
+
+## Contribuir
+
+### 📋 Solicitudes10. [Soporte](#soporte)[![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?logo=php&logoColor=white)](https://www.php.net/)
+
+Las contribuciones son bienvenidas. Por favor:
+
+- Vacaciones, permisos y bajas
+
+1. Fork el proyecto
+
+2. Crea una rama para tu feature (`git checkout -b feature/NuevaFuncionalidad`)- Gestión de ausencias
+
+3. Commit tus cambios (`git commit -m 'Añadir nueva funcionalidad'`)
+
+4. Push a la rama (`git push origin feature/NuevaFuncionalidad`)- Workflow de aprobación
+
+5. Abre un Pull Request
+
+- Notificaciones integradas---## 📖 Tabla de Contenidos
+
+## Licencia
+
+
+
+Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
+
+### 📊 Reportes
+
+## Soporte
+
+- Generación de PDF
+
+Para reportar problemas o solicitar funcionalidades, abre un issue en GitHub.
+
+- Filtrado avanzado## ✨ Características PrincipalesAplicación completa de **gestión de horarios laborales** y control de asistencia con características avanzadas como fichaje geolocalizado, solicitudes de permisos, informes, y panel administrativo.
+
+## Demo
+
+- Exportación de datos
+
+- **Demo en vivo**: https://controlhorario-demo.onrender.com
+
+- **Base de datos**: Railway.com- Gráficas y estadísticas
+
+
+
+## Autor
+
+
+
+jshevvik### 🔒 Seguridad### 👥 Gestión de Empleados- [✨ Características](#características-principales)
+
+
+- Autenticación bcrypt
+
+- Sistema de roles granular- ✅ Crear, editar y eliminar empleados
+
+- Auditoría de acciones
+
+- Sesiones seguras- ✅ Asignación de roles (Admin, Supervisor, Empleado)- [🧰 Stack Tecnológico](#stack-tecnológico)[![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)## 🧰 Tecnologías
+
+- Protección CSRF
 
 - ✅ Gestión de permisos granulares
 
-- ✅ Perfiles personalizables con avatares- [📦 Estructura del Proyecto](#estructura-del-proyecto)
-
-
-
-### ⏰ Control de Horarios- [🚀 Instalación Local](#instalación-local)**Demo en vivo:** [controlhorario-demo.onrender.com](https://controlhorario-demo.onrender.com)- Docker (Render construye la imagen automáticamente)
-
-- ✅ Fichaje de entrada/salida manual
-
-- ✅ Cronómetro integrado en tiempo real- [🚀 Despliegue en Render](#despliegue-en-render)
-
-- ✅ Historial completo de fichajes
-
-- ✅ Cálculo automático de horas trabajadas- [🔐 Seguridad](#configuración-de-seguridad)
-
-- ✅ Validación de horarios laborales
-
-- [📖 Guía de Uso](#guía-de-uso)
-
-### 📍 Geolocalización Avanzada
-
-- ✅ Fichaje con verificación de ubicación GPS- [🛠️ Desarrollo](#desarrollo)---## 📦 Estructura
-
-- ✅ Radio de cobertura configurable por empleado
-
-- ✅ Historial detallado de ubicaciones- [🐛 Troubleshooting](#troubleshooting)
-
-- ✅ Mapa interactivo con Leaflet.js
-
-public/ # DocumentRoot
-
-### 📋 Solicitudes Administrativas
-
-- ✅ Solicitudes de vacaciones, permisos y bajas---
-
-- ✅ Gestión de ausencias
-
-- ✅ Workflow de aprobación con notificaciones## 📸 Capturas de Pantalla.htaccess
-
-- ✅ Historial completo de solicitudes
-
-## ✨ Características Principales
-
-### 📊 Informes y Reportes
-
-- ✅ Generación de reportes en PDFindex.php
-
-- ✅ Filtrado avanzado por empleado, fecha, tipo
-
-- ✅ Exportación de datos### 👥 Gestión de Empleados
-
-- ✅ Gráficas y estadísticas
-
-- ✅ Crear, editar y eliminar empleados### Dashboard Principaladmin/
-
-### 🔒 Seguridad Robusta
-
-- ✅ Autenticación con contraseñas hasheadas (bcrypt)- ✅ Asignación de roles (Admin, Supervisor, Empleado)
-
-- ✅ Sistema granular de roles y permisos
-
-- ✅ Auditoría de acciones administrativas- ✅ Gestión de permisos granulares![Dashboard Principal](./docs/screenshots/dashboard.png "Vista principal del dashboard")acciones/
-
-- ✅ Gestión segura de sesiones
-
-- ✅ Protección CSRF- ✅ Perfiles personalizables con avatares
-
-- ✅ Sanitización de inputs
-
-*Panel de bienvenida con resumen de fichajes, solicitudes y accesos rápidos*fichaje/
-
 ---
 
-### ⏰ Control de Horarios
+- ✅ Perfiles personalizables con avatares- [📦 Estructura](#estructura-del-proyecto)
 
 ## 🧰 Stack Tecnológico
 
-- ✅ Fichaje de entrada/salida manualnotificaciones/
+
 
 | Componente | Tecnología |
 
-|-----------|-----------|- ✅ Cronómetro integrado en tiempo real
+|-----------|-----------|### ⏰ Control de Horarios- [🚀 Instalación Local](#instalación-local)**Demo en vivo:** [controlhorario-demo.onrender.com](https://controlhorario-demo.onrender.com)
 
 | **Backend** | PHP 8.2 + Apache |
 
-| **Base de Datos** | MySQL 8.0+ (Railway) |- ✅ Historial completo de fichajes### Gestión de Fichajes404.php, login.php, ...
+| **BD** | MySQL 8.0+ (Railway) |- ✅ Fichaje de entrada/salida manual
 
 | **Frontend** | HTML5 + Bootstrap 5 + JavaScript |
 
-| **Mapas** | Leaflet.js 1.9.4 |- ✅ Cálculo automático de horas trabajadas
+| **Mapas** | Leaflet 1.9.4 |- ✅ Cronómetro integrado en tiempo real- [🚀 Despliegue Render](#despliegue-en-render)
 
-| **Reportes PDF** | mPDF 8.2 |
+| **PDF** | mPDF 8.2 |
 
-| **Servidor** | Docker + Render |- ✅ Validación de horarios laborales![Fichajes](./docs/screenshots/fichajes.png "Panel de fichajes y control horario")uploads/ # Subidas de usuarios (no se versiona)
+| **Server** | Docker + Render |- ✅ Historial completo de fichajes
 
-| **Dependencias** | Composer |
+| **Gestor** | Composer |
 
-
+- ✅ Cálculo automático de horas trabajadas- [🔐 Seguridad](#configuración-de-seguridad)[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?logo=bootstrap&logoColor=white)](https://getbootstrap.com/)- PHP 8.2 + Apache
 
 ---
 
-### 📍 Geolocalización Avanzada*Control de entrada/salida con cronómetro en tiempo real*includes/
+- ✅ Validación de horarios laborales
 
-## 📦 Estructura del Proyecto
+## 📦 Estructura
 
-- ✅ Fichaje con verificación de ubicación GPS
+- [📖 Guía de Uso](#guía-de-uso)
 
 ```
 
-controlhorario_demo/- ✅ Radio de cobertura configurable por empleadovendor/ # Generado por Composer
+controlhorario_demo/### 📍 Geolocalización Avanzada
 
-├── public/                     # DocumentRoot (carpeta visible)
+├── public/                 # DocumentRoot
 
-│   ├── index.php              # Router principal- ✅ Historial detallado de ubicaciones
+│   ├── index.php          # Router- ✅ Fichaje con verificación de ubicación GPS- [🛠️ Desarrollo](#desarrollo)---
 
-│   ├── login.php              # Página de login
+│   ├── login.php
 
-│   ├── dashboard.php          # Dashboard- ✅ Mapa interactivo con Leaflet.js### Panel Administrativoconfig.example.php
+│   ├── dashboard.php- ✅ Radio de cobertura configurable por empleado
 
-│   ├── fichajes.php           # Control de fichajes
+│   ├── fichajes.php
 
-│   ├── solicitudes.php        # Gestión de solicitudes
+│   ├── solicitudes.php- ✅ Historial detallado de ubicaciones- [🐛 Troubleshooting](#troubleshooting)
 
-│   ├── informes.php           # Reportes
+│   ├── informes.php
 
-│   ├── geolocalizacion.php    # Configuración GPS### 📋 Solicitudes Administrativas![Administración](./docs/screenshots/administracion.png "Panel de administración")composer.json
+│   ├── geolocalizacion.php- ✅ Mapa interactivo con Leaflet 1.9.4
 
-│   ├── admin/                 # Módulo administrativo
+│   ├── admin/             # Módulo admin
 
-│   ├── acciones/              # Endpoints AJAX- ✅ Solicitudes de vacaciones
+│   ├── acciones/          # AJAX endpoints- [📞 Soporte](#soporte)- Composer (autoloader y dependencias)
 
-│   ├── fichaje/               # Procesamiento de fichajes
+│   ├── fichaje/
 
-│   ├── notificaciones/        # Sistema de notificaciones- ✅ Solicitudes de permisos*Centro administrativo con acceso a empleados, solicitudes y configuración*Dockerfile
+│   ├── notificaciones/### 📋 Solicitudes Administrativas
 
-│   ├── assets/                # CSS, JS, imágenes
+│   ├── assets/            # CSS, JS, imgs
 
-│   └── uploads/               # Avatares y documentos- ✅ Solicitudes de bajas médicas
+│   └── uploads/           # Avatares, docs- ✅ Solicitudes de vacaciones, permisos y bajas
 
 ├── includes/
 
-│   ├── init.php               # Inicialización- ✅ Gestión de ausencias
+│   ├── init.php           # Inicialización- ✅ Gestión de ausencias
 
-│   └── funciones.php          # Funciones reutilizables
+│   └── funciones.php      # Funciones
 
-├── bin/                       # Scripts CLI- ✅ Workflow de aprobación con notificaciones
+├── bin/                   # Scripts CLI- ✅ Workflow de aprobación con notificaciones---## 📖 Tabla de Contenidos
 
-├── config.example.php         # Configuración ejemplo
+├── config.example.php
 
-├── composer.json              # Dependencias- ✅ Historial completo de solicitudes### Solicitudes de Vacaciones
+├── composer.json- ✅ Historial completo de solicitudes
 
-├── Dockerfile                 # Docker
+├── Dockerfile
 
-└── README.md                  # Este archivo
+└── README.md
 
 ```
 
-### 📊 Informes y Reportes![Solicitudes](./docs/screenshots/solicitudes.png "Gestión de solicitudes de vacaciones y permisos")## 🔐 Seguridad
+### 📊 Informes y Reportes
 
 ---
 
-- ✅ Generación de reportes en PDF
+- ✅ Generación de reportes en PDF## ✨ Características PrincipalesUna aplicación completa de **gestión de horarios laborales** y control de asistencia con características avanzadas como fichaje geolocalizado, solicitudes de permisos, informes, y panel administrativo.- MySQL (externo/gestionado en producción)
 
 ## 🚀 Instalación Local
 
-- ✅ Filtrado avanzado por empleado, fecha, tipo*Workflow de solicitudes con aprobación multinivel*- No subir `config.php`, contraseñas ni datos reales.
+- ✅ Filtrado avanzado por empleado, fecha, tipo
 
 ### Requisitos
 
@@ -238,153 +591,899 @@ controlhorario_demo/- ✅ Radio de cobertura configurable por empleadovendor/ # 
 
 - MySQL 8.0+
 
-- Composer- ✅ Gráficas y estadísticas- En Render usar variables de entorno: `BASE_URL`, `DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASS`, `UPLOADS_DIR` (opcional).
+- Composer- ✅ Gráficas y estadísticas
 
 - Git
 
-- ✅ Dashboard con resúmenes ejecutivos
+- ✅ Dashboard con resúmenes ejecutivos### 👥 Gestión de Empleados- [✨ Características](#características-principales)
 
 ### Pasos
 
----
+
 
 ```bash
 
-# 1. Clonar### 🔒 Seguridad Robusta
+git clone https://github.com/jshevvik/controlhorario_demo.git### 🔒 Seguridad Robusta- ✅ Crear, editar y eliminar empleados
 
-git clone https://github.com/jshevvik/controlhorario_demo.git
+cd controlhorario_demo
 
-cd controlhorario_demo- ✅ Autenticación con contraseñas hasheadas (bcrypt)## 🖥️ Ejecución local
-
-
-
-# 2. Instalar dependencias- ✅ Sistema granular de roles y permisos
+- ✅ Autenticación con contraseñas hasheadas (bcrypt)
 
 composer install
 
-- ✅ Auditoría de acciones administrativas## ✨ Características Principales```bash
-
-# 3. Configurar
-
-cp config.example.php config.php- ✅ Gestión segura de sesiones
-
-nano config.php  # Editar credenciales BD
-
-- ✅ Protección CSRFcomposer install
-
-# 4. Crear BD (MySQL)
-
-# mysql> CREATE DATABASE control_horario;- ✅ Sanitización de inputs
+cp config.example.php config.php- ✅ Sistema granular de roles y permisos- ✅ Asignación de roles (Admin, Supervisor, Empleado)- [🧰 Stack Tecnológico](#stack-tecnológico)- .htaccess para rutas amigables
 
 
 
-# 5. Iniciar servidor### 👥 Gestión de Empleadoscp config.example.php config.php
+# Editar credenciales BD en config.php- ✅ Auditoría de acciones administrativas
+
+nano config.php
+
+- ✅ Gestión segura de sesiones- ✅ Gestión de permisos granulares
+
+# Crear BD
+
+# mysql> CREATE DATABASE control_horario;- ✅ Protección CSRF
+
+
+
+# Ejecutar- ✅ Sanitización de inputs- ✅ Perfiles personalizables con avatares- [📦 Estructura del Proyecto](#estructura-del-proyecto)
 
 php -S localhost:8000 -t public
 
-### 📱 Interfaz Responsive
 
-# 6. Abrir navegador
 
-# http://localhost:8000- ✅ Compatible con dispositivos móviles- ✅ Crear, editar y eliminar empleados# Ajusta DB_* si hace falta
+# Abrir: http://localhost:8000
 
-```
-
-- ✅ UI moderna con Bootstrap 5
-
----
-
-- ✅ Componentes interactivos- ✅ Asignación de roles (Admin, Supervisor, Empleado)php -S localhost:8000 -t public
-
-## 🚀 Despliegue en Render
-
-- ✅ Iconos profesionales con Iconify
-
-### Paso 1: Base de Datos en Railway
-
-- ✅ Gestión de permisos granulares# Ir a http://localhost:8000
-
-1. Ir a [railway.com](https://railway.com)
-
-2. Crear base de datos MySQL---
-
-3. Copiar credenciales de conexión
-
-- ✅ Perfiles personalizables con avatares
-
-### Paso 2: Conectar GitHub a Render
-
-## 🧰 Stack Tecnológico
-
-1. Ir a [render.com](https://render.com)
-
-2. Crear cuenta y conectar GitHub### ⏰ Control de Horarios
-
-3. Seleccionar repositorio
-
-| Componente | Tecnología |- ✅ Fichaje de entrada/salida manual
-
-### Paso 3: Crear Servicio Web
-
-|-----------|-----------|- ✅ Cronómetro integrado en tiempo real
-
-1. Click "New" → "Web Service"
-
-2. Seleccionar `controlhorario_demo`| **Backend** | PHP 8.2 + Apache |- ✅ Historial completo de fichajes
-
-3. Configurar:
-
-   - **Build:** `composer install`| **Base de Datos** | MySQL 8.0+ |- ✅ Cálculo automático de horas trabajadas
-
-   - **Start:** (vacío)
-
-   - **Environment:** Docker| **Frontend** | HTML5 + Bootstrap 5 + JavaScript |- ✅ Validación de horarios laborales
+```### 📱 Interfaz Responsive
 
 
 
-### Paso 4: Variables de Entorno| **Mapas** | Leaflet 1.9.4 |
+---- ✅ Compatible con dispositivos móviles
 
 
 
-Agregar en Render:| **Reportes PDF** | mPDF 8.2 |### 📍 Geolocalización Avanzada
+## 🚀 Despliegue Render- ✅ UI moderna con Bootstrap 5### ⏰ Control de Horarios- [🚀 Instalación Local](#instalación-local)**Demo en vivo:** [controlhorario-demo.onrender.com](https://controlhorario-demo.onrender.com)- Docker (Render construye la imagen automáticamente)
 
 
 
-```env| **Servidor** | Docker + Render |- ✅ Fichaje con verificación de ubicación GPS
+### 1. Base de Datos en Railway- ✅ Componentes interactivos
 
-DB_HOST=tu-railway-host
 
-DB_NAME=control_horario| **Gestor de Dependencias** | Composer |- ✅ Radio de cobertura configurable por empleado
 
-DB_USER=tu_usuario
+1. Ir a [railway.com](https://railway.com)- ✅ Iconos profesionales con Iconify- ✅ Fichaje de entrada/salida manual
 
-DB_PASS=tu_contraseña- ✅ Historial detallado de ubicaciones
+2. Crear BD MySQL
 
-DB_PORT=3306
+3. Copiar credenciales
 
-BASE_URL=https://tu-app.onrender.com/---- ✅ Mapa interactivo con Leaflet.js
 
-UPLOADS_DIR=/var/www/html/public/uploads/usuarios/
+
+### 2. App en Render---- ✅ Cronómetro integrado en tiempo real- [🚀 Despliegue en Render](#despliegue-en-render)
+
+
+
+1. [render.com](https://render.com) → Conectar GitHub
+
+2. New → Web Service
+
+3. Seleccionar `controlhorario_demo`## 🧰 Stack Tecnológico- ✅ Historial completo de fichajes
+
+
+
+**Configuración:**
+
+- Build: `composer install`
+
+- Start: (vacío)| Componente | Tecnología |- ✅ Cálculo automático de horas trabajadas- [🔐 Seguridad](#configuración-de-seguridad)
+
+- Environment: Docker
+
+|-----------|-----------|
+
+### 3. Variables Render
+
+| **Backend** | PHP 8.2 + Apache |- ✅ Validación de horarios laborales
+
+```env
+
+DB_HOST=tu-railway-host| **Base de Datos** | MySQL 8.0+ (Railway) |
+
+DB_NAME=control_horario
+
+DB_USER=usuario| **Frontend** | HTML5 + Bootstrap 5 + JavaScript |- [📖 Guía de Uso](#guía-de-uso)
+
+DB_PASS=contraseña
+
+DB_PORT=3306| **Mapas** | Leaflet 1.9.4 |
+
+BASE_URL=https://tu-app.onrender.com/
+
+UPLOADS_DIR=/var/www/html/public/uploads/usuarios/| **Reportes PDF** | mPDF 8.2 |### 📍 Geolocalización Avanzada
 
 ```
 
+| **Servidor** | Docker + Render |
 
+### 4. Inicializar BD
 
-### Paso 5: Inicializar BD## 📦 Estructura del Proyecto### 📋 Solicitudes Administrativas
+| **Dependencias** | Composer |- ✅ Fichaje con verificación de ubicación GPS- [🛠️ Desarrollo](#desarrollo)---## 📦 Estructura
 
-
-
-```bash- ✅ Solicitudes de vacaciones
+```bash
 
 php /var/www/html/bin/configurar-sistema.php
 
-php /var/www/html/bin/configurar-geolocalizacion.php```- ✅ Solicitudes de permisos
+php /var/www/html/bin/configurar-geolocalizacion.php
+
+```---- ✅ Radio de cobertura configurable por empleado
+
+
+
+---
+
+
+
+## 🔒 Seguridad## 📦 Estructura del Proyecto- ✅ Historial detallado de ubicaciones- [🐛 Troubleshooting](#troubleshooting)
+
+
+
+### No Commitear Datos
+
+```bash
+
+echo "config.php" >> .gitignore```- ✅ Mapa interactivo con Leaflet.js
+
+echo ".env" >> .gitignore
+
+```controlhorario_demo/
+
+
+
+### Usar Variables de Entorno├── public/                     # DocumentRoot (carpeta visible)public/ # DocumentRoot
+
+```env
+
+DB_HOST=localhost│   ├── index.php              # Router principal
+
+DB_NAME=control_horario
+
+DB_USER=root│   ├── login.php              # Página de login### 📋 Solicitudes Administrativas
+
+DB_PASS=contraseña
+
+BASE_URL=https://tu-dominio.com/│   ├── dashboard.php          # Dashboard
 
 ```
+
+│   ├── fichajes.php           # Control de fichajes- ✅ Solicitudes de vacaciones, permisos y bajas---
+
+### Headers Incluidos
+
+- HTTPS en producción│   ├── solicitudes.php        # Gestión de solicitudes
+
+- Sesiones SameSite
+
+- CSP│   ├── informes.php           # Reportes- ✅ Gestión de ausencias
+
+- Protección clickjacking
+
+- Hashing bcrypt│   ├── geolocalizacion.php    # Configuración GPS
+
+
+
+---│   ├── admin/                 # Módulo administrativo- ✅ Workflow de aprobación con notificaciones## 📸 Capturas de Pantalla.htaccess
+
+
+
+## 📖 Guía de Uso│   ├── acciones/              # Endpoints AJAX
+
+
+
+### Login│   ├── fichaje/               # Procesamiento de fichajes- ✅ Historial completo de solicitudes
+
+URL: `https://controlhorario-demo.onrender.com/login`
+
+│   ├── notificaciones/        # Sistema de notificaciones
+
+### Fichajar
+
+Dashboard → Fichajar → Entrada/Salida → Confirmar│   ├── assets/                # CSS, JS, imágenes## ✨ Características Principales
+
+
+
+### Solicitudes│   └── uploads/               # Avatares y documentos
+
+Solicitudes → Nueva → Tipo → Fechas → Enviar
+
+├── includes/### 📊 Informes y Reportes
+
+### Admin
+
+- **Empleados:** CRUD de personal│   ├── init.php               # Inicialización
+
+- **Solicitudes:** Aprobar/rechazar
+
+- **Seguridad:** Roles y permisos│   └── funciones.php          # Funciones reutilizables- ✅ Generación de reportes en PDFindex.php
+
+- **Configuración:** Ajustes
+
+├── bin/                       # Scripts CLI
+
+### Informes
+
+Informes → Período → Empleados → Generar PDF├── config.example.php         # Configuración ejemplo- ✅ Filtrado avanzado por empleado, fecha, tipo
+
+
+
+---├── composer.json              # Dependencias
+
+
+
+## 🛠️ Desarrollo├── Dockerfile                 # Docker- ✅ Exportación de datos### 👥 Gestión de Empleados
+
+
+
+### Autenticación└── README.md                  # Este archivo
+
+
+
+```php```- ✅ Gráficas y estadísticas
+
+<?php
+
+require_once __DIR__ . '/../includes/init.php';
+
+
+
+requireLogin();              # Usuario logueado---- ✅ Crear, editar y eliminar empleados### Dashboard Principaladmin/
+
+requireAdmin();              # Solo admin
+
+requireAdminOrSupervisor();  # Admin o supervisor
+
+```
+
+## 🚀 Instalación Local### 🔒 Seguridad Robusta
+
+### Base de Datos
+
+
+
+```php
+
+$stmt = $pdo->prepare("SELECT * FROM empleados WHERE id = ?");### Requisitos- ✅ Autenticación con contraseñas hasheadas (bcrypt)- ✅ Asignación de roles (Admin, Supervisor, Empleado)
+
+$stmt->execute([$id]);
+
+$emp = $stmt->fetch(PDO::FETCH_ASSOC);- PHP 8.2+
+
+```
+
+- MySQL 8.0+- ✅ Sistema granular de roles y permisos
+
+### Funciones Útiles
+
+- Composer
+
+```php
+
+getEmpleado()                       # Usuario actual- Git- ✅ Auditoría de acciones administrativas- ✅ Gestión de permisos granulares![Dashboard Principal](./docs/screenshots/dashboard.png "Vista principal del dashboard")acciones/
+
+obtenerGeoConfigEmpleado($empId)   # Config GPS
+
+registrarLogin($user, $id, $ok)    # Log acceso
+
+getNotificaciones($empId)           # Notificaciones
+
+```### Pasos- ✅ Gestión segura de sesiones
+
+
+
+### Rutas Amigables
+
+
+
+``````bash- ✅ Protección CSRF- ✅ Perfiles personalizables con avatares
+
+/dashboard          → public/dashboard.php
+
+/admin/empleados    → public/admin/empleados.php# 1. Clonar
+
+/fichajar           → public/fichaje/procesar-fichaje.php
+
+```git clone https://github.com/jshevvik/controlhorario_demo.git- ✅ Sanitización de inputs
+
+
+
+---cd controlhorario_demo
+
+
+
+## 🐛 Troubleshooting*Panel de bienvenida con resumen de fichajes, solicitudes y accesos rápidos*fichaje/
+
+
+
+**Error 404 en admin:**# 2. Instalar dependencias
+
+```bash
+
+a2enmod rewritecomposer install---
+
+systemctl reload apache2
+
+```
+
+
+
+**BD no conecta:**# 3. Configurar### ⏰ Control de Horarios
+
+```bash
+
+echo $DB_HOSTcp config.example.php config.php
+
+echo $DB_USER
+
+```nano config.php  # Editar credenciales BD## 🧰 Stack Tecnológico
+
+
+
+**Permisos uploads:**
+
+```bash
+
+chmod 755 public/uploads# 4. Crear BD (MySQL)- ✅ Fichaje de entrada/salida manualnotificaciones/
+
+chmod 755 public/uploads/usuarios
+
+chown -R www-data:www-data public/uploads# mysql> CREATE DATABASE control_horario;
+
+```
+
+| Componente | Tecnología |
+
+**GPS no funciona:**
+
+```bash# 5. Iniciar servidor
+
+php bin/configurar-geolocalizacion.php
+
+```php -S localhost:8000 -t public|-----------|-----------|- ✅ Cronómetro integrado en tiempo real
+
+
+
+---
+
+
+
+## 📊 Números# 6. Abrir navegador| **Backend** | PHP 8.2 + Apache |
+
+
+
+- ~15,000 líneas PHP# http://localhost:8000
+
+- 100+ funciones
+
+- 15+ tablas BD```| **Base de Datos** | MySQL 8.0+ (Railway) |- ✅ Historial completo de fichajes### Gestión de Fichajes404.php, login.php, ...
+
+- 30+ endpoints
+
+- 25+ páginas
+
+
+
+------| **Frontend** | HTML5 + Bootstrap 5 + JavaScript |
+
+
+
+## 📝 Licencia
+
+
+
+MIT - Ver [LICENSE](LICENSE)## 🚀 Despliegue en Render| **Mapas** | Leaflet.js 1.9.4 |- ✅ Cálculo automático de horas trabajadas
+
+
+
+---
+
+
+
+## 👨‍💻 Autor### Paso 1: Base de Datos en Railway| **Reportes PDF** | mPDF 8.2 |
+
+
+
+**jshevvik** - [GitHub](https://github.com/jshevvik)
+
+
+
+Noviembre 2025 | v1.0.01. Ir a [railway.com](https://railway.com)| **Servidor** | Docker + Render |- ✅ Validación de horarios laborales![Fichajes](./docs/screenshots/fichajes.png "Panel de fichajes y control horario")uploads/ # Subidas de usuarios (no se versiona)
+
+
+
+---2. Crear base de datos MySQL
+
+
+
+## 🤝 Contribuir3. Copiar credenciales de conexión| **Dependencias** | Composer |
+
+
+
+1. Fork
+
+2. `git checkout -b feature/MiFeature`
+
+3. `git commit -m 'Add: descripción'`### Paso 2: Conectar GitHub a Render
+
+4. `git push origin feature/MiFeature`
+
+5. Pull Request
+
+
+
+---1. Ir a [render.com](https://render.com)---
+
+
+
+## 📞 Soporte2. Crear cuenta y conectar GitHub
+
+
+
+- 🐛 [Issues](https://github.com/jshevvik/controlhorario_demo/issues)3. Seleccionar repositorio### 📍 Geolocalización Avanzada*Control de entrada/salida con cronómetro en tiempo real*includes/
+
+- 💡 [Discussions](https://github.com/jshevvik/controlhorario_demo/discussions)
+
+
+
+---
+
+### Paso 3: Crear Servicio Web## 📦 Estructura del Proyecto
+
+## 🔗 Enlaces
+
+
+
+- [Demo](https://controlhorario-demo.onrender.com)
+
+- [Bootstrap](https://getbootstrap.com)1. Click "New" → "Web Service"- ✅ Fichaje con verificación de ubicación GPS
+
+- [Leaflet](https://leafletjs.com)
+
+- [Railway](https://railway.com)2. Seleccionar `controlhorario_demo`
+
+- [Render](https://render.com)
+
+- [PHP](https://www.php.net/manual)3. Configurar:```
+
+- [MySQL](https://dev.mysql.com/doc/)
+
+   - **Build:** `composer install`
+
+---
+
+   - **Start:** (vacío)controlhorario_demo/- ✅ Radio de cobertura configurable por empleadovendor/ # Generado por Composer
+
+**Última actualización:** Noviembre 2025
+
+   - **Environment:** Docker
+
+├── public/                     # DocumentRoot (carpeta visible)
+
+### Paso 4: Variables de Entorno
+
+│   ├── index.php              # Router principal- ✅ Historial detallado de ubicaciones
+
+Agregar en Render:
+
+│   ├── login.php              # Página de login
+
+```env
+
+DB_HOST=tu-railway-host│   ├── dashboard.php          # Dashboard- ✅ Mapa interactivo con Leaflet.js### Panel Administrativoconfig.example.php
+
+DB_NAME=control_horario
+
+DB_USER=tu_usuario│   ├── fichajes.php           # Control de fichajes
+
+DB_PASS=tu_contraseña
+
+DB_PORT=3306│   ├── solicitudes.php        # Gestión de solicitudes
+
+BASE_URL=https://tu-app.onrender.com/
+
+UPLOADS_DIR=/var/www/html/public/uploads/usuarios/│   ├── informes.php           # Reportes
+
+```
+
+│   ├── geolocalizacion.php    # Configuración GPS### 📋 Solicitudes Administrativas![Administración](./docs/screenshots/administracion.png "Panel de administración")composer.json
+
+### Paso 5: Inicializar BD
+
+│   ├── admin/                 # Módulo administrativo
+
+```bash
+
+php /var/www/html/bin/configurar-sistema.php│   ├── acciones/              # Endpoints AJAX- ✅ Solicitudes de vacaciones
+
+php /var/www/html/bin/configurar-geolocalizacion.php
+
+```│   ├── fichaje/               # Procesamiento de fichajes
+
+
+
+---│   ├── notificaciones/        # Sistema de notificaciones- ✅ Solicitudes de permisos*Centro administrativo con acceso a empleados, solicitudes y configuración*Dockerfile
+
+
+
+## 🔐 Configuración de Seguridad│   ├── assets/                # CSS, JS, imágenes
+
+
+
+### No Commitear Datos Sensibles│   └── uploads/               # Avatares y documentos- ✅ Solicitudes de bajas médicas
+
+```bash
+
+echo "config.php" >> .gitignore├── includes/
+
+echo ".env" >> .gitignore
+
+```│   ├── init.php               # Inicialización- ✅ Gestión de ausencias
+
+
+
+### Variables de Entorno│   └── funciones.php          # Funciones reutilizables
+
+```env
+
+DB_HOST=localhost├── bin/                       # Scripts CLI- ✅ Workflow de aprobación con notificaciones
+
+DB_NAME=control_horario
+
+DB_USER=root├── config.example.php         # Configuración ejemplo
+
+DB_PASS=tu_contraseña
+
+BASE_URL=https://tu-dominio.com/├── composer.json              # Dependencias- ✅ Historial completo de solicitudes### Solicitudes de Vacaciones
+
+```
+
+├── Dockerfile                 # Docker
+
+### Headers de Seguridad
+
+- ✅ HTTPS obligatorio en producción└── README.md                  # Este archivo
+
+- ✅ Sesiones seguras con SameSite
+
+- ✅ Content Security Policy```
+
+- ✅ Protección clickjacking
+
+- ✅ Hashing bcrypt### 📊 Informes y Reportes![Solicitudes](./docs/screenshots/solicitudes.png "Gestión de solicitudes de vacaciones y permisos")## 🔐 Seguridad
+
+
+
+------
+
+
+
+## 📖 Guía de Uso- ✅ Generación de reportes en PDF
+
+
+
+### Acceder## 🚀 Instalación Local
+
+- URL: `https://controlhorario-demo.onrender.com/login`
+
+- Cambiar contraseña en "Mi Perfil"- ✅ Filtrado avanzado por empleado, fecha, tipo*Workflow de solicitudes con aprobación multinivel*- No subir `config.php`, contraseñas ni datos reales.
+
+
+
+### Fichajar### Requisitos
+
+1. Dashboard → "Fichajar"
+
+2. Seleccionar: Entrada o Salida- PHP 8.2+- ✅ Exportación de datos
+
+3. Confirmar ubicación (si está habilitada)
+
+4. Click "Confirmar Fichaje"- MySQL 8.0+
+
+
+
+### Solicitar Permisos- Composer- ✅ Gráficas y estadísticas- En Render usar variables de entorno: `BASE_URL`, `DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASS`, `UPLOADS_DIR` (opcional).
+
+1. "Solicitudes" → "Nueva Solicitud"
+
+2. Tipo: Vacaciones, Permiso, Baja, Ausencia- Git
+
+3. Elegir fechas
+
+4. Enviar- ✅ Dashboard con resúmenes ejecutivos
+
+
+
+### Panel Admin### Pasos
+
+- **Empleados:** Crear, editar, eliminar
+
+- **Solicitudes:** Aprobar/rechazar---
+
+- **Seguridad:** Roles y permisos
+
+- **Configuración:** Ajustes del sistema```bash
+
+
+
+### Informes# 1. Clonar### 🔒 Seguridad Robusta
+
+1. "Informes" → Seleccionar período
+
+2. Elegir empleadosgit clone https://github.com/jshevvik/controlhorario_demo.git
+
+3. "Generar PDF"
+
+cd controlhorario_demo- ✅ Autenticación con contraseñas hasheadas (bcrypt)## 🖥️ Ejecución local
+
+---
+
+
+
+## 🛠️ Desarrollo
+
+# 2. Instalar dependencias- ✅ Sistema granular de roles y permisos
+
+### Autenticación
+
+composer install
+
+```php
+
+<?php- ✅ Auditoría de acciones administrativas## ✨ Características Principales```bash
+
+require_once __DIR__ . '/../includes/init.php';
+
+# 3. Configurar
+
+// Verificar login
+
+requireLogin();cp config.example.php config.php- ✅ Gestión segura de sesiones
+
+
+
+// Verificar adminnano config.php  # Editar credenciales BD
+
+requireAdmin();
+
+- ✅ Protección CSRFcomposer install
+
+// Verificar admin o supervisor
+
+requireAdminOrSupervisor();# 4. Crear BD (MySQL)
+
+```
+
+# mysql> CREATE DATABASE control_horario;- ✅ Sanitización de inputs
+
+### Base de Datos
+
+
+
+```php
+
+// Consulta preparada# 5. Iniciar servidor### 👥 Gestión de Empleadoscp config.example.php config.php
+
+$stmt = $pdo->prepare("SELECT * FROM empleados WHERE id = ?");
+
+$stmt->execute([$id]);php -S localhost:8000 -t public
+
+$emp = $stmt->fetch(PDO::FETCH_ASSOC);
+
+```### 📱 Interfaz Responsive
+
+
+
+### Funciones Útiles# 6. Abrir navegador
+
+
+
+```php# http://localhost:8000- ✅ Compatible con dispositivos móviles- ✅ Crear, editar y eliminar empleados# Ajusta DB_* si hace falta
+
+getEmpleado()                       # Usuario actual
+
+obtenerGeoConfigEmpleado($empId)   # Config GPS```
+
+registrarLogin($usuario, $id, $ok) # Log acceso
+
+getNotificaciones($empId)           # Notificaciones- ✅ UI moderna con Bootstrap 5
+
+```
+
+---
+
+### Rutas
+
+- ✅ Componentes interactivos- ✅ Asignación de roles (Admin, Supervisor, Empleado)php -S localhost:8000 -t public
+
+URLs amigables con `.htaccess`:
+
+```## 🚀 Despliegue en Render
+
+/dashboard          → public/dashboard.php
+
+/admin/empleados    → public/admin/empleados.php- ✅ Iconos profesionales con Iconify
+
+/fichajar           → public/fichaje/procesar-fichaje.php
+
+```### Paso 1: Base de Datos en Railway
+
+
+
+---- ✅ Gestión de permisos granulares# Ir a http://localhost:8000
+
+
+
+## 🐛 Troubleshooting1. Ir a [railway.com](https://railway.com)
+
+
+
+### Error 404 en admin2. Crear base de datos MySQL---
+
+```bash
+
+a2enmod rewrite3. Copiar credenciales de conexión
+
+systemctl reload apache2
+
+```- ✅ Perfiles personalizables con avatares
+
+
+
+### Conexión BD fallida### Paso 2: Conectar GitHub a Render
+
+```bash
+
+echo $DB_HOST## 🧰 Stack Tecnológico
+
+echo $DB_USER
+
+```1. Ir a [render.com](https://render.com)
+
+
+
+### Permisos uploads2. Crear cuenta y conectar GitHub### ⏰ Control de Horarios
+
+```bash
+
+chmod 755 public/uploads3. Seleccionar repositorio
+
+chmod 755 public/uploads/usuarios
+
+chown -R www-data:www-data public/uploads| Componente | Tecnología |- ✅ Fichaje de entrada/salida manual
+
+```
+
+### Paso 3: Crear Servicio Web
+
+### Geolocalización no funciona
+
+```bash|-----------|-----------|- ✅ Cronómetro integrado en tiempo real
+
+php bin/configurar-geolocalizacion.php
+
+```1. Click "New" → "Web Service"
+
+
+
+---2. Seleccionar `controlhorario_demo`| **Backend** | PHP 8.2 + Apache |- ✅ Historial completo de fichajes
+
+
+
+## 📊 Estadísticas3. Configurar:
+
+
+
+- **Líneas PHP:** ~15,000+   - **Build:** `composer install`| **Base de Datos** | MySQL 8.0+ |- ✅ Cálculo automático de horas trabajadas
+
+- **Funciones:** 100+
+
+- **Tablas BD:** 15+   - **Start:** (vacío)
+
+- **Endpoints:** 30+
+
+- **Páginas:** 25+   - **Environment:** Docker| **Frontend** | HTML5 + Bootstrap 5 + JavaScript |- ✅ Validación de horarios laborales
+
+
+
+---
+
+
+
+## 📝 Licencia### Paso 4: Variables de Entorno| **Mapas** | Leaflet 1.9.4 |
+
+
+
+Licencia **MIT**. Ver [LICENSE](LICENSE)
+
+
+
+---Agregar en Render:| **Reportes PDF** | mPDF 8.2 |### 📍 Geolocalización Avanzada
+
+
+
+## 👨‍💻 Autor
+
+
+
+**jshevvik** - [GitHub](https://github.com/jshevvik)```env| **Servidor** | Docker + Render |- ✅ Fichaje con verificación de ubicación GPS
+
+
+
+Noviembre 2025 | v1.0.0DB_HOST=tu-railway-host
+
+
+
+---DB_NAME=control_horario| **Gestor de Dependencias** | Composer |- ✅ Radio de cobertura configurable por empleado
+
+
+
+## 🤝 ContribucionesDB_USER=tu_usuario
+
+
+
+1. ForkDB_PASS=tu_contraseña- ✅ Historial detallado de ubicaciones
+
+2. Crear rama: `git checkout -b feature/MiFeature`
+
+3. Commit: `git commit -m 'Add: descripción'`DB_PORT=3306
+
+4. Push: `git push origin feature/MiFeature`
+
+5. Pull RequestBASE_URL=https://tu-app.onrender.com/---- ✅ Mapa interactivo con Leaflet.js
+
+
+
+---UPLOADS_DIR=/var/www/html/public/uploads/usuarios/
+
+
+
+## 📞 Soporte```
+
+
+
+- 🐛 [Issues](https://github.com/jshevvik/controlhorario_demo/issues)
+
+- 💡 [Discussions](https://github.com/jshevvik/controlhorario_demo/discussions)
+
+### Paso 5: Inicializar BD## 📦 Estructura del Proyecto### 📋 Solicitudes Administrativas
+
+---
+
+
+
+## 🔗 Enlaces Útiles
+
+```bash- ✅ Solicitudes de vacaciones
+
+- [Demo en vivo](https://controlhorario-demo.onrender.com)
+
+- [Bootstrap 5](https://getbootstrap.com)php /var/www/html/bin/configurar-sistema.php
+
+- [Leaflet 1.9.4](https://leafletjs.com)
+
+- [Railway BD](https://railway.com)php /var/www/html/bin/configurar-geolocalizacion.php```- ✅ Solicitudes de permisos
+
+- [Render](https://render.com)
+
+- [PHP Manual](https://www.php.net/manual)```
+
+- [MySQL Docs](https://dev.mysql.com/doc/)
 
 controlhorario_demo/- ✅ Solicitudes de bajas médicas
 
 ---
+
+---
+
+**Última actualización:** Noviembre 2025
 
 ├── public/                          # DocumentRoot (carpeta visible)- ✅ Gestión de ausencias
 
