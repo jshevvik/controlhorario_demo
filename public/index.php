@@ -3,15 +3,33 @@ require_once __DIR__ . '/../includes/init.php';
 
 // Determinar la página solicitada
 $page = $_GET['page'] ?? 'dashboard';
-$page = basename($page);
+// NO usar basename() aquí - queremos preservar las rutas como 'admin/empleados'
+// Solo sanitizar para evitar ataques de path traversal
+$page = str_replace('..', '', $page);
+$page = trim($page, '/');
 
 // Lista blanca de páginas permitidas
 $allowed = [
     'dashboard','fichajes','solicitudes','permisos','bajas','horas-extras',
     'ausencias','informes','geolocalizacion','administracion','miperfil',
-    'admin/crear-empleado','editar-perfil','admin/empleados','login', 'logout',
-    'admin/editar-empleado', 'admin/ver-empleado', 'admin/editar-horario',
-    'admin/ver-solicitudes','admin/configuracion','admin/seguridad','admin/contenido'
+    'editar-perfil','login','logout',
+    // Admin pages
+    'admin/crear-empleado',
+    'admin/empleados',
+    'admin/editar-empleado',
+    'admin/ver-empleado',
+    'admin/editar-horario',
+    'admin/ver-solicitudes',
+    'admin/configuracion',
+    'admin/seguridad',
+    'admin/contenido',
+    'admin/borrar-empleado',
+    'admin/detalle-fichajes',
+    'admin/generar-pdf',
+    'admin/gestor-archivos',
+    'admin/mantenimiento',
+    'admin/notificaciones',
+    'admin/ver-notificaciones'
 ];
 
 // Si la página no está permitida → 404
