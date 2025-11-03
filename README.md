@@ -1,4 +1,4 @@
-# ⏱️ Control de Horario - Sistema de Gestión Laboral# ⏱️ Control de Horario - Sistema de Gestión Laboral# Control de Horario (Demo)
+# ⏱️ Control de Horario - Sistema de Gestión Laboral# Control de Horario (Demo)
 
 
 
