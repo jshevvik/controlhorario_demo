@@ -1,6 +1,11 @@
 <?php
-if (!empty($emp['avatar'])) {
-    $avatarPath = appendCacheBuster($config['UPLOADS_URL'] . $emp['avatar']);
+$avatar = !empty($emp['avatar']) ? $emp['avatar'] : null;
+
+if ($avatar) {
+    $avatarFisica = rtrim($config['UPLOADS_DIR'], '/') . '/' . ltrim($avatar, '/');
+    $avatarWeb    = rtrim($config['UPLOADS_URL'], '/') . '/' . ltrim($avatar, '/');
+    $avatarExiste = file_exists($avatarFisica);
+    $avatarPath   = $avatarExiste ? appendCacheBuster($avatarWeb) : $config['ASSET_URL'] . "img/avatar-default.jpg";
 } else {
     $avatarPath = $config['ASSET_URL'] . "img/avatar-default.jpg";
 }

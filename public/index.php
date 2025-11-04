@@ -57,15 +57,21 @@ if (empty($_SESSION['empleado_id'])) {
 }
 
 // Avatar para UI (sidebar/navbar)
-$avatar = $emp['avatar'] ?? null;
-$avatarFisica = $config['UPLOADS_DIR'] . $avatar;
-$avatarWeb    = $config['UPLOADS_URL'] . $avatar;
+$avatar = !empty($emp['avatar']) ? $emp['avatar'] : null;
 
-$sidebarAvatar = (!empty($avatar) && file_exists($avatarFisica))
+if ($avatar) {
+    $avatarFisica = rtrim($config['UPLOADS_DIR'], '/') . '/' . ltrim($avatar, '/');
+    $avatarWeb    = rtrim($config['UPLOADS_URL'], '/') . '/' . ltrim($avatar, '/');
+    $avatarExiste = file_exists($avatarFisica);
+} else {
+    $avatarExiste = false;
+}
+
+$sidebarAvatar = $avatarExiste
     ? appendCacheBuster($avatarWeb)
     : $config['ASSET_URL'] . 'img/avatar-default.jpg';
 
-$fotoPerfil = (!empty($avatar) && file_exists($avatarFisica))
+$fotoPerfil = $avatarExiste
     ? appendCacheBuster($avatarWeb)
     : 'https://ui-avatars.com/api/?name='
         . urlencode($emp['nombre'].' '.$emp['apellidos'])
