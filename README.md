@@ -2,11 +2,14 @@
 
 [![PHP](https://img.shields.io/badge/PHP-8.2-777BB4?logo=php&logoColor=white)](https://www.php.net/)
 [![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)
+[![Railway](https://img.shields.io/badge/Railway-Database-0B0D0E?logo=railway&logoColor=white)](https://railway.app/)
+[![Render](https://img.shields.io/badge/Render-Deploy-46E3B7?logo=render&logoColor=white)](https://render.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 Aplicación para **gestión de horarios laborales**, fichaje con **geolocalización**, **solicitudes** (vacaciones/permiso/baja), **informes** en PDF y **panel administrativo**.
 
-**Demo:** https://controlhorario-demo.onrender.com
+**🌐 Demo en vivo:** https://controlhorario-demo.onrender.com  
+**💾 Base de datos:** MySQL 8.0+ en Railway
 
 ---
 
@@ -41,11 +44,12 @@ Aplicación para **gestión de horarios laborales**, fichaje con **geolocalizaci
 | Componente | Tecnología |
 |-----------|------------|
 | Backend | PHP 8.2 + Apache |
-| Base de datos | MySQL 8.0+ |
+| Base de datos | MySQL 8.0+ (Railway) |
 | Frontend | HTML5, Bootstrap 5, JS |
 | Mapas | Leaflet 1.9.4 |
 | PDF | mPDF 8.2 |
-| Deploy | Docker + Render |
+| Deploy App | Docker + Render |
+| Deploy DB | Railway |
 | Dependencias | Composer |
 
 ---
@@ -99,22 +103,44 @@ Abrir: http://localhost:8000
 
 ## 🌐 Despliegue en Render
 
+### Base de Datos en Railway
+
+1. Crea cuenta en https://railway.app
+2. **New Project** → **Provision MySQL**
+3. Obtén las credenciales en **Variables**:
+   - `MYSQLHOST`
+   - `MYSQLPORT` (normalmente 3306)
+   - `MYSQLDATABASE`
+   - `MYSQLUSER`
+   - `MYSQLPASSWORD`
+
+4. Importa el esquema de base de datos:
+```bash
+mysql -h MYSQLHOST -P MYSQLPORT -u MYSQLUSER -p MYSQLDATABASE < bin/crear-configuracion.sql
+```
+
+### Aplicación en Render
+
 1. Conecta el repo en https://render.com  
 2. Render detecta el **Dockerfile** automáticamente  
-3. Configura variables de entorno:
+3. Configura variables de entorno con las credenciales de Railway:
 
 ```env
-DB_HOST=tu-host
-DB_NAME=control_horario
-DB_USER=tu_usuario
-DB_PASS=tu_contraseña
+DB_HOST=tu-host-railway.railway.app
+DB_NAME=railway
+DB_USER=root
+DB_PASS=tu_contraseña_railway
 DB_PORT=3306
 BASE_URL=https://tu-app.onrender.com/
 UPLOADS_DIR=/var/www/html/public/uploads/usuarios/
 APP_ENV=production
 ```
 
-> **Nota:** La BD en producción puede ser gestionada (p. ej., Railway).
+4. Ejecuta scripts de configuración inicial:
+```bash
+php bin/configurar-sistema.php
+php bin/configurar-geolocalizacion.php
+```
 
 ---
 
@@ -137,6 +163,8 @@ APP_ENV=production
 ---
 
 ## 🛠️ Desarrollo
+
+### Funciones principales
 ```php
 require_once __DIR__ . '/../includes/init.php';
 requireLogin();
@@ -145,6 +173,27 @@ getEmpleado();
 obtenerGeoConfigEmpleado($id);
 registrarLogin($usuario, $id, true);
 getNotificaciones($id);
+```
+
+### Respaldo de Base de Datos (Railway)
+```bash
+# Exportar base de datos
+mysqldump -h MYSQLHOST -P MYSQLPORT -u MYSQLUSER -p MYSQLDATABASE > backup.sql
+
+# Importar base de datos
+mysql -h MYSQLHOST -P MYSQLPORT -u MYSQLUSER -p MYSQLDATABASE < backup.sql
+```
+
+### Scripts de mantenimiento
+```bash
+# Actualizar festivos
+php bin/update-holidays.php
+
+# Configurar geolocalización
+php bin/configurar-geolocalizacion.php
+
+# Configurar sistema
+php bin/configurar-sistema.php
 ```
 
 ---
@@ -157,7 +206,10 @@ a2enmod rewrite && systemctl reload apache2
 ```
 
 **Conexión BD**
-Verifica variables de entorno o config.php
+- Verifica variables de entorno en Render
+- Confirma que Railway DB esté activo
+- Verifica que el IP de Render esté permitido en Railway
+- Prueba conexión: `php -r "new PDO('mysql:host=HOST;port=3306;dbname=DB', 'USER', 'PASS');"`
 
 **Permisos uploads**
 ```bash
@@ -169,6 +221,11 @@ chown -R www-data:www-data public/uploads
 ```bash
 php bin/configurar-geolocalizacion.php
 ```
+
+**Railway Database timeout**
+- Railway puede suspender la BD por inactividad (plan gratuito)
+- Solución: Acceder a Railway Dashboard para despertar la BD
+- Considera plan de pago para BD siempre activa
 
 ---
 
