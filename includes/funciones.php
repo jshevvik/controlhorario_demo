@@ -801,15 +801,16 @@ function obtenerAvatarEmpleado($empleado, $config) {
         $avatarFisica = rtrim($config['UPLOADS_DIR'], '/\\') . '/' . ltrim($empleado['avatar'], '/\\');
         $avatarWeb    = rtrim($config['UPLOADS_URL'], '/\\') . '/' . ltrim($empleado['avatar'], '/\\');
         
-        if (file_exists($avatarFisica)) {
-            return $avatarWeb . '?v=' . filemtime($avatarFisica);
+        // Verificar si el archivo existe
+        if (@file_exists($avatarFisica)) {
+            return $avatarWeb . '?v=' . time();
         }
     }
     
     // Fallback a Gravatar
-    $email = strtolower(trim($empleado['email'] ?? ''));
+    $email = !empty($empleado['email']) ? strtolower(trim($empleado['email'])) : 'user@example.com';
     $hash = md5($email);
-    return "https://www.gravatar.com/avatar/{$hash}?s=40&d=identicon";
+    return "https://www.gravatar.com/avatar/{$hash}?s=80&d=identicon&r=pg";
 }
 
 // Genera la URL de paginación manteniendo los filtros
@@ -1051,8 +1052,8 @@ function obtenerAvatarURL($empleado, $config) {
         $avatarFisica = rtrim($config['UPLOADS_DIR'], '/\\') . '/' . ltrim($empleado['avatar'], '/\\');
         $avatarWeb    = rtrim($config['UPLOADS_URL'], '/\\') . '/' . ltrim($empleado['avatar'], '/\\');
         
-        if (file_exists($avatarFisica)) {
-            return $avatarWeb . '?v=' . filemtime($avatarFisica);
+        if (@file_exists($avatarFisica)) {
+            return $avatarWeb . '?v=' . time();
         }
     }
     

@@ -62,17 +62,17 @@ $avatar = !empty($emp['avatar']) ? $emp['avatar'] : null;
 if ($avatar) {
     $avatarFisica = rtrim($config['UPLOADS_DIR'], '/') . '/' . ltrim($avatar, '/');
     $avatarWeb    = rtrim($config['UPLOADS_URL'], '/') . '/' . ltrim($avatar, '/');
-    $avatarExiste = file_exists($avatarFisica);
+    $avatarExiste = @file_exists($avatarFisica);
 } else {
     $avatarExiste = false;
 }
 
 $sidebarAvatar = $avatarExiste
-    ? appendCacheBuster($avatarWeb)
+    ? $avatarWeb . '?v=' . time()
     : $config['ASSET_URL'] . 'img/avatar-default.jpg';
 
 $fotoPerfil = $avatarExiste
-    ? appendCacheBuster($avatarWeb)
+    ? $avatarWeb . '?v=' . time()
     : 'https://ui-avatars.com/api/?name='
         . urlencode($emp['nombre'].' '.$emp['apellidos'])
         . '&background=0D8ABC&color=fff&size=80';

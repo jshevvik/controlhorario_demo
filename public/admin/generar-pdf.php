@@ -281,14 +281,33 @@ $filename   = sprintf('%s_%s_%s.pdf',
 
 // Generar y forzar descarga del PDF con mPDF
 try {
+    // Configurar directorio temporal
+    $tempDir = sys_get_temp_dir();
+    if (!is_writable($tempDir)) {
+        $tempDir = __DIR__ . '/../../tmp';
+        if (!is_dir($tempDir)) {
+            mkdir($tempDir, 0755, true);
+        }
+    }
+    
     $mpdf = new \Mpdf\Mpdf([
-        'tempDir' => sys_get_temp_dir(),
+        'tempDir' => $tempDir,
         'mode' => 'utf-8',
-        'format' => 'A4'
+        'format' => 'A4',
+        'margin_left' => 15,
+        'margin_right' => 15,
+        'margin_top' => 16,
+        'margin_bottom' => 16,
+        'margin_header' => 9,
+        'margin_footer' => 9
     ]);
+    
     $mpdf->WriteHTML($html);
     $mpdf->Output($filename, 'D');
+    exit;
 } catch (Exception $e) {
     error_log('Error al generar PDF: ' . $e->getMessage());
-    die('Error al generar el PDF: ' . htmlspecialchars($e->getMessage()));
+    error_log('Trace: ' . $e->getTraceAsString());
+    http_response_code(500);
+    die('<h1>Error al generar el PDF</h1><p>' . htmlspecialchars($e->getMessage()) . '</p>');
 }
