@@ -255,7 +255,8 @@ try {
                 </div>
             </div>
 
-            <!-- Gestión de Páginas -->
+            <!-- Gestión de Páginas (solo admin) -->
+            <?php if (isAdmin()): ?>
             <div class="card mb-4">
                 <div class="card-header bg-success text-white">
                     <h5 class="mb-0">
@@ -289,6 +290,7 @@ try {
                     </div>
                 </div>
             </div>
+            <?php endif; ?>
         </div>
 
         <!-- Panel lateral de información -->

@@ -1,7 +1,6 @@
 <?php
-
-requireAdmin();
-
+// Administradores y supervisores pueden editar empleados
+requireAdminOrSupervisor();
 
 $empId = intval($_GET['id'] ?? 0);
 if (!$empId) {

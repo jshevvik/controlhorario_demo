@@ -174,12 +174,14 @@ try {
                 </div>
             </div>
 
-            <!-- Botón de acción -->
+            <!-- Botón de acción (solo admin) -->
+            <?php if (canManageEmployees()): ?>
             <div class="d-flex justify-content-end mb-3">
                 <a href="<?= $config['ruta_absoluta'] ?>admin/crear-empleado" class="btn btn-primary">
                     <i class="ti ti-plus me-1"></i>Nuevo empleado
                 </a>
             </div>
+            <?php endif; ?>
 
             <!-- Filtros -->
             <div class="card mb-4">

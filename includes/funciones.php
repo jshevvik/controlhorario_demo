@@ -53,6 +53,11 @@ function isAdminOrSupervisor() {
     return $emp && in_array($emp['rol'], ['admin', 'supervisor']);
 }
 
+// True si el usuario puede crear/eliminar empleados (solo admin)
+function canManageEmployees() {
+    return isAdmin();
+}
+
 // Protege una ruta para sólo administradores 
 function requireAdmin() {
     if (!isAdmin()) {

@@ -1,5 +1,9 @@
 <?php
-
+// Solo administradores pueden crear empleados
+if (!canManageEmployees()) {
+    header('Location: ' . $config['ruta_absoluta'] . 'admin/empleados');
+    exit;
+}
 ?>
 
 <div class="mb-3 overflow-hidden position-relative">
