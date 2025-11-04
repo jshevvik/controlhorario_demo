@@ -8,7 +8,12 @@ require_once __DIR__ . '/../../includes/init.php';
 
 $userId = $_SESSION['empleado_id'] ?? null;
 $tipo = $_POST['tipo'] ?? '';
-$carpetaDestino = $config['UPLOADS_DIR'];
+$carpetaDestino = rtrim($config['UPLOADS_DIR'], '/\\') . '/';
+
+// Crear carpeta si no existe
+if (!is_dir($carpetaDestino)) {
+    mkdir($carpetaDestino, 0755, true);
+}
 
 
 

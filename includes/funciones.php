@@ -793,12 +793,18 @@ function toSQLDate($str) {
 // Devuelve la URL del avatar de un empleado
 function obtenerAvatarEmpleado($empleado, $config) {
     if (!empty($empleado['avatar'])) {
-        return $config['ruta_absoluta'] . 'uploads/usuarios/' . $empleado['avatar'];
-    } else {
-        $email = strtolower(trim($empleado['email']));
-        $hash = md5($email);
-        return "https://www.gravatar.com/avatar/{$hash}?s=40&d=identicon";
+        $avatarFisica = rtrim($config['UPLOADS_DIR'], '/\\') . '/' . ltrim($empleado['avatar'], '/\\');
+        $avatarWeb    = rtrim($config['UPLOADS_URL'], '/\\') . '/' . ltrim($empleado['avatar'], '/\\');
+        
+        if (file_exists($avatarFisica)) {
+            return $avatarWeb . '?v=' . filemtime($avatarFisica);
+        }
     }
+    
+    // Fallback a Gravatar
+    $email = strtolower(trim($empleado['email'] ?? ''));
+    $hash = md5($email);
+    return "https://www.gravatar.com/avatar/{$hash}?s=40&d=identicon";
 }
 
 // Genera la URL de paginación manteniendo los filtros
@@ -1036,9 +1042,16 @@ function getFichajesTabla($pdo, $empleadoId, $fechaDesde = null, $fechaHasta = n
  * @return string URL del avatar
  */
 function obtenerAvatarURL($empleado, $config) {
-    return !empty($empleado['avatar'])
-        ? $config['UPLOADS_URL'] . $empleado['avatar']
-        : $config['ASSET_URL'] . 'img/avatar-default.jpg';
+    if (!empty($empleado['avatar'])) {
+        $avatarFisica = rtrim($config['UPLOADS_DIR'], '/\\') . '/' . ltrim($empleado['avatar'], '/\\');
+        $avatarWeb    = rtrim($config['UPLOADS_URL'], '/\\') . '/' . ltrim($empleado['avatar'], '/\\');
+        
+        if (file_exists($avatarFisica)) {
+            return $avatarWeb . '?v=' . filemtime($avatarFisica);
+        }
+    }
+    
+    return $config['ASSET_URL'] . 'img/avatar-default.jpg';
 }
 
 // ========================================

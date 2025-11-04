@@ -1,9 +1,17 @@
 <?php
+// Habilitar reporte de errores para debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 require_once __DIR__ . '/../../includes/init.php';
 require_once __DIR__ . '/../../vendor/autoload.php';
 
 // Obtener y sanear ID del empleado
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+if ($id <= 0) {
+    die('Error: ID de empleado inválido.');
+}
 
 // Filtros de fecha
 $whereFecha = '';
@@ -25,6 +33,10 @@ $stmtEmp = $pdo->prepare("
 ");
 $stmtEmp->execute([ $id ]);
 $empleado = $stmtEmp->fetch(PDO::FETCH_ASSOC);
+
+if (!$empleado) {
+    die('Error: Empleado no encontrado.');
+}
 
 
 // Consultar los fichajes del empleado en el periodo seleccionado
@@ -187,6 +199,9 @@ if (!empty($_GET['desde']) && !empty($_GET['hasta'])) {
 }
 
 // Generar HTML para mPDF
+$logoPath = __DIR__ . '/../assets/img/logo.png';
+$logoUrl = file_exists($logoPath) ? $config['ASSET_URL'] . 'img/logo.png' : '';
+
 $html = '
 <style>
   table { border-collapse: collapse; width: 100%; font-size: 12px; }
@@ -196,20 +211,22 @@ $html = '
   .ficha { margin-bottom: 16px; }
   .ficha p { margin: 2px 0; }
   .logo { text-align: center; margin-bottom: 12px; }
-</style>
+</style>';
 
+if ($logoUrl) {
+    $html .= '
 <div class="logo">
-  <img src="' . $config['ASSET_URL'] . 'img/logo.png" style="height:50px;">
+  <img src="' . htmlspecialchars($logoUrl) . '" style="height:50px;">
+</div>';
+}
 
-</div>
-
+$html .= '
 <div class="ficha">
   <h2>Fichajes de trabajador</h2>
   <p><strong>Nombre:</strong> ' . htmlspecialchars($empleado['nombre']) . '</p>
   <p><strong>Apellidos:</strong> ' . htmlspecialchars($empleado['apellidos']) . '</p>
   <p><strong>Email:</strong> ' . htmlspecialchars($empleado['email']) . '</p>
   <h3>' . htmlspecialchars($periodo) . '</h3>
-
 </div>
 
 <table>
@@ -263,6 +280,15 @@ $filename   = sprintf('%s_%s_%s.pdf',
 );
 
 // Generar y forzar descarga del PDF con mPDF
-$mpdf = new \Mpdf\Mpdf();
-$mpdf->WriteHTML($html);
-$mpdf->Output($filename, 'D');
+try {
+    $mpdf = new \Mpdf\Mpdf([
+        'tempDir' => sys_get_temp_dir(),
+        'mode' => 'utf-8',
+        'format' => 'A4'
+    ]);
+    $mpdf->WriteHTML($html);
+    $mpdf->Output($filename, 'D');
+} catch (Exception $e) {
+    error_log('Error al generar PDF: ' . $e->getMessage());
+    die('Error al generar el PDF: ' . htmlspecialchars($e->getMessage()));
+}
