@@ -9,13 +9,6 @@ if (!$empleado) {
     exit;
 }
 
-// Verificar permisos: supervisor no puede ver/editar admin
-$usuarioActual = getEmpleado();
-if (isSupervisor() && $empleado['rol'] === 'admin') {
-    header('Location: ' . $config['ruta_absoluta'] . 'admin/empleados?error=sin_permisos');
-    exit;
-}
-
 // Obtener avatar URL
 $avatarURL = obtenerAvatarURL($empleado, $config);
 
