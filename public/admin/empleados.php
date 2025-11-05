@@ -334,10 +334,12 @@ try {
                                                        class="btn btn-sm btn-info" title="Ver detalles">
                                                         <i class="ti ti-eye"></i>
                                                     </a>
+                                                    <?php if (isAdmin() || (isSupervisor() && $emp['rol'] !== 'admin')): ?>
                                                     <a href="<?= $config['ruta_absoluta'] ?>admin/editar-empleado?id=<?= $emp['id'] ?>"
                                                        class="btn btn-sm btn-warning" title="Editar">
                                                         <i class="ti ti-edit"></i>
                                                     </a>
+                                                    <?php endif; ?>
                                                     <?php if (isAdmin()): ?>
                                                     <a href="<?= $config['ruta_absoluta'] ?>admin/borrar-empleado.php?id=<?= $emp['id'] ?>"
                                                        class="btn btn-sm btn-danger" title="Eliminar"
@@ -453,10 +455,12 @@ try {
                                                        class="btn btn-info btn-sm" title="Ver detalles">
                                                         <i class="ti ti-eye"></i>
                                                     </a>
+                                                    <?php if (isAdmin() || (isSupervisor() && $emp['rol'] !== 'admin')): ?>
                                                     <a href="<?= $config['ruta_absoluta'] ?>admin/editar-empleado?id=<?= $emp['id'] ?>"
                                                        class="btn btn-warning btn-sm" title="Editar">
                                                         <i class="ti ti-edit"></i>
                                                     </a>
+                                                    <?php endif; ?>
                                                     <?php if (isAdmin()): ?>
                                                     <a href="<?= $config['ruta_absoluta'] ?>admin/borrar-empleado.php?id=<?= $emp['id'] ?>"
                                                        class="btn btn-danger btn-sm" title="Eliminar"
@@ -488,6 +492,21 @@ try {
         </div>
         <div class="toast-body">
             Empleado eliminado correctamente.
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+
+<?php if (isset($_GET['error']) && $_GET['error'] === 'sin_permisos'): ?>
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 1100;">
+    <div class="toast show" role="alert">
+        <div class="toast-header bg-danger text-white">
+            <i class="ti ti-alert-circle me-2"></i>
+            <strong class="me-auto">Error</strong>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
+        </div>
+        <div class="toast-body">
+            No tienes permisos para editar o eliminar administradores.
         </div>
     </div>
 </div>

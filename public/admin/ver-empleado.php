@@ -9,6 +9,13 @@ if (!$empleado) {
     exit;
 }
 
+// Verificar permisos: supervisor no puede ver/editar admin
+$usuarioActual = getEmpleado();
+if (isSupervisor() && $empleado['rol'] === 'admin') {
+    header('Location: ' . $config['ruta_absoluta'] . 'admin/empleados?error=sin_permisos');
+    exit;
+}
+
 // Obtener avatar URL
 $avatarURL = obtenerAvatarURL($empleado, $config);
 
@@ -54,17 +61,27 @@ $fullName = $empleado['nombre'].' '.$empleado['apellidos'];
         <span class="rol-chip mb-2"><?= htmlspecialchars($empleado['rol']) ?></span>        
         <div class="mb-3 mb-md-4 text-muted small"><?= htmlspecialchars($empleado['email']) ?></div>
         <div class="d-flex flex-column flex-sm-row justify-content-center gap-2">
+          <?php
+          // Supervisor no puede editar/eliminar admin
+          $puedeEditar = isAdmin() || (isSupervisor() && $empleado['rol'] !== 'admin');
+          $puedeEliminar = canManageEmployees();
+          ?>
+          
+          <?php if ($puedeEditar): ?>
           <a href="<?= $config['ruta_absoluta'] ?>admin/editar-empleado?id=<?= $empleado['id'] ?>" class="btn btn-primary btn-sm">
             <i class="bi bi-pencil"></i> Editar
           </a>
+          <?php endif; ?>
+          
+          <?php if ($puedeEliminar): ?>
           <a
             href="<?= $config['ruta_absoluta'] ?>admin/borrar-empleado.php?id=<?= $empleado['id'] ?>"
             class="btn btn-danger btn-sm"
             onclick='return confirm(<?= json_encode("¿Seguro que deseas eliminar a $fullName?") ?>);'
             >
             <i class="bi bi-trash"></i> Eliminar
-        </a>
-
+          </a>
+          <?php endif; ?>
         </div>
         <hr class="my-3 my-md-4">
         <div class="text-start small text-muted px-2">

@@ -15,6 +15,12 @@ if (!$emp) {
     exit;
 }
 
+// Supervisor no puede editar admin
+if (isSupervisor() && $emp['rol'] === 'admin') {
+    header('Location: ' . $config['ruta_absoluta'] . 'admin/empleados?error=sin_permisos');
+    exit;
+}
+
 
 $dias_semana = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sabado','Domingo'];
 
@@ -141,11 +147,16 @@ foreach ($horariosData as $row) {
 
             <div class="mb-4">
               <label for="rol" class="form-label">Rol</label>
-              <select id="rol" name="rol" class="form-select" required>
+              <select id="rol" name="rol" class="form-select" required <?= isSupervisor() ? 'data-original-role="'.$emp['rol'].'"' : '' ?>>
                 <option value="empleado"   <?= $emp['rol']==='empleado'   ?'selected':'' ?>>Empleado</option>
                 <option value="supervisor" <?= $emp['rol']==='supervisor'?'selected':'' ?>>Supervisor</option>
+                <?php if (isAdmin()): ?>
                 <option value="admin"      <?= $emp['rol']==='admin'      ?'selected':'' ?>>Administrador</option>
+                <?php endif; ?>
               </select>
+              <?php if (isSupervisor()): ?>
+              <small class="text-muted">Solo los administradores pueden asignar el rol de administrador.</small>
+              <?php endif; ?>
             </div>
 
 

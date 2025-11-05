@@ -26,6 +26,19 @@ if (!$id || !$nombre || !$apellidos || !$usuario || !$email) {
     exit;
 }
 
+// Obtener datos actuales del empleado
+$stmt = $pdo->prepare("SELECT rol FROM empleados WHERE id = ?");
+$stmt->execute([$id]);
+$empleadoActual = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// Supervisor no puede editar admin ni asignar rol admin
+if (isSupervisor()) {
+    if ($empleadoActual['rol'] === 'admin' || $rol === 'admin') {
+        header('Location: ' . $config['ruta_absoluta'] . 'admin/empleados?error=sin_permisos');
+        exit;
+    }
+}
+
 // Actualizar datos básicos
 $params = [$nombre, $apellidos, $usuario, $email, $rol, $id];
 
