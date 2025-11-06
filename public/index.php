@@ -29,7 +29,10 @@ $allowed = [
     'admin/gestor-archivos',
     'admin/mantenimiento',
     'admin/notificaciones',
-    'admin/ver-notificaciones'
+    'admin/ver-notificaciones',
+    'admin/editar-permisos',
+    'admin/historial-solicitud'
+
 ];
 
 // Si la página no está permitida → 404
