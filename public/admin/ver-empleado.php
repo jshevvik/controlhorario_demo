@@ -66,6 +66,12 @@ $fullName = $empleado['nombre'].' '.$empleado['apellidos'];
           </a>
           <?php endif; ?>
           
+          <?php if (isAdmin()): ?>
+          <a href="<?= $config['ruta_absoluta'] ?>admin/editar-permisos?id=<?= $empleado['id'] ?>" class="btn btn-warning btn-sm">
+            <i class="bi bi-shield-lock"></i> Permisos
+          </a>
+          <?php endif; ?>
+          
           <?php if ($puedeEliminar): ?>
           <a
             href="<?= $config['ruta_absoluta'] ?>admin/borrar-empleado.php?id=<?= $empleado['id'] ?>"

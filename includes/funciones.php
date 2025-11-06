@@ -117,6 +117,121 @@ function requireAdminOrSupervisor() {
     }
 }
 
+// ========================================
+// FUNCIONES DE PERMISOS GRANULARES
+// ========================================
+
+/**
+ * Obtiene los permisos de un empleado
+ * @param int $empleadoId ID del empleado
+ * @return array|null Permisos del empleado
+ */
+function getPermisosEmpleado($empleadoId = null) {
+    global $pdo;
+    
+    if ($empleadoId === null) {
+        $empleadoId = $_SESSION['empleado_id'] ?? 0;
+    }
+    
+    if (!$empleadoId) {
+        return null;
+    }
+    
+    try {
+        $stmt = $pdo->prepare("SELECT * FROM permisos_empleados WHERE empleado_id = ?");
+        $stmt->execute([$empleadoId]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        error_log("Error al obtener permisos: " . $e->getMessage());
+        return null;
+    }
+}
+
+/**
+ * Verifica si el empleado tiene un permiso específico
+ * @param string $permiso Nombre del permiso
+ * @param int|null $empleadoId ID del empleado (null = usuario actual)
+ * @return bool
+ */
+function tienePermiso($permiso, $empleadoId = null) {
+    // Admin siempre tiene todos los permisos
+    if (isAdmin()) {
+        return true;
+    }
+    
+    $permisos = getPermisosEmpleado($empleadoId);
+    
+    if (!$permisos) {
+        return false;
+    }
+    
+    return !empty($permisos[$permiso]);
+}
+
+/**
+ * Registra un cambio en una solicitud
+ * @param int $solicitudId
+ * @param string $accion
+ * @param string|null $campo
+ * @param string|null $valorAnterior
+ * @param string|null $valorNuevo
+ * @param string|null $comentario
+ */
+function registrarCambioSolicitud($solicitudId, $accion, $campo = null, $valorAnterior = null, $valorNuevo = null, $comentario = null) {
+    global $pdo;
+    
+    $empleadoId = $_SESSION['empleado_id'] ?? null;
+    $ipAddress = $_SERVER['REMOTE_ADDR'] ?? '';
+    
+    try {
+        $stmt = $pdo->prepare("
+            INSERT INTO solicitudes_historial 
+            (solicitud_id, empleado_id, accion, campo_modificado, valor_anterior, valor_nuevo, comentario, ip_address) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        ");
+        $stmt->execute([
+            $solicitudId,
+            $empleadoId,
+            $accion,
+            $campo,
+            $valorAnterior,
+            $valorNuevo,
+            $comentario,
+            $ipAddress
+        ]);
+    } catch (PDOException $e) {
+        error_log("Error al registrar cambio en solicitud: " . $e->getMessage());
+    }
+}
+
+/**
+ * Obtiene el historial de cambios de una solicitud
+ * @param int $solicitudId
+ * @return array
+ */
+function getHistorialSolicitud($solicitudId) {
+    global $pdo;
+    
+    try {
+        $stmt = $pdo->prepare("
+            SELECT 
+                h.*,
+                e.nombre,
+                e.apellidos,
+                e.rol
+            FROM solicitudes_historial h
+            LEFT JOIN empleados e ON h.empleado_id = e.id
+            WHERE h.solicitud_id = ?
+            ORDER BY h.fecha DESC
+        ");
+        $stmt->execute([$solicitudId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        error_log("Error al obtener historial de solicitud: " . $e->getMessage());
+        return [];
+    }
+}
+
 /**
  * Devuelve la fecha y hora actual en formato:
  * 9 junio 2025 — 09:20
