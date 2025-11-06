@@ -332,6 +332,13 @@ try {
             </button>
         </li>
         <li class="nav-item" role="presentation">
+            <button class="nav-link" id="permisos-tab" data-bs-toggle="tab" data-bs-target="#permisos" type="button" role="tab">
+                <i class="bi bi-shield-lock me-1 me-md-2"></i>
+                <span class="d-none d-sm-inline">Permisos</span>
+                <span class="d-sm-none">P</span>
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
             <button class="nav-link" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" type="button" role="tab">
                 <i class="bi bi-gear me-1 me-md-2"></i>
                 <span class="d-none d-sm-inline">General</span>
@@ -691,6 +698,147 @@ try {
             </div>
         </div>
         
+        <!-- Tab Permisos -->
+        <div class="tab-pane fade" id="permisos" role="tabpanel">
+            <div class="row g-4">
+                <div class="col-12">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">
+                                <i class="bi bi-shield-lock me-2"></i>
+                                Gestión de Permisos por Empleado
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="alert alert-info">
+                                <i class="bi bi-info-circle me-2"></i>
+                                Configura los permisos específicos para cada empleado o supervisor. Los administradores tienen todos los permisos por defecto.
+                            </div>
+
+                            <?php
+                            // Obtener todos los empleados con sus permisos
+                            $sql = "SELECT e.id, e.nombre, e.apellidos, e.email, e.rol,
+                                    p.puede_ver_dashboard, p.puede_fichaje, p.puede_crear_solicitudes,
+                                    p.puede_ver_informes, p.puede_aprobar_solicitudes, p.puede_rechazar_solicitudes,
+                                    p.puede_editar_solicitudes, p.puede_gestionar_empleados, p.puede_ver_empleados,
+                                    p.puede_editar_horarios, p.puede_crear_contenido, p.puede_ver_fichajes_otros
+                                    FROM empleados e
+                                    LEFT JOIN permisos_empleados p ON e.id = p.empleado_id
+                                    ORDER BY 
+                                        CASE e.rol 
+                                            WHEN 'admin' THEN 1
+                                            WHEN 'supervisor' THEN 2
+                                            ELSE 3
+                                        END,
+                                        e.nombre";
+                            
+                            $empleadosPermisos = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+                            ?>
+
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Empleado</th>
+                                            <th>Rol</th>
+                                            <th class="text-center">Estado</th>
+                                            <th class="text-center">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($empleadosPermisos as $emp): ?>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="avatar-circle me-2" style="width: 35px; height: 35px; background: <?= $emp['rol'] === 'admin' ? '#dc3545' : ($emp['rol'] === 'supervisor' ? '#0d6efd' : '#6c757d') ?>;">
+                                                        <i class="bi bi-person text-white"></i>
+                                                    </div>
+                                                    <div>
+                                                        <strong><?= htmlspecialchars($emp['nombre'] . ' ' . $emp['apellidos']) ?></strong>
+                                                        <br>
+                                                        <small class="text-muted"><?= htmlspecialchars($emp['email']) ?></small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                $badgeClass = $emp['rol'] === 'admin' ? 'danger' : ($emp['rol'] === 'supervisor' ? 'primary' : 'secondary');
+                                                $rolNombre = ucfirst($emp['rol']);
+                                                ?>
+                                                <span class="badge bg-<?= $badgeClass ?>">
+                                                    <i class="bi bi-<?= $emp['rol'] === 'admin' ? 'shield-fill-check' : ($emp['rol'] === 'supervisor' ? 'person-badge' : 'person') ?> me-1"></i>
+                                                    <?= $rolNombre ?>
+                                                </span>
+                                            </td>
+                                            <td class="text-center">
+                                                <?php if ($emp['rol'] === 'admin'): ?>
+                                                    <span class="badge bg-success">
+                                                        <i class="bi bi-check-circle-fill me-1"></i>
+                                                        Todos los permisos
+                                                    </span>
+                                                <?php elseif (isset($emp['puede_ver_dashboard'])): ?>
+                                                    <?php
+                                                    $permisos_activos = array_filter([
+                                                        $emp['puede_aprobar_solicitudes'],
+                                                        $emp['puede_rechazar_solicitudes'],
+                                                        $emp['puede_editar_solicitudes'],
+                                                        $emp['puede_gestionar_empleados'],
+                                                        $emp['puede_crear_contenido'],
+                                                        $emp['puede_ver_fichajes_otros']
+                                                    ]);
+                                                    $total_permisos = count($permisos_activos);
+                                                    ?>
+                                                    <span class="badge bg-<?= $total_permisos > 0 ? 'info' : 'warning' ?>">
+                                                        <i class="bi bi-<?= $total_permisos > 0 ? 'shield-check' : 'shield-exclamation' ?> me-1"></i>
+                                                        <?= $total_permisos ?> permisos especiales
+                                                    </span>
+                                                <?php else: ?>
+                                                    <span class="badge bg-warning">
+                                                        <i class="bi bi-exclamation-triangle me-1"></i>
+                                                        Sin configurar
+                                                    </span>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td class="text-center">
+                                                <?php if ($emp['rol'] !== 'admin'): ?>
+                                                    <a href="editar-permisos.php?id=<?= $emp['id'] ?>" 
+                                                       class="btn btn-sm btn-primary"
+                                                       title="Configurar permisos">
+                                                        <i class="bi bi-gear-fill me-1"></i>
+                                                        Configurar
+                                                    </a>
+                                                <?php else: ?>
+                                                    <button class="btn btn-sm btn-secondary" disabled title="Los administradores tienen todos los permisos por defecto">
+                                                        <i class="bi bi-lock-fill me-1"></i>
+                                                        Bloqueado
+                                                    </button>
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="alert alert-secondary mt-4">
+                                <h6 class="alert-heading">
+                                    <i class="bi bi-lightbulb me-2"></i>
+                                    Sobre los permisos
+                                </h6>
+                                <hr>
+                                <ul class="mb-0">
+                                    <li><strong>Administradores:</strong> Tienen todos los permisos automáticamente y no pueden ser modificados.</li>
+                                    <li><strong>Supervisores:</strong> Por defecto tienen permisos de aprobación y gestión. Puedes personalizarlos.</li>
+                                    <li><strong>Empleados:</strong> Solo tienen acceso básico. Puedes otorgarles permisos adicionales según sea necesario.</li>
+                                    <li><strong>Historial de cambios:</strong> Todos los cambios en solicitudes quedan registrados con el usuario que los realizó.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <!-- Tab General -->
         <div class="tab-pane fade" id="general" role="tabpanel">
             <div class="row g-4">
@@ -932,6 +1080,27 @@ try {
         </div>
     </div>
 </div>
+
+<style>
+.avatar-circle {
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.nav-tabs-responsive .nav-link {
+    padding: 0.5rem 1rem;
+}
+
+@media (max-width: 576px) {
+    .nav-tabs-responsive .nav-link {
+        padding: 0.5rem 0.5rem;
+        font-size: 0.875rem;
+    }
+}
+</style>
 
 <script>
 function eliminarFestivo(id) {
