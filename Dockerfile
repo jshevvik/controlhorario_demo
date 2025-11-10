@@ -10,6 +10,7 @@ RUN apt-get update \
     libpng-dev \
     libfreetype6-dev \
     libzip-dev \
+    libonig-dev \
     unzip \
  && docker-php-ext-configure gd --with-jpeg --with-freetype \
  && docker-php-ext-install gd pdo pdo_mysql mbstring zip \
