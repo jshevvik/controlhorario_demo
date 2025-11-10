@@ -1,10 +1,18 @@
 FROM php:8.2-apache
 
-# Extensiones necesarias (PDO MySQL + GD para imágenes) y mod_rewrite
+# Instalar Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Extensiones necesarias (PDO MySQL + GD para imágenes + mbstring para mPDF) y mod_rewrite
 RUN apt-get update \
- && apt-get install -y libjpeg-dev libpng-dev libfreetype6-dev \
+ && apt-get install -y \
+    libjpeg-dev \
+    libpng-dev \
+    libfreetype6-dev \
+    libzip-dev \
+    unzip \
  && docker-php-ext-configure gd --with-jpeg --with-freetype \
- && docker-php-ext-install gd pdo pdo_mysql \
+ && docker-php-ext-install gd pdo pdo_mysql mbstring zip \
  && a2enmod rewrite \
  && rm -rf /var/lib/apt/lists/*
 
@@ -27,7 +35,12 @@ RUN set -eux; \
 WORKDIR /var/www/html
 COPY . /var/www/html
 
-# Carpeta de subidas dentro de public (para demo sin disco)
-RUN mkdir -p public/uploads/usuarios && chown -R www-data:www-data public/uploads
+# Instalar dependencias de Composer (mPDF y otras librerías)
+RUN composer install --no-dev --optimize-autoloader --no-interaction
+
+# Crear directorio temporal para mPDF y carpeta de subidas
+RUN mkdir -p tmp public/uploads/usuarios public/uploads/solicitudes \
+ && chown -R www-data:www-data tmp public/uploads \
+ && chmod -R 755 tmp public/uploads
 
 EXPOSE 10000
