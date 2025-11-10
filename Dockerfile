@@ -36,7 +36,14 @@ WORKDIR /var/www/html
 COPY . /var/www/html
 
 # Instalar dependencias de Composer (mPDF y otras librerías)
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+# Aumentar timeout y usar prefer-dist para descargar más rápido
+RUN COMPOSER_PROCESS_TIMEOUT=600 composer install \
+    --no-dev \
+    --optimize-autoloader \
+    --no-interaction \
+    --prefer-dist \
+    --no-scripts \
+    || (cat /root/.composer/cache/repo/https---repo.packagist.org/packages.json 2>/dev/null; exit 1)
 
 # Crear directorio temporal para mPDF y carpeta de subidas
 RUN mkdir -p tmp public/uploads/usuarios public/uploads/solicitudes \
