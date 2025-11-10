@@ -267,13 +267,3 @@ $fullName = $empleado['nombre'] . ' ' . $empleado['apellidos'];
         </div>
     </div>
 </div>
-
-<style>
-.form-check-input:checked {
-    background-color: #0d6efd;
-    border-color: #0d6efd;
-}
-.form-check-label {
-    cursor: pointer;
-}
-</style>

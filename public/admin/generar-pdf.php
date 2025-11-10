@@ -38,6 +38,27 @@ if (!$empleado) {
     die('Error: Empleado no encontrado.');
 }
 
+// Preparar ruta de log de errores específico para PDF (ayuda a diagnosticar en entornos donde error_log no es visible)
+$pdfErrorLog = __DIR__ . '/../../tmp/pdf_error.log';
+function _pdf_log($msg) {
+    global $pdfErrorLog;
+    $line = date('[Y-m-d H:i:s] ') . $msg . PHP_EOL;
+    @file_put_contents($pdfErrorLog, $line, FILE_APPEND | LOCK_EX);
+}
+
+// Verificar que autoload y mPDF estén disponibles
+if (!file_exists(__DIR__ . '/../../vendor/autoload.php')) {
+    _pdf_log("FATAL: vendor/autoload.php no encontrado. Ejecuta 'composer install'.");
+    http_response_code(500);
+    die('Error interno: dependencias no instaladas.');
+}
+
+if (!class_exists('\\Mpdf\\Mpdf')) {
+    _pdf_log("FATAL: Clase Mpdf no encontrada. Comprueba que la extensión mbstring y las dependencias de composer estén instaladas.");
+    http_response_code(500);
+    die('Error interno: librería de PDF no disponible.');
+}
+
 
 // Consultar los fichajes del empleado en el periodo seleccionado
 $fichajes = $pdo->prepare("
@@ -306,8 +327,16 @@ try {
     $mpdf->Output($filename, 'D');
     exit;
 } catch (Exception $e) {
-    error_log('Error al generar PDF: ' . $e->getMessage());
+    $msg = 'Error al generar PDF: ' . $e->getMessage();
+    error_log($msg);
     error_log('Trace: ' . $e->getTraceAsString());
+    // También registrar en nuestro log específico en tmp para entornos con logs inaccesibles
+    if (function_exists('_pdf_log')) {
+        _pdf_log($msg);
+        _pdf_log('Trace: ' . $e->getTraceAsString());
+        _pdf_log('tempDir used: ' . (isset($tempDir) ? $tempDir : 'no definido'));
+        _pdf_log('Mpdf class exists: ' . (class_exists('\\Mpdf\\Mpdf') ? 'yes' : 'no'));
+    }
     http_response_code(500);
     die('<h1>Error al generar el PDF</h1><p>' . htmlspecialchars($e->getMessage()) . '</p>');
 }
