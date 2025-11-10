@@ -801,7 +801,7 @@ try {
                                             </td>
                                             <td class="text-center">
                                                 <?php if ($emp['rol'] !== 'admin'): ?>
-                                                    <a href="editar-permisos.php?id=<?= $emp['id'] ?>" 
+                                                    <a href="<?= $config['ruta_absoluta'] ?>admin/editar-permisos?id=<?= $emp['id'] ?>" 
                                                        class="btn btn-sm btn-primary"
                                                        title="Configurar permisos">
                                                         <i class="bi bi-gear-fill me-1"></i>

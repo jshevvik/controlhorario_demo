@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../../includes/init.php';
+
 requireAdmin(); // Solo admins pueden gestionar permisos
 
 $empleadoId = isset($_GET['id']) ? intval($_GET['id']) : 0;

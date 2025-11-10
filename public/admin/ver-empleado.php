@@ -227,12 +227,13 @@ $fullName = $empleado['nombre'].' '.$empleado['apellidos'];
       <div class="card p-3 p-md-4">
         <div class="card-header d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-2 border-0 bg-transparent p-0 mb-3">
           <span class="card-title h5 mb-2 mb-sm-0 text-primary"><i class="bi bi-calendar-check"></i> Fichajes</span>
-          <form method="get" class="d-flex flex-wrap gap-2">
+          <form method="get" action="<?= $config['ruta_absoluta'] ?>admin/ver-empleado" class="d-flex flex-wrap gap-2">
+            <input type="hidden" name="page" value="admin/ver-empleado">
             <input type="hidden" name="id" value="<?= $empleado['id'] ?>">
             <input type="date" name="desde" class="form-control form-control-sm" style="width:auto; min-width:120px;" value="<?= htmlspecialchars($fechaDesde ?? '') ?>">
             <input type="date" name="hasta" class="form-control form-control-sm" style="width:auto; min-width:120px;" value="<?= htmlspecialchars($fechaHasta ?? '') ?>">
-            <button class="btn btn-success btn-sm"><i class="bi bi-search"></i><span class="d-none d-sm-inline ms-1">Buscar</span></button>
-            <button class="btn btn-danger btn-sm" formaction="<?= $config['ruta_absoluta'] ?>admin/generar-pdf.php"><i class="bi bi-file-earmark-pdf"></i><span class="d-none d-sm-inline ms-1">PDF</span></button>
+            <button type="submit" class="btn btn-success btn-sm"><i class="bi bi-search"></i><span class="d-none d-sm-inline ms-1">Buscar</span></button>
+            <button type="submit" class="btn btn-danger btn-sm" formaction="<?= $config['ruta_absoluta'] ?>admin/generar-pdf.php"><i class="bi bi-file-earmark-pdf"></i><span class="d-none d-sm-inline ms-1">PDF</span></button>
           </form>
         </div>
         <div class="card-body p-0">
