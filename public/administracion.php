@@ -6,12 +6,11 @@ requireAdminOrSupervisor();
 $esAdmin = isAdmin();
 $esSupervisor = isSupervisor();
 
-// Obtener ruta del avatar personalizado o el predeterminado
-if (!empty($emp['avatar'])) {
-    $avatarPath = $config['UPLOADS_URL'] . $emp['avatar'];
-} else {
-    $avatarPath = $config['ASSET_URL'] . "img/avatar-default.jpg";
-}
+// Obtener ruta del avatar personalizado o el predeterminado (igual que en index.php)
+$avatarFisica = $config['UPLOADS_DIR'] . ($emp['avatar'] ?? '');
+$avatarPath = (!empty($emp['avatar']) && file_exists($avatarFisica))
+    ? $config['UPLOADS_URL'] . $emp['avatar']
+    : 'https://ui-avatars.com/api/?name=' . urlencode($emp['nombre'].' '.$emp['apellidos']) . '&background=0D8ABC&color=fff&size=180';
 ?>
 
 
