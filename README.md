@@ -19,7 +19,7 @@ Para probar la aplicación en la demo, usa estas credenciales:
 
 | Rol | Usuario | Contraseña | Descripción |
 |-----|---------|------------|-------------|
-| 👑 **Admin** | `admin` | `admin123` | Acceso completo al sistema |
+| 👑 **Admin** | `admindemo` | `admin123` | Acceso completo al sistema |
 | 👥 **Supervisor** | `supervisor` | `supervisor123` | Gestión de empleados y aprobaciones |
 | 👤 **Empleado** | `empleado` | `empleado123` | Fichaje y solicitudes |
 
@@ -29,25 +29,57 @@ Para probar la aplicación en la demo, usa estas credenciales:
 
 ## 📸 Capturas de Pantalla
 
-### 🏠 Dashboard
+### 🏠 Dashboard Principal
 ![Dashboard](screenshots/dashboard.png)
-*Vista principal con resumen de fichajes y accesos rápidos*
+*Panel principal con resumen de actividad, fichajes del día y accesos rápidos a las funcionalidades principales del sistema.*
 
-### 👥 Gestión de Empleados
+---
+
+### �‍💼 Panel de Administración
+![Administración](screenshots/administracion.png)
+*Centro de control administrativo con acceso a gestión de empleados, solicitudes, configuración y seguridad.*
+
+---
+
+### �👥 Gestión de Empleados
 ![Empleados](screenshots/empleados.png)
-*Panel de administración de empleados con búsqueda y filtros*
+*Lista completa de empleados con búsqueda, filtros por rol, estado de fichaje en tiempo real y acciones rápidas de edición.*
+
+---
+
+### 👤 Perfil de Empleado
+![Ver Empleado](screenshots/ver-empleado.png)
+*Vista detallada del empleado con información personal, horario asignado, historial de fichajes y opciones de gestión de permisos.*
+
+---
 
 ### 📍 Fichaje con Geolocalización
 ![Fichaje](screenshots/fichaje.png)
-*Sistema de fichaje con validación de ubicación mediante mapa*
+*Sistema de fichaje inteligente con validación de ubicación mediante mapa interactivo (Leaflet), garantizando que los empleados fichen desde las ubicaciones autorizadas.*
 
-### 📋 Solicitudes
-![Solicitudes](screenshots/solicitudes.png)
-*Gestión de vacaciones, permisos y bajas con aprobación*
+---
 
-### 📊 Informes PDF
-![Informes](screenshots/informes.png)
-*Generación de informes de fichajes en PDF*
+### �️ Configuración de Geolocalización
+![Geolocalización](screenshots/geolocalizacion.png)
+*Panel de configuración de ubicaciones permitidas para fichaje, con mapa interactivo para definir zonas autorizadas y radio de tolerancia.*
+
+---
+
+### �📋 Gestión de Solicitudes
+![Gestión de Solicitudes](screenshots/gestion-solicitudes.png)
+*Administración de solicitudes de vacaciones, permisos y bajas con sistema de aprobación/rechazo, historial completo y notificaciones automáticas.*
+
+---
+
+### 📊 Estadísticas e Informes
+![Estadísticas](screenshots/estadisticas.png)
+*Dashboard de analíticas con gráficos de asistencia, horas trabajadas, ausencias y estadísticas por departamento o empleado.*
+
+---
+
+### 📄 Informes PDF
+![Informes PDF](screenshots/informes.png)
+*Generación automática de informes de fichajes en formato PDF con filtros por período, empleado y tipo de reporte. Incluye resumen de horas trabajadas y descansos.*
 
 ---
 
@@ -69,14 +101,64 @@ Para probar la aplicación en la demo, usa estas credenciales:
 ---
 
 ## ✨ Características
-- Fichaje **Entrada/Salida** con validación de **ubicación (Leaflet)**  
-- Gestión de **empleados**, **roles** (Admin / Supervisor / Empleado)  
-- Solicitudes: **vacaciones, permisos, bajas**, con **aprobación**  
-- **Informes** y exportación **PDF** (mPDF)  
-- **Notificaciones** internas  
-- **Dashboard** con resumen  
-- **UI responsive** (Bootstrap 5)  
-- Preparado para **Docker + Render**
+
+### 🎯 Funcionalidades Principales
+
+#### 👤 Gestión de Empleados
+- ✅ CRUD completo de empleados (Crear, Leer, Actualizar, Eliminar)
+- ✅ Asignación de roles: **Admin**, **Supervisor**, **Empleado**
+- ✅ Sistema de **Super Admin** protegido (no puede ser eliminado ni editado)
+- ✅ Gestión de horarios personalizados por empleado
+- ✅ Permisos granulares por empleado (12 tipos de permisos)
+- ✅ Avatar personalizado o generado automáticamente con iniciales
+- ✅ Búsqueda y filtrado avanzado
+
+#### 🕐 Sistema de Fichaje
+- ✅ Fichaje de **Entrada/Salida** con marca de tiempo
+- ✅ Control de **Pausas** (inicio y fin)
+- ✅ Validación de ubicación mediante **geolocalización**
+- ✅ Mapa interactivo (Leaflet) con zonas autorizadas
+- ✅ Radio de tolerancia configurable
+- ✅ Historial completo de fichajes
+- ✅ Cálculo automático de horas trabajadas y descansos
+
+#### 📋 Solicitudes
+- ✅ Tipos: **Vacaciones**, **Permisos**, **Bajas**, **Ausencias**
+- ✅ Sistema de aprobación/rechazo por admin/supervisor
+- ✅ Historial de cambios con auditoría (quién modificó, cuándo, qué)
+- ✅ Notificaciones automáticas al empleado
+- ✅ Gestión de balances de días disponibles
+- ✅ Validación de conflictos de fechas
+
+#### 📊 Informes y Analíticas
+- ✅ Generación de **PDF** con informes de fichajes (mPDF)
+- ✅ Filtros por período, empleado y tipo
+- ✅ Resumen de horas trabajadas y descansos
+- ✅ Exportación de datos
+- ✅ Dashboard con estadísticas en tiempo real
+
+#### 🔐 Seguridad
+- ✅ Autenticación con **bcrypt** para contraseñas
+- ✅ Sesiones seguras con **SameSite** cookies
+- ✅ Protección **CSRF** en formularios
+- ✅ Validación y sanitización de inputs
+- ✅ **PDO** con prepared statements (anti SQL injection)
+- ✅ Auditoría de acciones administrativas
+- ✅ Protección de rutas según rol
+
+#### 🔔 Notificaciones
+- ✅ Sistema de notificaciones internas
+- ✅ Contador en tiempo real
+- ✅ Notificaciones de solicitudes aprobadas/rechazadas
+- ✅ Alertas de cambios importantes
+
+#### 🎨 Interfaz
+- ✅ Diseño **responsive** (Bootstrap 5.3)
+- ✅ Modo claro/oscuro
+- ✅ Iconos modernos (Bootstrap Icons, Tabler Icons)
+- ✅ Datatables para listados avanzados
+- ✅ Gráficos y visualizaciones
+- ✅ Experiencia de usuario optimizada
 
 ---
 
