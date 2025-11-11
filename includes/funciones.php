@@ -104,8 +104,10 @@ function eliminarEmpleado($empleadoId, $adminId = null) {
         // Eliminar registros relacionados en orden (de dependientes a principales)
         $pdo->prepare("DELETE FROM notificaciones WHERE empleado_id = ?")->execute([$empleadoId]);
         $pdo->prepare("DELETE FROM fichajes WHERE empleado_id = ?")->execute([$empleadoId]);
+        $pdo->prepare("DELETE FROM solicitudes_balances WHERE empleado_id = ?")->execute([$empleadoId]);
         $pdo->prepare("DELETE FROM solicitudes WHERE empleado_id = ?")->execute([$empleadoId]);
         $pdo->prepare("DELETE FROM permisos_empleados WHERE empleado_id = ?")->execute([$empleadoId]);
+        $pdo->prepare("DELETE FROM horarios_empleados WHERE empleado_id = ?")->execute([$empleadoId]);
         
         // Eliminar el empleado
         $pdo->prepare("DELETE FROM empleados WHERE id = ?")->execute([$empleadoId]);
