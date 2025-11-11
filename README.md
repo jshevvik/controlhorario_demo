@@ -13,7 +13,47 @@ Aplicación para **gestión de horarios laborales**, fichaje con **geolocalizaci
 
 ---
 
+## 🔑 Credenciales de Prueba
+
+Para probar la aplicación en la demo, usa estas credenciales:
+
+| Rol | Usuario | Contraseña | Descripción |
+|-----|---------|------------|-------------|
+| 👑 **Admin** | `admin` | `admin123` | Acceso completo al sistema |
+| 👥 **Supervisor** | `supervisor` | `supervisor123` | Gestión de empleados y aprobaciones |
+| 👤 **Empleado** | `empleado` | `empleado123` | Fichaje y solicitudes |
+
+> ⚠️ **Nota:** Estas son credenciales de demostración. En producción, cambia todas las contraseñas.
+
+---
+
+## 📸 Capturas de Pantalla
+
+### 🏠 Dashboard
+![Dashboard](screenshots/dashboard.png)
+*Vista principal con resumen de fichajes y accesos rápidos*
+
+### 👥 Gestión de Empleados
+![Empleados](screenshots/empleados.png)
+*Panel de administración de empleados con búsqueda y filtros*
+
+### 📍 Fichaje con Geolocalización
+![Fichaje](screenshots/fichaje.png)
+*Sistema de fichaje con validación de ubicación mediante mapa*
+
+### 📋 Solicitudes
+![Solicitudes](screenshots/solicitudes.png)
+*Gestión de vacaciones, permisos y bajas con aprobación*
+
+### 📊 Informes PDF
+![Informes](screenshots/informes.png)
+*Generación de informes de fichajes en PDF*
+
+---
+
 ## 📑 Índice
+- [Credenciales de Prueba](#-credenciales-de-prueba)
+- [Capturas de Pantalla](#-capturas-de-pantalla)
 - [Características](#-características)
 - [Stack](#-stack)
 - [Estructura](#-estructura)

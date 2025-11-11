@@ -58,6 +58,76 @@ function canManageEmployees() {
     return isAdmin();
 }
 
+/**
+ * Elimina un empleado y todos sus registros relacionados
+ * @param int $empleadoId ID del empleado a eliminar
+ * @param int $adminId ID del admin que realiza la acción (para auditoría)
+ * @return array ['success' => bool, 'message' => string]
+ */
+function eliminarEmpleado($empleadoId, $adminId = null) {
+    global $pdo;
+    
+    try {
+        // Verificar que el empleado existe
+        $stmt = $pdo->prepare("SELECT id, nombre, apellidos, usuario, rol FROM empleados WHERE id = ?");
+        $stmt->execute([$empleadoId]);
+        $empleado = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if (!$empleado) {
+            return ['success' => false, 'message' => 'Empleado no encontrado'];
+        }
+        
+        // Verificar que no se intente eliminar a sí mismo
+        if ($empleadoId === $_SESSION['empleado_id']) {
+            return ['success' => false, 'message' => 'No puedes eliminar tu propia cuenta'];
+        }
+        
+        // Solo admin puede eliminar a otro admin
+        if ($empleado['rol'] === 'admin' && !isAdmin()) {
+            return ['success' => false, 'message' => 'No tienes permisos para eliminar un administrador'];
+        }
+        
+        // Iniciar transacción
+        $pdo->beginTransaction();
+        
+        // Eliminar registros relacionados en orden (de dependientes a principales)
+        $pdo->prepare("DELETE FROM notificaciones WHERE empleado_id = ?")->execute([$empleadoId]);
+        $pdo->prepare("DELETE FROM fichajes WHERE empleado_id = ?")->execute([$empleadoId]);
+        $pdo->prepare("DELETE FROM solicitudes WHERE empleado_id = ?")->execute([$empleadoId]);
+        $pdo->prepare("DELETE FROM permisos_empleados WHERE empleado_id = ?")->execute([$empleadoId]);
+        
+        // Eliminar el empleado
+        $pdo->prepare("DELETE FROM empleados WHERE id = ?")->execute([$empleadoId]);
+        
+        // Registrar en auditoría si está disponible
+        if ($adminId && function_exists('registrarActividadSeguridad')) {
+            registrarActividadSeguridad(
+                'eliminar_empleado',
+                $empleado['usuario'] . ' (' . $empleado['nombre'] . ' ' . $empleado['apellidos'] . ')',
+                'Empleado eliminado exitosamente',
+                $adminId
+            );
+        }
+        
+        $pdo->commit();
+        
+        return [
+            'success' => true, 
+            'message' => 'Empleado eliminado correctamente'
+        ];
+        
+    } catch (PDOException $e) {
+        if ($pdo->inTransaction()) {
+            $pdo->rollBack();
+        }
+        error_log("Error al eliminar empleado ID $empleadoId: " . $e->getMessage());
+        return [
+            'success' => false, 
+            'message' => 'Error al eliminar el empleado: ' . $e->getMessage()
+        ];
+    }
+}
+
 // Protege una ruta para sólo administradores 
 function requireAdmin() {
     if (!isAdmin()) {
