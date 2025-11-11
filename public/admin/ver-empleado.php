@@ -233,7 +233,7 @@ $fullName = $empleado['nombre'].' '.$empleado['apellidos'];
             <input type="date" name="desde" class="form-control form-control-sm" style="width:auto; min-width:120px;" value="<?= htmlspecialchars($fechaDesde ?? '') ?>">
             <input type="date" name="hasta" class="form-control form-control-sm" style="width:auto; min-width:120px;" value="<?= htmlspecialchars($fechaHasta ?? '') ?>">
             <button type="submit" class="btn btn-success btn-sm"><i class="bi bi-search"></i><span class="d-none d-sm-inline ms-1">Buscar</span></button>
-            <button type="submit" class="btn btn-danger btn-sm" formaction="<?= $config['ruta_absoluta'] ?>admin/generar-pdf"><i class="bi bi-file-earmark-pdf"></i><span class="d-none d-sm-inline ms-1">PDF</span></button>
+            <button type="submit" class="btn btn-danger btn-sm" formaction="<?= $config['ruta_absoluta'] ?>admin/generar-pdf.php"><i class="bi bi-file-earmark-pdf"></i><span class="d-none d-sm-inline ms-1">PDF</span></button>
           </form>
         </div>
         <div class="card-body p-0">
