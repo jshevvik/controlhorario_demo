@@ -15,6 +15,12 @@ if (!$emp) {
     exit;
 }
 
+// PROTECCIÓN: No se puede editar al super admin (solo él mismo puede editarse)
+if (!empty($emp['es_super_admin']) && $_SESSION['empleado_id'] !== $empId) {
+    header('Location: ' . $config['ruta_absoluta'] . 'admin/empleados?error=super_admin_protegido');
+    exit;
+}
+
 // Supervisor no puede editar admin
 if (isSupervisor() && $emp['rol'] === 'admin') {
     header('Location: ' . $config['ruta_absoluta'] . 'admin/empleados?error=sin_permisos');

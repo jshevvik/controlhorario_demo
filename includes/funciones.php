@@ -41,6 +41,12 @@ function isAdmin() {
     return $emp && $emp['rol'] === 'admin';
 }
 
+// True si el usuario logueado es super admin
+function isSuperAdmin() {
+    $emp = getEmpleado();
+    return $emp && $emp['rol'] === 'admin' && !empty($emp['es_super_admin']);
+}
+
 // True si el usuario logueado es supervisor
 function isSupervisor() {
     $emp = getEmpleado();
@@ -69,7 +75,7 @@ function eliminarEmpleado($empleadoId, $adminId = null) {
     
     try {
         // Verificar que el empleado existe
-        $stmt = $pdo->prepare("SELECT id, nombre, apellidos, usuario, rol FROM empleados WHERE id = ?");
+        $stmt = $pdo->prepare("SELECT id, nombre, apellidos, usuario, rol, es_super_admin FROM empleados WHERE id = ?");
         $stmt->execute([$empleadoId]);
         $empleado = $stmt->fetch(PDO::FETCH_ASSOC);
         
@@ -80,6 +86,11 @@ function eliminarEmpleado($empleadoId, $adminId = null) {
         // Verificar que no se intente eliminar a sí mismo
         if ($empleadoId === $_SESSION['empleado_id']) {
             return ['success' => false, 'message' => 'No puedes eliminar tu propia cuenta'];
+        }
+        
+        // PROTECCIÓN: No se puede eliminar al super admin
+        if (!empty($empleado['es_super_admin'])) {
+            return ['success' => false, 'message' => 'No se puede eliminar al super administrador'];
         }
         
         // Solo admin puede eliminar a otro admin

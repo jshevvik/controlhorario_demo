@@ -334,13 +334,21 @@ try {
                                                        class="btn btn-sm btn-info" title="Ver detalles">
                                                         <i class="ti ti-eye"></i>
                                                     </a>
-                                                    <?php if (isAdmin() || (isSupervisor() && $emp['rol'] !== 'admin')): ?>
+                                                    <?php 
+                                                    // No mostrar editar si es super admin (excepto para sí mismo)
+                                                    $puedeEditar = (isAdmin() || (isSupervisor() && $emp['rol'] !== 'admin')) 
+                                                                   && (empty($emp['es_super_admin']) || $emp['id'] === $_SESSION['empleado_id']);
+                                                    if ($puedeEditar): 
+                                                    ?>
                                                     <a href="<?= $config['ruta_absoluta'] ?>admin/editar-empleado?id=<?= $emp['id'] ?>"
                                                        class="btn btn-sm btn-warning" title="Editar">
                                                         <i class="ti ti-edit"></i>
                                                     </a>
                                                     <?php endif; ?>
-                                                    <?php if (isAdmin()): ?>
+                                                    <?php 
+                                                    // No mostrar eliminar si es super admin
+                                                    if (isAdmin() && empty($emp['es_super_admin'])): 
+                                                    ?>
                                                     <a href="<?= $config['ruta_absoluta'] ?>admin/borrar-empleado.php?id=<?= $emp['id'] ?>"
                                                        class="btn btn-sm btn-danger" title="Eliminar"
                                                        onclick='return confirm(<?= json_encode("¿Seguro que deseas eliminar a $fullName?") ?>);'>
@@ -455,13 +463,21 @@ try {
                                                        class="btn btn-info btn-sm" title="Ver detalles">
                                                         <i class="ti ti-eye"></i>
                                                     </a>
-                                                    <?php if (isAdmin() || (isSupervisor() && $emp['rol'] !== 'admin')): ?>
+                                                    <?php 
+                                                    // No mostrar editar si es super admin (excepto para sí mismo)
+                                                    $puedeEditar = (isAdmin() || (isSupervisor() && $emp['rol'] !== 'admin')) 
+                                                                   && (empty($emp['es_super_admin']) || $emp['id'] === $_SESSION['empleado_id']);
+                                                    if ($puedeEditar): 
+                                                    ?>
                                                     <a href="<?= $config['ruta_absoluta'] ?>admin/editar-empleado?id=<?= $emp['id'] ?>"
                                                        class="btn btn-warning btn-sm" title="Editar">
                                                         <i class="ti ti-edit"></i>
                                                     </a>
                                                     <?php endif; ?>
-                                                    <?php if (isAdmin()): ?>
+                                                    <?php 
+                                                    // No mostrar eliminar si es super admin
+                                                    if (isAdmin() && empty($emp['es_super_admin'])): 
+                                                    ?>
                                                     <a href="<?= $config['ruta_absoluta'] ?>admin/borrar-empleado.php?id=<?= $emp['id'] ?>"
                                                        class="btn btn-danger btn-sm" title="Eliminar"
                                                        onclick='return confirm(<?= json_encode("¿Seguro que deseas eliminar a $fullName?") ?>);'>

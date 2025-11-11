@@ -27,9 +27,21 @@ if (!$id || !$nombre || !$apellidos || !$usuario || !$email) {
 }
 
 // Obtener datos actuales del empleado
-$stmt = $pdo->prepare("SELECT rol FROM empleados WHERE id = ?");
+$stmt = $pdo->prepare("SELECT rol, es_super_admin FROM empleados WHERE id = ?");
 $stmt->execute([$id]);
 $empleadoActual = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// PROTECCIÓN: No se puede modificar al super admin (excepto él mismo)
+if (!empty($empleadoActual['es_super_admin']) && $_SESSION['empleado_id'] !== $id) {
+    header('Location: ' . $config['ruta_absoluta'] . 'admin/empleados?error=super_admin_protegido');
+    exit;
+}
+
+// PROTECCIÓN: No se puede degradar al super admin de su rol
+if (!empty($empleadoActual['es_super_admin']) && $rol !== 'admin') {
+    header('Location: ' . $config['ruta_absoluta'] . 'admin/editar-empleado?id='.$id.'&error=no_degradar_super_admin');
+    exit;
+}
 
 // Supervisor no puede editar admin ni asignar rol admin
 if (isSupervisor()) {

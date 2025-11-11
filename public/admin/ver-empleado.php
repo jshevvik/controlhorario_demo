@@ -55,9 +55,13 @@ $fullName = $empleado['nombre'].' '.$empleado['apellidos'];
         <div class="mb-3 mb-md-4 text-muted small"><?= htmlspecialchars($empleado['email']) ?></div>
         <div class="d-flex flex-column flex-sm-row justify-content-center gap-2">
           <?php
-          // Supervisor no puede editar/eliminar admin
-          $puedeEditar = isAdmin() || (isSupervisor() && $empleado['rol'] !== 'admin');
-          $puedeEliminar = canManageEmployees();
+          // Permisos: no permitir editar/eliminar al super admin (excepto él mismo)
+          $esSuperAdmin = !empty($empleado['es_super_admin']);
+          $esSiMismo = $_SESSION['empleado_id'] === $empleado['id'];
+          
+          $puedeEditar = (isAdmin() || (isSupervisor() && $empleado['rol'] !== 'admin'))
+                         && (!$esSuperAdmin || $esSiMismo);
+          $puedeEliminar = canManageEmployees() && !$esSuperAdmin;
           ?>
           
           <?php if ($puedeEditar): ?>
@@ -66,7 +70,7 @@ $fullName = $empleado['nombre'].' '.$empleado['apellidos'];
           </a>
           <?php endif; ?>
           
-          <?php if (isAdmin()): ?>
+          <?php if (isAdmin() && (!$esSuperAdmin || $esSiMismo)): ?>
           <a href="<?= $config['ruta_absoluta'] ?>admin/editar-permisos?id=<?= $empleado['id'] ?>" class="btn btn-warning btn-sm">
             <i class="bi bi-shield-lock"></i> Permisos
           </a>
