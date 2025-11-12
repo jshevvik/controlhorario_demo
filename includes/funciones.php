@@ -84,7 +84,7 @@ function eliminarEmpleado($empleadoId, $adminId = null) {
         }
         
         // Verificar que no se intente eliminar a sí mismo
-        if ($empleadoId === $_SESSION['empleado_id']) {
+        if ($empleadoId === ($_SESSION['empleado_id'] ?? null)) {
             return ['success' => false, 'message' => 'No puedes eliminar tu propia cuenta'];
         }
         

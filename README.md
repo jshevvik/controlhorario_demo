@@ -358,4 +358,4 @@ Licencia **MIT**. Ver [LICENSE](LICENSE).
 
 ## 👤 Autor
 **jshevvik** — https://github.com/jshevvik  
-Versión **1.0.0** · Noviembre 2025
+Versión **1.0.1** · Noviembre 2025

@@ -395,7 +395,7 @@ $archivo = __DIR__ . '/' . $page . '.php';
   <script src="<?= $config['ASSET_URL'] ?>js/vendor.min.js"></script>
   <script src="<?= $config['ASSET_URL'] ?>js/feather.min.js"></script>
   <script src="<?= $config['ASSET_URL'] ?>js/highlight.min.js"></script>
-  <script src="<?= appendCacheBuster($config['ruta_absoluta'] . 'js/notificaciones.js') ?>"></script>
+  <script src="<?= appendCacheBuster($config['ASSET_URL'] . 'js/notificaciones.js') ?>"></script>
 
 
   <script src="<?= $config['ASSET_URL'] ?>js/calendar.js"></script>
