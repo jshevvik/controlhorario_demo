@@ -4,7 +4,6 @@
 [![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)
 [![Railway](https://img.shields.io/badge/Railway-Database-0B0D0E?logo=railway&logoColor=white)](https://railway.app/)
 [![Render](https://img.shields.io/badge/Render-Deploy-46E3B7?logo=render&logoColor=white)](https://render.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 Aplicación para **gestión de horarios laborales**, fichaje con **geolocalización**, **solicitudes** (vacaciones/permiso/baja), **informes** en PDF y **panel administrativo**.
 
@@ -35,13 +34,13 @@ Para probar la aplicación en la demo, usa estas credenciales:
 
 ---
 
-### �‍💼 Panel de Administración
+### 👨‍💼 Panel de Administración
 ![Administración](screenshots/administracion.png)
 *Centro de control administrativo con acceso a gestión de empleados, solicitudes, configuración y seguridad.*
 
 ---
 
-### �👥 Gestión de Empleados
+### 👥 Gestión de Empleados
 ![Empleados](screenshots/empleados.png)
 *Lista completa de empleados con búsqueda, filtros por rol, estado de fichaje en tiempo real y acciones rápidas de edición.*
 
@@ -59,13 +58,13 @@ Para probar la aplicación en la demo, usa estas credenciales:
 
 ---
 
-### �️ Configuración de Geolocalización
+### 🗺️ Configuración de Geolocalización
 ![Geolocalización](screenshots/geolocalizacion.png)
 *Panel de configuración de ubicaciones permitidas para fichaje, con mapa interactivo para definir zonas autorizadas y radio de tolerancia.*
 
 ---
 
-### �📋 Gestión de Solicitudes
+### 📋 Gestión de Solicitudes
 ![Gestión de Solicitudes](screenshots/gestion-solicitudes.png)
 *Administración de solicitudes de vacaciones, permisos y bajas con sistema de aprobación/rechazo, historial completo y notificaciones automáticas.*
 
@@ -134,17 +133,16 @@ Para probar la aplicación en la demo, usa estas credenciales:
 - ✅ Generación de **PDF** con informes de fichajes (mPDF)
 - ✅ Filtros por período, empleado y tipo
 - ✅ Resumen de horas trabajadas y descansos
-- ✅ Exportación de datos
 - ✅ Dashboard con estadísticas en tiempo real
 
 #### 🔐 Seguridad
-- ✅ Autenticación con **bcrypt** para contraseñas
-- ✅ Sesiones seguras con **SameSite** cookies
-- ✅ Protección **CSRF** en formularios
+- ✅ Autenticación con **password_hash()** de PHP (bcrypt por defecto)
+- ✅ Sesiones seguras con cookies HTTP-only
 - ✅ Validación y sanitización de inputs
 - ✅ **PDO** con prepared statements (anti SQL injection)
 - ✅ Auditoría de acciones administrativas
 - ✅ Protección de rutas según rol
+- ✅ Sistema de Super Admin protegido
 
 #### 🔔 Notificaciones
 - ✅ Sistema de notificaciones internas
@@ -154,11 +152,10 @@ Para probar la aplicación en la demo, usa estas credenciales:
 
 #### 🎨 Interfaz
 - ✅ Diseño **responsive** (Bootstrap 5.3)
-- ✅ Modo claro/oscuro
 - ✅ Iconos modernos (Bootstrap Icons, Tabler Icons)
 - ✅ Datatables para listados avanzados
-- ✅ Gráficos y visualizaciones
 - ✅ Experiencia de usuario optimizada
+- ✅ Diseño moderno y profesional
 
 ---
 
@@ -236,10 +233,13 @@ Abrir: http://localhost:8000
    - `MYSQLUSER`
    - `MYSQLPASSWORD`
 
-4. Importa el esquema de base de datos:
+4. La base de datos se creará automáticamente al ejecutar el script de configuración:
 ```bash
-mysql -h MYSQLHOST -P MYSQLPORT -u MYSQLUSER -p MYSQLDATABASE < bin/crear-configuracion.sql
+# Conectarse al servidor Railway y ejecutar el script de configuración
+php bin/configurar-sistema.php
 ```
+
+> **Nota:** El script `configurar-sistema.php` creará todas las tablas necesarias automáticamente.
 
 ### Aplicación en Render
 
@@ -276,11 +276,13 @@ php bin/configurar-geolocalizacion.php
 ---
 
 ## 🔐 Seguridad
-- Contraseñas con **bcrypt**
-- **PDO** + prepared statements
-- Cookies **SameSite** y HTTPS en producción
-- Configuración **CSP** y headers protectores
-- Variables sensibles via **entorno** (no commitear)
+- Contraseñas con **password_hash()** (bcrypt por defecto)
+- **PDO** + prepared statements (prevención de SQL injection)
+- Sesiones seguras con cookies HTTP-only
+- Validación y sanitización de inputs
+- Protección de rutas según rol
+- Sistema de Super Admin protegido
+- Auditoría de acciones administrativas
 
 ---
 
@@ -352,10 +354,10 @@ php bin/configurar-geolocalizacion.php
 ---
 
 ## 📜 Licencia
-Licencia **MIT**. Ver [LICENSE](LICENSE).
+Proyecto de código abierto. Puedes usar, modificar y distribuir este código libremente.
 
 ---
 
 ## 👤 Autor
 **jshevvik** — https://github.com/jshevvik  
-Versión **1.0.1** · Noviembre 2025
+Versión **1.1.0** · Noviembre 2025
