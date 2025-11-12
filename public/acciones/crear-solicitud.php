@@ -247,6 +247,16 @@ try {
     
     $solicitudId = $pdo->lastInsertId();
     
+    // Registrar creación en historial
+    registrarCambioSolicitud(
+        $solicitudId, 
+        'crear', 
+        null, 
+        null, 
+        null, 
+        "Solicitud creada por administrador" . ($comentario_admin ? ": $comentario_admin" : "")
+    );
+    
     // Obtener nombre del admin
     $stmtAdmin = $pdo->prepare('SELECT nombre, apellidos FROM empleados WHERE id = ?');
     $stmtAdmin->execute([$adminId]);

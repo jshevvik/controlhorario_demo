@@ -2579,6 +2579,7 @@ function initAdminSolicitudes_real() {
       fetch(BASE_URL + 'acciones/obtener-detalle-solicitud.php?id=' + id)
         .then(response => response.json())
         .then(data => {
+          console.log('Detalles de solicitud:', data); // Debug
           if (data.success) {
             modalBody.innerHTML = renderDetallesSolicitud(data.solicitud) + renderHistorialSolicitud(data.historial);
             

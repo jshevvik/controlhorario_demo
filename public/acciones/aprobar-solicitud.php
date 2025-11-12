@@ -43,6 +43,16 @@ try {
     $ok = $stmt->execute([$nuevoEstado, $_SESSION['empleado_id'], $comentario, $id]);
 
     if ($ok) {
+        // Registrar en historial
+        registrarCambioSolicitud(
+            $id, 
+            $accion, 
+            'estado', 
+            'pendiente', 
+            $nuevoEstado, 
+            $comentario
+        );
+        
         // Crear notificación para el empleado que hizo la solicitud
         $stmtEmpleado = $pdo->prepare("SELECT empleado_id, tipo, fecha_inicio, fecha_fin FROM solicitudes WHERE id = ?");
         $stmtEmpleado->execute([$id]);

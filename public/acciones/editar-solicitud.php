@@ -111,6 +111,73 @@ try {
         $solicitudId
     ]);
     
+    // Registrar cambios en historial
+    if ($updateFechaInicio !== $solicitud['fecha_inicio']) {
+        registrarCambioSolicitud(
+            $solicitudId, 
+            'editar', 
+            'fecha_inicio', 
+            $solicitud['fecha_inicio'], 
+            $updateFechaInicio, 
+            'Fecha de inicio modificada'
+        );
+    }
+    
+    if ($updateFechaFin !== $solicitud['fecha_fin']) {
+        registrarCambioSolicitud(
+            $solicitudId, 
+            'editar', 
+            'fecha_fin', 
+            $solicitud['fecha_fin'], 
+            $updateFechaFin, 
+            'Fecha de fin modificada'
+        );
+    }
+    
+    if ($updateMedioDia != $solicitud['medio_dia']) {
+        registrarCambioSolicitud(
+            $solicitudId, 
+            'editar', 
+            'medio_dia', 
+            $solicitud['medio_dia'] ? 'Sí' : 'No', 
+            $updateMedioDia ? 'Sí' : 'No', 
+            'Medio día modificado'
+        );
+    }
+    
+    if ($updateHoras != $solicitud['horas']) {
+        registrarCambioSolicitud(
+            $solicitudId, 
+            'editar', 
+            'horas', 
+            $solicitud['horas'], 
+            $updateHoras, 
+            'Horas modificadas'
+        );
+    }
+    
+    if ($comentario && $updateComentario !== $solicitud['comentario_admin']) {
+        registrarCambioSolicitud(
+            $solicitudId, 
+            'editar', 
+            'comentario_admin', 
+            $solicitud['comentario_admin'], 
+            $updateComentario, 
+            'Comentario administrativo actualizado'
+        );
+    }
+    
+    if ($archivo) {
+        registrarCambioSolicitud(
+            $solicitudId, 
+            'editar', 
+            'archivo', 
+            $solicitud['archivo'], 
+            $archivo, 
+            'Archivo adjunto actualizado'
+        );
+    }
+    
     // Crear notificación para el empleado que hizo la solicitud
     $empleadoSolicitud = $solicitud['empleado_id'];
     $adminId = $_SESSION['empleado_id'];
