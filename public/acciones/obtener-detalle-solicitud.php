@@ -97,6 +97,9 @@ try {
         }
     }
 
+    // Obtener historial de cambios
+    $historial = getHistorialSolicitud($solicitudId);
+    
     // Preparar respuesta
     $response = [
         'success' => true,
@@ -123,7 +126,8 @@ try {
             'aprobador_email' => $solicitud['aprobador_email'],
             'tipo_ausencia' => $solicitud['tipo_ausencia'] ?? null,
             'archivo' => $archivoInfo
-        ]
+        ],
+        'historial' => $historial
     ];
     
     echo json_encode($response);

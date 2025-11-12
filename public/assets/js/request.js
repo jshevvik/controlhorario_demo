@@ -2355,6 +2355,115 @@ function renderDetallesSolicitud(solicitud) {
 }
 
 /**
+ * Renderiza el historial de cambios de una solicitud
+ */
+function renderHistorialSolicitud(historial) {
+  if (!historial || historial.length === 0) {
+    return '';
+  }
+  
+  const formatearFechaHora = (fechaHora) => {
+    if (!fechaHora) return '-';
+    return moment(fechaHora).format('DD/MM/YYYY HH:mm');
+  };
+  
+  const getAccionTexto = (accion) => {
+    const acciones = {
+      'crear': 'Creó la solicitud',
+      'aprobar': 'Aprobó la solicitud',
+      'rechazar': 'Rechazó la solicitud',
+      'editar': 'Editó la solicitud',
+      'modificar': 'Modificó la solicitud',
+      'eliminar': 'Eliminó la solicitud',
+      'comentario': 'Agregó un comentario'
+    };
+    return acciones[accion] || accion;
+  };
+  
+  const getAccionIcono = (accion) => {
+    const iconos = {
+      'crear': 'ti ti-plus',
+      'aprobar': 'ti ti-check',
+      'rechazar': 'ti ti-x',
+      'editar': 'ti ti-edit',
+      'modificar': 'ti ti-edit',
+      'eliminar': 'ti ti-trash',
+      'comentario': 'ti ti-message'
+    };
+    return iconos[accion] || 'ti ti-clock';
+  };
+  
+  const getAccionColor = (accion) => {
+    const colores = {
+      'crear': 'info',
+      'aprobar': 'success',
+      'rechazar': 'danger',
+      'editar': 'warning',
+      'modificar': 'warning',
+      'eliminar': 'danger',
+      'comentario': 'secondary'
+    };
+    return colores[accion] || 'secondary';
+  };
+  
+  let historialHTML = `
+    <div class="mt-4">
+      <h6 class="mb-3">
+        <i class="ti ti-history me-2"></i>Historial de Cambios
+      </h6>
+      <div class="timeline">
+  `;
+  
+  historial.forEach((item, index) => {
+    const nombreCompleto = item.nombre && item.apellidos 
+      ? `${item.nombre} ${item.apellidos}` 
+      : 'Sistema';
+    const rol = item.rol ? `(${item.rol})` : '';
+    const icono = getAccionIcono(item.accion);
+    const color = getAccionColor(item.accion);
+    
+    let detalles = '';
+    if (item.campo_modificado) {
+      detalles += `<div class="small text-muted mt-1"><strong>Campo:</strong> ${item.campo_modificado}</div>`;
+    }
+    if (item.valor_anterior) {
+      detalles += `<div class="small text-muted"><strong>Valor anterior:</strong> ${item.valor_anterior}</div>`;
+    }
+    if (item.valor_nuevo) {
+      detalles += `<div class="small text-muted"><strong>Valor nuevo:</strong> ${item.valor_nuevo}</div>`;
+    }
+    if (item.comentario) {
+      detalles += `<div class="small mt-2"><em>"${item.comentario}"</em></div>`;
+    }
+    
+    historialHTML += `
+      <div class="timeline-item">
+        <div class="timeline-marker bg-${color}">
+          <i class="${icono}"></i>
+        </div>
+        <div class="timeline-content">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <strong>${nombreCompleto}</strong> ${rol}
+              <div class="small text-muted">${getAccionTexto(item.accion)}</div>
+              ${detalles}
+            </div>
+            <small class="text-muted text-nowrap ms-2">${formatearFechaHora(item.fecha)}</small>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+  
+  historialHTML += `
+      </div>
+    </div>
+  `;
+  
+  return historialHTML;
+}
+
+/**
  * Inicializa los event listeners para la gestión avanzada de solicitudes
  * Solo se ejecuta si existen los elementos necesarios en la página
  */
@@ -2471,7 +2580,7 @@ function initAdminSolicitudes_real() {
         .then(response => response.json())
         .then(data => {
           if (data.success) {
-            modalBody.innerHTML = renderDetallesSolicitud(data.solicitud);
+            modalBody.innerHTML = renderDetallesSolicitud(data.solicitud) + renderHistorialSolicitud(data.historial);
             
             // Mostrar/ocultar botón de descargar archivo
             const btnDescargar = document.getElementById('btnDescargarArchivo');
