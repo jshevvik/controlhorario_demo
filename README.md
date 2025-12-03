@@ -87,12 +87,9 @@ Para probar la aplicación en la demo, usa estas credenciales:
 - [Características](#-características)
 - [Stack](#-stack)
 - [Estructura](#-estructura)
-- [Instalación Local](#-instalación-local)
-- [Despliegue en Railway](#-despliegue-en-railway)
 - [Uso](#-uso)
 - [Seguridad](#-seguridad)
 - [Desarrollo](#-desarrollo)
-- [Troubleshooting](#-troubleshooting)
 - [Licencia](#-licencia)
 - [Autor](#-autor)
 
@@ -199,68 +196,6 @@ controlhorario_demo/
 
 ---
 
-## 💻 Instalación Local
-
-**Requisitos:** PHP 8.2+, MySQL 8.0+, Composer, Git
-
-```bash
-git clone https://github.com/jshevvik/controlhorario_demo.git
-cd controlhorario_demo
-composer install
-cp config.example.php config.php
-nano config.php
-php bin/configurar-sistema.php
-php bin/configurar-geolocalizacion.php
-php -S localhost:8000 -t public
-```
-
-Abrir: http://localhost:8000
-
----
-
-## 🌐 Despliegue en Railway
-
-### Paso 1: Crear Base de Datos MySQL
-
-1. Crea cuenta en https://railway.app
-2. **New Project** → **Provision MySQL**
-3. Anota las credenciales que aparecen en **Variables**:
-   - `MYSQLHOST`
-   - `MYSQLPORT` (normalmente 3306)
-   - `MYSQLDATABASE`
-   - `MYSQLUSER`
-   - `MYSQLPASSWORD`
-
-### Paso 2: Desplegar Aplicación PHP
-
-1. En el mismo proyecto de Railway, haz clic en **+ New**
-2. Selecciona **GitHub Repo** y conecta tu repositorio
-3. Railway detectará automáticamente que es un proyecto PHP y usará **Nixpacks**
-4. Configura las **Variables de Entorno**:
-
-```env
-DB_HOST=MYSQLHOST_de_tu_servicio_mysql
-DB_NAME=railway
-DB_USER=root
-DB_PASS=MYSQLPASSWORD_de_tu_servicio_mysql
-DB_PORT=3306
-BASE_URL=https://tu-app.up.railway.app/
-UPLOADS_DIR=/app/public/uploads/usuarios/
-APP_ENV=production
-```
-
-5. Railway desplegará automáticamente la aplicación
-6. Una vez desplegado, accede al shell del servicio y ejecuta:
-
-```bash
-php bin/configurar-sistema.php
-php bin/configurar-geolocalizacion.php
-```
-
-> **Nota:** Railway generará automáticamente una URL pública para tu aplicación (ej: `https://tu-proyecto.up.railway.app`)
-
----
-
 ## 🧭 Uso
 
 - `/login` → Inicio de sesión  
@@ -314,38 +249,6 @@ php bin/configurar-geolocalizacion.php
 # Configurar sistema
 php bin/configurar-sistema.php
 ```
-
----
-
-## 🧯 Troubleshooting
-
-**404 en rutas**
-```bash
-a2enmod rewrite && systemctl reload apache2
-```
-
-**Conexión BD**
-- Verifica variables de entorno en Railway
-- Confirma que el servicio MySQL esté activo
-- Verifica que ambos servicios estén en el mismo proyecto (se conectan automáticamente via red privada)
-- Prueba conexión: `php -r "new PDO('mysql:host=HOST;port=3306;dbname=DB', 'USER', 'PASS');"`
-
-**Permisos uploads**
-```bash
-chmod 755 public/uploads public/uploads/usuarios
-chown -R www-data:www-data public/uploads
-```
-
-**Geolocalización**
-```bash
-php bin/configurar-geolocalizacion.php
-```
-
-**Railway Service timeout**
-- Railway puede suspender servicios por inactividad (plan gratuito)
-- Solución: Acceder a Railway Dashboard para despertar los servicios
-- Considera plan de pago (Hobby: $5/mes) para servicios siempre activos
-- La aplicación se reinicia automáticamente al recibir tráfico
 
 ---
 
