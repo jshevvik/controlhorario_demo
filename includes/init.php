@@ -37,7 +37,7 @@ if (file_exists(__DIR__ . '/../config.php')) {
 }
 
 // Zona horaria y charset
-if (!ini_get('date.timezone')) { date_default_timezone_set('Europe/Madrid'); }
+date_default_timezone_set('Europe/Madrid'); // Forzar zona horaria de España (maneja DST automáticamente)
 ini_set('default_charset','UTF-8');
 
 // BASE_URL global
@@ -50,8 +50,13 @@ if (!isset($pdo) || !($pdo instanceof PDO)) {
     try {
         $pdo = new PDO($dsn, $config['DB_USER'], $config['DB_PASS'], [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4"
+            PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4, time_zone = '+01:00'"
         ]);
+        
+        // Configurar zona horaria de MySQL dinámicamente según DST
+        // En invierno: +01:00 (CET), en verano: +02:00 (CEST)
+        $phpOffset = (new DateTime('now', new DateTimeZone('Europe/Madrid')))->format('P');
+        $pdo->exec("SET time_zone = '$phpOffset'");
     } catch (PDOException $e) {
         die("Error de conexión a la base de datos: " . $e->getMessage());
     }
