@@ -89,7 +89,6 @@ Para probar la aplicación en la demo, usa estas credenciales:
 - [Estructura](#-estructura)
 - [Uso](#-uso)
 - [Seguridad](#-seguridad)
-- [Desarrollo](#-desarrollo)
 - [Licencia](#-licencia)
 - [Autor](#-autor)
 
@@ -214,41 +213,6 @@ controlhorario_demo/
 - Sistema de Super Admin protegido
 - Auditoría de acciones administrativas
 
----
-
-## 🛠️ Desarrollo
-
-### Funciones principales
-```php
-require_once __DIR__ . '/../includes/init.php';
-requireLogin();
-requireAdminOrSupervisor();
-getEmpleado();
-obtenerGeoConfigEmpleado($id);
-registrarLogin($usuario, $id, true);
-getNotificaciones($id);
-```
-
-### Respaldo de Base de Datos (Railway)
-```bash
-# Exportar base de datos
-mysqldump -h MYSQLHOST -P MYSQLPORT -u MYSQLUSER -p MYSQLDATABASE > backup.sql
-
-# Importar base de datos
-mysql -h MYSQLHOST -P MYSQLPORT -u MYSQLUSER -p MYSQLDATABASE < backup.sql
-```
-
-### Scripts de mantenimiento
-```bash
-# Actualizar festivos
-php bin/update-holidays.php
-
-# Configurar geolocalización
-php bin/configurar-geolocalizacion.php
-
-# Configurar sistema
-php bin/configurar-sistema.php
-```
 
 ---
 
