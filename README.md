@@ -2,13 +2,12 @@
 
 [![PHP](https://img.shields.io/badge/PHP-8.2-777BB4?logo=php&logoColor=white)](https://www.php.net/)
 [![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)
-[![Railway](https://img.shields.io/badge/Railway-Database-0B0D0E?logo=railway&logoColor=white)](https://railway.app/)
-[![Render](https://img.shields.io/badge/Render-Deploy-46E3B7?logo=render&logoColor=white)](https://render.com/)
+[![Railway](https://img.shields.io/badge/Railway-Deploy-0B0D0E?logo=railway&logoColor=white)](https://railway.app/)
 
 Aplicación para **gestión de horarios laborales**, fichaje con **geolocalización**, **solicitudes** (vacaciones/permiso/baja), **informes** en PDF y **panel administrativo**.
 
-**🌐 Demo en vivo:** https://controlhorario-demo.onrender.com  
-**💾 Base de datos:** MySQL 8.0+ en Railway
+**🌐 Demo en vivo:** https://controlhorariodemo-production.up.railway.app/  
+**💾 Hosting:** Railway (Aplicación + Base de datos MySQL 8.0+)
 
 ---
 
@@ -89,7 +88,7 @@ Para probar la aplicación en la demo, usa estas credenciales:
 - [Stack](#-stack)
 - [Estructura](#-estructura)
 - [Instalación Local](#-instalación-local)
-- [Despliegue en Render](#-despliegue-en-render)
+- [Despliegue en Railway](#-despliegue-en-railway)
 - [Uso](#-uso)
 - [Seguridad](#-seguridad)
 - [Desarrollo](#-desarrollo)
@@ -167,8 +166,7 @@ Para probar la aplicación en la demo, usa estas credenciales:
 | Frontend | HTML5, Bootstrap 5, JS |
 | Mapas | Leaflet 1.9.4 |
 | PDF | mPDF 8.2 |
-| Deploy App | Docker + Render |
-| Deploy DB | Railway |
+| Deploy | Railway (Nixpacks) |
 | Dependencias | Composer |
 
 ---
@@ -220,49 +218,46 @@ Abrir: http://localhost:8000
 
 ---
 
-## 🌐 Despliegue en Render
+## 🌐 Despliegue en Railway
 
-### Base de Datos en Railway
+### Paso 1: Crear Base de Datos MySQL
 
 1. Crea cuenta en https://railway.app
 2. **New Project** → **Provision MySQL**
-3. Obtén las credenciales en **Variables**:
+3. Anota las credenciales que aparecen en **Variables**:
    - `MYSQLHOST`
    - `MYSQLPORT` (normalmente 3306)
    - `MYSQLDATABASE`
    - `MYSQLUSER`
    - `MYSQLPASSWORD`
 
-4. La base de datos se creará automáticamente al ejecutar el script de configuración:
-```bash
-# Conectarse al servidor Railway y ejecutar el script de configuración
-php bin/configurar-sistema.php
-```
+### Paso 2: Desplegar Aplicación PHP
 
-> **Nota:** El script `configurar-sistema.php` creará todas las tablas necesarias automáticamente.
-
-### Aplicación en Render
-
-1. Conecta el repo en https://render.com  
-2. Render detecta el **Dockerfile** automáticamente  
-3. Configura variables de entorno con las credenciales de Railway:
+1. En el mismo proyecto de Railway, haz clic en **+ New**
+2. Selecciona **GitHub Repo** y conecta tu repositorio
+3. Railway detectará automáticamente que es un proyecto PHP y usará **Nixpacks**
+4. Configura las **Variables de Entorno**:
 
 ```env
-DB_HOST=tu-host-railway.railway.app
+DB_HOST=MYSQLHOST_de_tu_servicio_mysql
 DB_NAME=railway
 DB_USER=root
-DB_PASS=tu_contraseña_railway
+DB_PASS=MYSQLPASSWORD_de_tu_servicio_mysql
 DB_PORT=3306
-BASE_URL=https://tu-app.onrender.com/
-UPLOADS_DIR=/var/www/html/public/uploads/usuarios/
+BASE_URL=https://tu-app.up.railway.app/
+UPLOADS_DIR=/app/public/uploads/usuarios/
 APP_ENV=production
 ```
 
-4. Ejecuta scripts de configuración inicial:
+5. Railway desplegará automáticamente la aplicación
+6. Una vez desplegado, accede al shell del servicio y ejecuta:
+
 ```bash
 php bin/configurar-sistema.php
 php bin/configurar-geolocalizacion.php
 ```
+
+> **Nota:** Railway generará automáticamente una URL pública para tu aplicación (ej: `https://tu-proyecto.up.railway.app`)
 
 ---
 
@@ -330,9 +325,9 @@ a2enmod rewrite && systemctl reload apache2
 ```
 
 **Conexión BD**
-- Verifica variables de entorno en Render
-- Confirma que Railway DB esté activo
-- Verifica que el IP de Render esté permitido en Railway
+- Verifica variables de entorno en Railway
+- Confirma que el servicio MySQL esté activo
+- Verifica que ambos servicios estén en el mismo proyecto (se conectan automáticamente via red privada)
 - Prueba conexión: `php -r "new PDO('mysql:host=HOST;port=3306;dbname=DB', 'USER', 'PASS');"`
 
 **Permisos uploads**
@@ -346,10 +341,11 @@ chown -R www-data:www-data public/uploads
 php bin/configurar-geolocalizacion.php
 ```
 
-**Railway Database timeout**
-- Railway puede suspender la BD por inactividad (plan gratuito)
-- Solución: Acceder a Railway Dashboard para despertar la BD
-- Considera plan de pago para BD siempre activa
+**Railway Service timeout**
+- Railway puede suspender servicios por inactividad (plan gratuito)
+- Solución: Acceder a Railway Dashboard para despertar los servicios
+- Considera plan de pago (Hobby: $5/mes) para servicios siempre activos
+- La aplicación se reinicia automáticamente al recibir tráfico
 
 ---
 
